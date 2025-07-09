@@ -1,0 +1,42 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: 'Cascadia Mono', monospace;
+  margin: 10px;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+#themechange{
+  color: white;
+  background-color: black;
+  font-family: monospace;
+  user-select:none;
+}
+#themechange:hover{
+  color: black;
+  background-color: white;
+}
+#recur{
+  color: white;
+  background-color: #008800;
+  font-family: monospace;
+}
+#recur:hover{
+  color: #888888
+}
+#cmowre{
+  color: black;
+  background-color: #ff8800;
+  font-family:monospace
+}
+#serverbutton{
+  color:black;
+  background-color:#00ff00;
+   font-family:monospace
+}
+#catgame{
+  color: black;
+  background-color: #ffffff;
+  font-family: monospace
+}

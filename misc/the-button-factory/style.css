@@ -1,0 +1,67 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: open sans, open sans, sans-serif;
+  margin: 2em;
+  background: #eeeeee;
+}
+
+h1 {
+  font-style: italic;
+}
+
+h1 {
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+h3 {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 15.4px;
+}
+p {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+blockquote {
+  font-family: "Open Sans";
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+pre {
+  font-family: "Open Sans";
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+
+button {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 50;
+  line-height: 20.4px;
+  background: #00ee00;
+}
+
+button:hover {
+  background: #00ff00;
+  transition-duration: 0.1s; 
+}

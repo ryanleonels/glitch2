@@ -1,0 +1,340 @@
+<html lang="en">
+  <head>
+    <title>The Random Incremental</title>
+    <link rel="icon" href="themes/aCube.png">
+    <link rel="stylesheet" href="themes/light-mode.css" id="theme" />
+
+    <script src="features/coin.js" defer></script>
+    <script src="features/dice.js" defer></script>
+    <script src="features/cube.js" defer></script>
+    <script src="features/line.js" defer></script>
+    <script src="features/challenge.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="themes/switch.js" defer></script>
+    <script src="libs/components.js" defer></script>
+    <script src="libs/OmegaNum.js"></script>
+    <script src="libs/notify.min.js"></script>
+    <script src="libs/notifier.js"></script>
+    <script src="temp.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="save.js" defer></script>
+  </head>
+  <body id="body">
+    <div id="loadingscreen" style="
+        background-color: lightgray; 
+        position: absolute; 
+        min-width: 100vw; 
+        min-height: 100vw;
+        color: black;
+        font-size: 40px;
+        ">Loading...
+      <br><br>
+      <t id="brokensave">
+        looks like your save or the game is broken<br>
+        <button onclick="hardReset()">Hard reset</button>
+        <button onclick="importSave()">Import save</button>
+      </t>
+    </div>
+    <div id="app">
+      <div id="maintabs">
+        <button id="mainTabbtn"   @click="tmp.tab='main'">Main</button>
+
+        <button id="diceTabbtn"   @click="tmp.tab='dice'" v-if="player.unlocks.dice">Dice</button>
+
+        <button id="chaTabbtn"    @click="tmp.tab='challenge'" v-if="player.unlocks.cha">Challenge</button>
+
+        <button id="cubeTabbtn"   @click="tmp.tab='cube'" v-if="player.unlocks.cubes">Cube</button>
+
+        <button id="linesTabbtn"  @click="tmp.tab='lines'" v-if="player.unlocks.lines">Lines</button>
+
+        <button id="optsTabbtn"   @click="tmp.tab='options'">Options</button>
+
+        <button id="logTabbtn"    @click="tmp.tab='changelog'">Changelog</button>
+      </div>
+      <br>
+      <span id="cin" v-if="player.inChallenge !== 0">
+        You are in Challenge {{ player.inChallenge }}
+        <button class="chalexit" @click="exitChallenge(player.inChallenge)">EXIT</button>
+        <br />
+      </span>
+      <div id="stats">
+        You have {{ formatWhole(player.coin) }} coins<br />
+        Roll number: {{ formatWhole(tmp.rng )}}<br />
+        Range: 1 - {{ formatWhole(tmp.maxnum) }}<br />
+        <div v-if="player.upgP2[1]">
+          Roll multiplier base number: {{ format(tmp.rng2, 1) }}<br />
+          Range: 1 - {{ format(tmp.maxnum2, 1) }}<br />
+          Roll multiplier exponent number: {{ format(tmp.rng3, 1) }}<br />
+          Range: 1 - {{ format(tmp.maxnum3, 1) }}<br />
+        </div>
+        <button id="rollbutton" @click="roll" class="roll">roll</button>
+        <p style="font-size: 12px;" v-if="!player.upg[5].gte(OmegaNum.ONE) && !player.unlocks.dice">
+          Unlock auto-roll when you get the fifth upgrade
+        </p>
+        <br>
+        <p v-if="!player.upgP2[1]" style="font-size: 16px;"
+          v-if="(player.upg[5].gte(OmegaNum.ONE) && player.inChallenge !== 2) || (player.unlocks.dice && player.inChallenge !== 2)">
+          You are gaining approxly {{ approxGain() }} coins per second.
+        </p>
+        <br>
+        <p style="font-size: 16px;" v-if="player.inChallenge === 2">
+          You have rolled {{ formatWhole(player.rolltimes) }} / 10.
+        </p>
+      </div>
+      <div id="tabcontent">
+
+        <div id="main" v-show="tmp.tab=='main'">
+          <span class="upgtext">Upgrades</span><br />
+          <table id="upgTable">
+            <tr>
+              <td v-for="(n, index) in 5" :key="index" class="coinupgs">
+                <div v-if="coinUpgDesc().condition[n].req||player.upg[n]>=1">
+                  <t>{{coinUpgDesc()[n]}}</t>
+                  <t>Level: {{format(player.upg[n])}}</t>
+                  <t>Effect: {{format(tmp.upgeff[n])}} </t>
+                  <t>cost: {{formatWhole(getupgcost(n))}}</t>
+                  <button @click="buyUpg(n)" v-bind:class="{ 
+                activeBtn: canBuyUpg(n)&&player.inChallenge!==3||(canBuyUpg(n) && player.inChallenge==3 && (n<3)), 
+                inactiveBtn: (!canBuyUpg(n))||(player.inChallenge && player.inChallenge==3 && (n>2)),
+                }">buy</button>
+                  <button @click="player.auto[n] = !player.auto[n]"
+                    :class="{toggleautobtn: true, nocursor: !player.upgP[n]}">{{player.upgP[n]? ("auto "+
+                    (player.auto[n] ? "ON":"OFF")): "LOCKED"}}</button>
+                </div>
+                <div v-else>
+                  <p>{{coinUpgDesc().condition[n].reqtxt}}</p>
+                </div>
+              </td>
+            </tr>
+
+            <tr v-if="player.chaComp[3]>0||player.unlocks.cubes">
+              <td v-for="(n, index) in 5" :key="index" class="coinupgs">
+                <div v-if="coinUpgDesc().condition[n+5].req||player.upg[n+5]>=1">
+                  <t>{{coinUpgDesc()[n+5]}}</t>
+                  <t>Level: {{format(player.upg[n+5])}}</t>
+                  <t>Effect: {{format(tmp.upgeff[n+5])}} </t>
+                  <t>cost: {{formatWhole(getupgcost(n+5))}}</t>
+                  <button @click="buyUpg(n+5)" v-bind:class="{ 
+                activeBtn: canBuyUpg(n+5) && player.inChallenge!==3,
+                inactiveBtn: !canBuyUpg(n+5)||player.inChallenge==3
+                }">buy</button>
+                  <button @click="player.auto[n+5] = !player.auto[n+5]"
+                    :class="{toggleautobtn: true, nocursor: !player.upgP[n+5]}">{{player.upgP[n+5]? ("auto "+
+                    (player.auto[n+5] ? "ON":"OFF")): "LOCKED"}}</button>
+                </div>
+                <div v-else>
+                  <p>{{coinUpgDesc().condition[n+5].reqtxt}}</p>
+                </div>
+              </td>
+            </tr>
+
+          </table>
+
+          <br><br>
+        </div>
+
+
+        <div id="diceTab" v-show="tmp.tab=='dice'">
+          You have {{formatWhole(player.dice)}} dice<br /><br />
+          <button id="prestigebtn" class="dice" @click="dicePrestige()">
+            Prestige for {{formatWhole(tmp.p1r)}} dice.<br />
+
+          </button><br>
+          <t v-if="!tmp.p1r.gte(500)">Next at {{formatWhole(nextDiceAt())}} coins.</t>
+          <t v-if="tmp.p1r.gte(500) && player.inChallenge!==5 && player.inChallenge!==8">Dice gain gets softcapped past 500.</t><br>
+          <t v-if="tmp.p1r.gte(1e4) && player.inChallenge!==5 && player.inChallenge!==8">Dice gain gets softcapped^2 past 10,000.</t><br>
+          <t v-if="tmp.p1r.gte(1e6) && player.inChallenge!==5 && player.inChallenge!==8">Dice gain gets softcapped^3 past 1,000,000</t><br>
+          <t v-if="tmp.p1r.gte(1e11) && player.inChallenge!==5 && player.inChallenge!==8">Dice gain gets softcapped^4 past 1e11</t>
+          <br>autobuying upgrades does not spend coins.<br />
+          <table id="upgTable2"></table>
+
+          <table id="a-upgTable2">
+            <tr>
+              <td v-for="(n, index) in 5" :key="index" class="diceUpgs">
+                <div>
+                  <t>{{diceUpgDesc()[n].name}}</t>
+                  <t v-if="diceUpgDesc()[n].effect">{{diceUpgDesc()[n].effect}}</t>
+                  <t v-if="!player.upgP[n]">{{"Cost: "+diceUpgDesc()[n].cost+" dice"}}</t>
+                  <button :class="{
+                nocursor: player.upgP[n],
+                graybg: player.upgP[n],
+                activeBtn: !player.upgP[n]&&player.dice.gte(diceUpgDesc()[n].cost),
+                inactiveBtn: !player.upgP[n]&&!player.dice.gte(diceUpgDesc()[n].cost)
+              }" @click="buyDiceUpg(n)">{{player.upgP[n]?"Bought":"Buy"}}</button>
+                </div>
+              </td>
+            </tr>
+
+            <tr v-if="(player.chaComp[3]>0||player.unlocks.cubes)">
+              <td v-for="(n, index) in 5" :key="index" class="diceUpgs">
+                <div v-if="diceUpgDesc()[n+5].req||player.upgP[n+5]>=1">
+                  <t>{{diceUpgDesc()[n+5].name}}</t>
+                  <t v-if="diceUpgDesc()[n+5].effect">{{diceUpgDesc()[n+5].effect}}</t>
+                  <t v-if="!player.upgP[n+5]">{{"Cost: "+formatWhole(diceUpgDesc()[n+5].cost)+" dice"}}</t>
+                  <button :class="{
+                nocursor: player.upgP[n+5],
+                graybg: player.upgP[n+5],
+                activeBtn: !player.upgP[n+5]&&player.dice.gte(diceUpgDesc()[n+5].cost),
+                inactiveBtn: !player.upgP[n+5]&&!player.dice.gte(diceUpgDesc()[n+5].cost)
+              }" @click="buyDiceUpg(n+5)">{{player.upgP[n+5]?"Bought":"Buy"}}</button>
+                </div>
+                <div v-else>
+                  {{(diceUpgDesc()[n+5].reqtxt)}}
+                </div>
+              </td>
+            </tr>
+
+          </table>
+
+          <br><br>
+
+
+        </div>
+
+
+        <div id="challenge" v-show="tmp.tab=='challenge'">
+          <table id="chaTable">
+            <tr v-for="a in tmp.chaR">
+              <td v-for="(n, index) in 4" :key="index" class="Ctd">
+                <div class="Cdiv">
+                  <p>Challenge {{a*4+n-4}}</p>
+                  <p>{{challengeDescription()[a*4+n-4].desc}}</p>
+                  <p v-if="(player.chaComp[a*4+n-4])<(tmp.chaAmax[a*4+n-4])">{{"Goal: "+formatWhole(getChallengeGoal(a*4+n-4))}}</p>
+                  <br v-else style="content: ''; margin: 16 ">
+                  <p>Completion: {{player.chaComp[a*4+n-4]+"/"+tmp.chaAmax[a*4+n-4]}}</p>
+                  <p>{{"Reward: "+challengeDescription()[a*4+n-4].reward}}</p>
+                  <button v-if="player.upgP[5]" class="chaenterbtn"
+                    @click="(player.inChallenge==(a*4+n-4))?exitChallenge(a*4+n-4):startChallenge(a*4+n-4)">{{(player.inChallenge==(a*4+n-4))?"exit":"enter"}}</button>
+                  <button v-else class="chaenterbtn nocursor">LOCKED</button>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <div v-show="player.hasmilestone[13]">
+          </div>
+        </div>
+
+        <div v-show="tmp.tab == 'cube'">
+          <button class="taba" @click="tmp.cubeSubTab='milestone'">Milestone</button>
+          <button v-show="player.hasmilestone[13]" class="taba" @click="tmp.cubeSubTab='upgrade'">Upgrade</button><br>
+
+
+          <span>You have {{formatWhole(player.cube)}} cubes, which boost coin gain by
+          {{format(tmp.cubeff)}}x</span><span v-if="player.hasmilestone[5]">, dice gain by x{{format(tmp.cubeff.pow(0.5))}} and {{(player.line.gte(1))?("^"+(format(tmp.dopewope))):("if you see it everything is very bad")}}</span><br /><br />
+          <button class="cubeResetbtn" @click="cubePrestige()" id="prestige2btn">
+            Prestige for {{formatWhole(tmp.p2r)}} cubes.<br />
+            <t id="cubegainnext">
+              Next at {{formatWhole(nextCubeAt())}} dices.</t>
+          </button><br>
+
+
+          <div id="milestone" v-if="tmp.cubeSubTab=='milestone'">
+            <table>
+              <tr v-for="(n, index) in Object.keys(milestones).length" :key="index">
+                <td v-bind:class="{
+                milestoneCompleted: player.hasmilestone[n],
+                milesnoneRow: true}">
+                  <p style="position: absolute;">{{n}}</p>
+                  <h2>{{milestones[n].condition}}</h2>
+                  <t>{{milestones[n].desc}}</t>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div id="cubeupgrade" v-if="tmp.cubeSubTab=='upgrade'">
+            <table>
+              <tr>
+                <td v-for="(n, index) in Object.keys(cubeUpg()).length" :key="index" :class="{cubeupgs: true}">
+                  <div v-if="player.upgP2[n-1] || n==1">
+                    <t>{{cubeUpg()[n].desc}}</t>
+                    <t>{{(!player.upgP2[n])? ("Cost: "+cubeUpg()[n].cost)+" cubes":""}}</t>
+                    <t v-if="cubeUpg()[n].effect">Effect: x{{format(tmp.upgP2eff[n],1)}}</t>
+                    <button :class="{nocursor: player.upgP2[n], graybg: true}" @click="buyCubeUpg(n)">{{(player.upgP2[n])
+                      ? "Bought" : "Buy"}}</button>
+                  </div>
+                  <div v-else>
+                    <p>Buy previous upgrade to unlock</p>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div id="lines"  v-show="tmp.tab=='lines'">
+          <span>You have {{format(player.line)}} lines, which boost dice gain by {{format(tmp.lineEffect)}}x after softcap</span><br><br>
+          <button id="lineResetbtn"
+            @click="linePrestige()">
+            Prestige for {{format(tmp.linesOnReset)}} lines
+          </button>
+          <!-- ok i didn't implement it yet - yyyy
+          <div id="linemilestone" v-if="tmp.lineSubTab=='linemilestone'">
+            <table>
+              <tr v-for="(n, index) in Object.keys(linemilestones).length" :key="index">
+                <td v-bind:class="{
+                milestoneCompleted: player.haslinemilestone[n],
+                milesnoneRow: true}">
+                  <p style="position: absolute;">{{n}}</p>
+                  <h2>{{linemilestones[n].condition}}</h2>
+                  <t>{{linemilestones[n].desc}}</t>
+                </td>
+              </tr>
+            </table>
+          </div>
+          -->
+        </div>
+
+        <div id="changelog" v-show="tmp.tab=='changelog'">
+          <h1>Beta v0.0.3</h1>
+          Added new layer: Lines (it has nothing yet)<br>
+          Balanced Cube Layer, up to c8x6<br>
+          Balanced Dice Layer Slightly<br>
+          Fixed many typos<br>
+          
+          <h1>Beta v0.0.2 <t>With this update v0.0.1 is mostly working</t>
+          </h1>
+          Fixed challenges not starting<br>
+          Fixed challenges giving 1 completion without meeting requirements<br>
+          Fixed inconsistencies in UI<br>
+          Made a theme switch and added dark theme<br>
+          Added loading screen<br>
+          Fixde a few of typos<br>
+          Fixed NaN if you refresh the page while having autoroll<br>
+
+          <h1>Beta v0.0.1</h1>
+          Added 4 cube milestones<br>
+          Added 3 cube upgrades<br>
+          Added a new challenge<br>
+          Balanced up to 25 cubes on reset<br>
+          
+          <h1>Beta v0.0</h1>
+          Released the game in beta!<br>
+          
+          <h1>Alpha</h1>
+          No one knows what existed in this period...<br>
+
+        </div>
+        <div v-if="tmp.tab == 'options'">
+          <br><br><br>
+          <table class=" opt">
+            <tr>
+              <td><button @click="save(), notifier.success('game saved')">save</button></td>
+              <td><button @click="exportSave()">export</button></td>
+              <td><button @click="importSave()">import</button></td>
+              <td><button @click="hardReset()">hard reset</button></td>
+            </tr>
+            <tr>
+              <td><button @click="togglesave()">Auto save: {{player.options.autoSave}} </button></td>
+              <td><button @click="changeTheme()">Toggle theme: {{updateTheme()}}</button></td>
+            </tr>
+          </table>
+          <br><br>Made by 3^3=7, yyyy7089, jakub, Wrab, and water (even if he quit)
+          <br><a href="https://discord.gg/zdPsnvypfV" class="hyperlink">Join our Discord!</a>
+          <br>This game might contain lots of bugs. if you see your save broken, refresh. if it doesn't solve your problem, hard reset.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

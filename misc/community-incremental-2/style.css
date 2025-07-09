@@ -1,0 +1,337 @@
+/* a minimalist set of CSS resets */
+
+/* default to border-box - did you know you can add .x to px size? */
+html {        
+  box-sizing: border-box;
+  font-size: 15.5px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit; 
+}
+
+/* adjust typography defaults */
+body {
+  margin: auto;
+  text-align: center;
+  font-family: sans-serif;
+  line-height: 1.5;
+  background-color: black;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  width: fit-content;
+}
+
+#tabs > button, .tabbtn {
+  height: 25px;
+  background-color: black;
+  border: solid white 0.25em;
+  color: white;
+  border-radius: 20px;
+}
+
+#tabs > button:hover, .tabbtn:hover {
+  color: black;
+  background-color: #ABABAB;
+}
+
+.ascensiontab {
+  height: 25px;
+  background-color: black;
+  border: solid yellow 0.25em;
+  color: yellow;
+  border-radius: 25px;
+}
+
+.ascensiontab:hover {
+  color: black;
+  background-color: yellow;
+}
+
+.trollButton {
+  user-select: none;
+  margin: 0 auto;
+  font-size: 2em;
+  color: cyan;
+  background-color: black;
+  padding: 1em;
+  border: solid 0.25em cyan;
+  border-radius: 0.75em;
+  width: fit-content;
+  transition: 0.5s all;
+}
+.trollButton:hover {
+  background-color: #000044;
+}
+/* yo did you know you can use hex codes???? crazy i know */
+/* Yes i know */
+
+/* Gen. styling*/
+
+.prestige {
+  background-color: black;
+  border: solid orange 0.25em;
+  color: orange;
+  font-size: 1.5em;
+  padding: 1em;
+  border-radius: 0.75em;
+}
+
+.prestige:hover {
+  background-color: #BCBC1F;
+  color: black;
+}
+
+.automation {
+  background-color: black;
+  border: solid lime 0.5em;
+  color: lime;
+  margin: 0 auto;
+  padding: 0.25em;
+  border-radius: 3em;
+  
+}
+.automation:hover {
+  background-color: green;  
+}
+
+.numbertext{
+  font-size: 2em;
+  color: cyan;
+}
+
+.upgrade {
+  height: 100px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.upgradeText{
+  background-color: black;
+  border: solid yellow 0.2em;
+  color: yellow;
+  margin: 0 auto;
+  padding: 0.3em;
+  border-radius: 2em;
+}
+
+.upgradeText:hover{
+  background-color: orange;
+  color: yellow;
+  margin: 0 auto;
+}
+
+.save{
+  color: blue;
+  border: solid blue;
+  background-color: black;
+}
+.save:hover{
+  color: green;
+}
+
+.edit{
+  color: red;
+  border: solid red;
+  background-color: black;
+}
+.edit:hover{
+  color: red;
+  border: solid red;
+  background-color: blue;
+}
+.discord{
+  color: red;
+  border: solid red;
+  background-color: black;
+}
+.discord:hover{
+  color: red;
+  border: solid red;
+  background-color: blue;
+}
+.superprestige {
+  background-color: black;
+  border: solid green 0.2544em;
+  color: green;
+  font-size: 1.25em;
+  padding: 0.25em;
+}
+.superprestige:hover{
+  background-color: #003300;
+  color:red
+}
+
+.ascensionReset {
+  background-color: black;
+  border: solid yellow 0.2544em;
+  color: yellow;
+  font-size: 1.25em;
+  padding: 0.25em;
+}
+.ascensionReset:hover{
+  color:black;
+  background-color: #AA6022;
+}
+
+.prestigepoints{
+  font-size: 1em;
+  color: orange;
+}
+
+.superprestigepoints{
+  font-size: 1em;
+  color: green;
+}
+
+.prestigeUpgradeText{
+  background-color: black;
+  border: solid yellow 0.2em;
+  color: blue;
+  border-color: blue;
+  margin: 0 auto;
+  padding: 0.3em;
+  border-radius: 2em;
+}
+
+.prestigeUpgradeText:hover{
+  background-color: aqua;
+}
+
+.superprestigeUpgradeText{
+  background-color: black;
+  border: solid yellow 0.2em;
+  color: red;
+  border-color: red;
+  margin: 0 auto;
+  padding: 0.25em;
+  border-radius: 3em;
+}
+.superprestigeUpgradeText:hover{
+  background-color: aqua;
+}
+
+#hardReset{
+  color: red;
+  border: red;
+  background-color: black;
+}
+
+.buyable{
+  min-height: 50px;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.sprestigebuyable{
+  background-color: black;
+  color:  white;
+  border: solid 0.25em white;
+  border-radius: 0.5em;
+}
+.challenge{
+  background-color: black;
+  border: solid red 0.2544em;
+  color: red;
+  font-size: 1.25em;
+  padding: 0.25em;
+  height: 200px;
+  width: 400px;
+  vertical-align: top;
+}
+.challenge:hover{
+  background-color: #333333;
+}
+.challengeincomplete{
+  background-color: black;
+  border: solid yellow 0.2544em;
+  color: yellow;
+  font-size: 1.25em;
+  padding: 0.25em;
+  height: 200px;
+  width: 400px;
+}
+.challengecomplete{
+  background-color: black;
+  border: solid #00DD00 0.2544em;
+  color: #00DD00;
+  font-size: 1.25em;
+  padding: 0.25em;
+  height: 200px;
+  width: 400px;
+}
+
+
+.upgradeText.bought {
+  background-color: #440;
+}
+
+.prestigeUpgradeText.bought {
+  background-color: #004;
+}
+.superprestigeUpgradeText.bought{
+  background-color: #400;
+}
+.ascpoints {
+  color: yellow;
+}
+
+.ascensionUpgradeText{
+  background-color: black;
+  border: solid yellow 0.2em;
+  color: orange;
+  border-color: orange;
+  margin: 0 auto;
+  padding: 0.3em;
+  border-radius: 2em;
+}
+.ascensionUpgradeText:hover{
+  background-color: purple;
+}
+
+.ascensionUpgradeText.bought{
+  background-color: brown;
+}
+
+
+.inadequate {
+  background-color: #b887 !important;
+  color: #b88 !important;
+  border-color: #b88 !important;
+  cursor: not-allowed;
+}
+
+.buyable:not(.inadequate) {
+  cursor: pointer;
+}
+
+.milestone {
+  color: #fff;
+  border: 2px solid;
+  padding: 5px;
+  display: inline-block;
+  width: 400px;
+}
+
+.flexrow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.fridgebtn {
+  color: #fff;
+  background: #000;
+  border: 2px solid;
+}
+
+.fridgebtn.selected {
+  color: #ff0;
+}
+
+.photonText {
+  background: linear-gradient(45deg, #aa1, #ff5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

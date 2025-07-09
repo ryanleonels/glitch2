@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .round1 {
+        width: 80px;
+        height: 80px;
+        background-color: dimgray;
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round2 {
+        width: 80px;
+        height: 80px;
+        background-color: lime;
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round3 {
+        width: 80px;
+        height: 80px;
+        background-color: crimson;
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round4 {
+        width: 80px;
+        height: 80px;
+        background-color: royalblue;
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round5 {
+        width: 80px;
+        height: 80px;
+        background-image: linear-gradient(90deg, green, cyan);
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round6 {
+        width: 80px;
+        height: 80px;
+        background-image: linear-gradient(90deg, blue, yellow);
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round7 {
+        width: 80px;
+        height: 80px;
+        background-image: linear-gradient(90deg, royalblue, slateblue, teal);
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round8 {
+        width: 80px;
+        height: 80px;
+        background-image: radial-gradient(cyan, green, lime);
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .round9 {
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(
+          ellipse farthest-corner at right bottom,
+          #bf4040 0%,
+          #bfbf40 8%,
+          #40bf40 30%,
+          #4040bf 40%,
+          #bf40bf 80%
+        );
+        border-radius: 23px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+
+      .row1 {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .row2 {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .row3 {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    </style>
+    <title>Old Prototype Merging Game</title>
+  </head>
+  <body>
+    <h2>Merger</h2>
+    <p id="demo9"></p>
+    <div class="row1">
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+    </div>
+    <div class="row2">
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+    </div>
+    <div class="row3">
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+      <div class="round1" style="display: block"></div>
+    </div>
+    <button class="button2" onclick="mergeBlock()">Merge</button
+    ><button class="button2" id="costs" onclick="faster()">
+      250 money for 0.1x faster
+    </button>
+
+    <script>
+      var money = 0;
+      var timer = 20;
+      var merged = 0;
+      var cost = 250;
+      setInterval(() => {
+        document.getElementById("demo9").innerHTML =
+          timer / 1000 + "s | Merged " + merged + " times | Money: " + money;
+      }, 1);
+
+      function faster() {
+        if (money >= cost) {
+          money -= cost;
+          cost *= 1.3;
+          timer -= 100;
+          document.getElementById("costs").innerHTML =
+            cost.toFixed(1) + " money for 0.1x faster";
+        }
+      }
+
+      var d22 = 3.2;
+      function mergeBlock() {
+        document.getElementsByClassName("button2")[0].disabled = true;
+        d22 = 3.2;
+        var c22 = setInterval(() => {
+          timer -= d22;
+          if (timer < 0) {
+            timer = 0;
+            clearInterval(c22);
+            merged++;
+            document.getElementsByClassName("button2")[0].disabled = false;
+          }
+        }, 1);
+        if (timer < 1) {
+          switch (merged) {
+            default:
+              document.getElementsByClassName("round1")[0].className = "round2";
+              money += 1;
+              break;
+            case 3:
+            case 6:
+            case 10:
+            case 13:
+            case 18:
+            case 21:
+            case 25:
+            case 28:
+            case 34:
+            case 37:
+            case 41:
+            case 44:
+            case 49:
+            case 52:
+            case 56:
+            case 59:
+            case 66:
+            case 69:
+            case 73:
+            case 76:
+            case 81:
+            case 84:
+            case 88:
+            case 91:
+            case 97:
+            case 100:
+            case 104:
+            case 107:
+            case 112:
+            case 115:
+            case 119:
+            case 122:
+            case 130:
+            case 133:
+            case 137:
+            case 140:
+            case 145:
+            case 148:
+            case 152:
+            case 155:
+            case 161:
+            case 164:
+            case 168:
+            case 171:
+            case 176:
+            case 179:
+            case 183:
+            case 186:
+            case 193:
+            case 196:
+            case 200:
+            case 203:
+            case 208:
+            case 211:
+            case 215:
+            case 218:
+            case 224:
+            case 227:
+            case 231:
+            case 234:
+            case 239:
+            case 242:
+            case 246:
+            case 249:
+            case 258:
+            case 261:
+            case 265:
+            case 268:
+            case 273:
+            case 276:
+            case 280:
+            case 283:
+            case 289:
+            case 292:
+            case 296:
+            case 299:
+            case 304:
+            case 307:
+            case 311:
+            case 314:
+            case 321:
+            case 324:
+            case 328:
+            case 331:
+            case 336:
+            case 339:
+            case 343:
+            case 346:
+            case 352:
+            case 355:
+            case 359:
+            case 362:
+            case 367:
+            case 370:
+            case 374:
+            case 377:
+            case 385:
+            case 388:
+            case 392:
+            case 395:
+            case 399:
+            case 403:
+            case 406:
+            case 412:
+            case 415:
+            case 419:
+            case 422:
+            case 427:
+            case 430:
+            case 434:
+            case 437:
+            case 444:
+            case 447:
+            case 451:
+            case 454:
+            case 459:
+            case 462:
+            case 466:
+            case 469:
+            case 475:
+            case 478:
+            case 482:
+            case 485:
+            case 490:
+            case 493:
+            case 497:
+            case 500:
+              document.getElementsByClassName("round2")[0].className = "round3";
+              document.getElementsByClassName("round2")[0].className = "round1";
+              money += 4;
+              break;
+            case 7:
+            case 14:
+            case 22:
+            case 29:
+            case 38:
+            case 45:
+            case 53:
+            case 60:
+            case 70:
+            case 77:
+            case 85:
+            case 92:
+            case 101:
+            case 108:
+            case 116:
+            case 123:
+            case 134:
+            case 141:
+            case 149:
+            case 156:
+            case 165:
+            case 172:
+            case 180:
+            case 187:
+            case 197:
+            case 204:
+            case 212:
+            case 219:
+            case 228:
+            case 235:
+            case 243:
+            case 250:
+            case 257:
+            case 264:
+            case 272:
+            case 279:
+            case 288:
+            case 295:
+            case 303:
+            case 310:
+            case 320:
+            case 327:
+            case 335:
+            case 342:
+            case 351:
+            case 358:
+            case 366:
+            case 373:
+            case 381:
+            case 392:
+            case 399:
+            case 407:
+            case 414:
+            case 425:
+            case 432:
+            case 440:
+            case 447:
+            case 457:
+            case 464:
+            case 472:
+            case 479:
+            case 488:
+            case 495:
+            case 503:
+            case 510:
+              document.getElementsByClassName("round3")[0].className = "round4";
+              document.getElementsByClassName("round3")[0].className = "round1";
+              money += 10;
+              break;
+            case 15:
+            case 30:
+            case 46:
+            case 61:
+            case 78:
+            case 93:
+            case 109:
+            case 124:
+            case 142:
+            case 157:
+            case 173:
+            case 188:
+            case 205:
+            case 220:
+            case 236:
+            case 251:
+            case 266:
+            case 281:
+            case 297:
+            case 312:
+            case 329:
+            case 344:
+            case 360:
+            case 375:
+            case 393:
+            case 408:
+            case 424:
+            case 439:
+            case 456:
+            case 471:
+            case 487:
+            case 502:
+              document.getElementsByClassName("round4")[0].className = "round5";
+              document.getElementsByClassName("round4")[0].className = "round1";
+              money += 28;
+              break;
+            case 31:
+            case 62:
+            case 94:
+            case 125:
+            case 158:
+            case 189:
+            case 221:
+            case 252:
+            case 283:
+            case 314:
+            case 346:
+            case 377:
+            case 410:
+            case 444:
+            case 476:
+            case 507:
+              document.getElementsByClassName("round5")[0].className = "round6";
+              document.getElementsByClassName("round5")[0].className = "round1";
+              money += 82;
+              break;
+            case 63:
+            case 126:
+            case 190:
+            case 253:
+            case 316:
+            case 379:
+            case 444:
+            case 507:
+              document.getElementsByClassName("round6")[0].className = "round7";
+              document.getElementsByClassName("round6")[0].className = "round1";
+              money += 244;
+              break;
+            case 127:
+            case 254:
+            case 381:
+            case 508:
+              document.getElementsByClassName("round7")[0].className = "round8";
+              document.getElementsByClassName("round7")[0].className = "round1";
+              money += 730;
+              break;
+            case 255:
+            case 510:
+              document.getElementsByClassName("round8")[0].className = "round9";
+              document.getElementsByClassName("round8")[0].className = "round1";
+              money += 2188;
+              break;
+          }
+        }
+        timer = 20;
+      }
+    </script>
+  </body>
+</html>

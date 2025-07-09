@@ -1,0 +1,159 @@
+@font-face {
+    font-family: Typewriter;
+    src: url('https://cdn.glitch.com/c1f55f1d-8e83-4c4b-8149-22aaf7214a19%2FMonospaceTypewriter.ttf?v=1572152901676');
+}
+button {
+  font-family: Typewriter;
+  font-size: 20px;
+  display: inline-block
+}
+b {
+  font-family: Typewriter;
+  font-size: 30px
+}
+
+.normal {
+  color: #000000;
+    background: #F2F2F2;
+  font-weight: bold;
+    border: 2px solid #4980CC;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+.normal:hover {
+    color: #FFF;
+    background: #4980CC;
+}
+
+.infinity {
+  color: #FFFFFF;
+  background: #1F1F1F;
+  font-weight: bold;
+  border: 2px solid #B67F33;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+.infinity:hover {
+  color: #000000;
+  background: #B67F33;
+}
+
+.eternity {
+  color: #b341e0;
+  background: black;
+  border: 2px solid #b341e0;
+  font-weight: bold;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+.eternity:hover {
+  color: #511568;
+  background: white;
+}
+
+.singularity {
+  color: white;
+    background: #1f1f1f;
+    font-family: Typewriter;
+    border: 2px solid #b67f33;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 20px;
+    animation: singularity 1s linear infinite;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+.singularity:hover {
+  color: black;
+  animation: singularityHover 1s linear infinite;
+}
+@keyframes singularity { 
+  0%{
+      border: 2px solid #b67f33;
+  }
+  20%{
+      border: 2px solid #65E421;
+  }
+  40%{
+      border: 2px solid #34F7F4;
+  }
+  60%{
+      border: 2px solid #B008C1;
+  }
+  80%{
+      border: 2px solid #951827;
+  }
+  100%{
+      border: 2px solid #b67f33;
+  }
+}
+@keyframes singularityHover { 
+  0%{
+      border: 2px solid #b67f33;
+      background: #b67f33;
+  }
+  20%{
+      border: 2px solid #65E421;
+      background: #65E421;
+  }
+  40%{
+      border: 2px solid #34F7F4;
+      background: #34F7F4;
+  }
+  60%{
+      border: 2px solid #B008C1;
+      background: #B008C1;
+  }
+  80%{
+      border: 2px solid #951827;
+      background: #951827;
+  }
+  100%{
+      border: 2px solid #b67f33;
+      background: #b67f33;
+  }
+}
+
+.sanity {
+  color: #ff1313;
+  background: black;
+  border: 2px solid #ff1313;
+  font-weight: bold;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  animation: dilationBtnGlow 4s linear infinite;
+}
+.sanity:hover {
+  color: #aa1313;
+  background: white;
+  text-shadow: 0px 0px 3px #aa1313;
+}
+@keyframes dilationBtnGlow {
+    0%  {box-shadow: inset 5px 0px 20px #ff1313;}
+    25% {box-shadow: inset 0px 5px 20px #ff1313;}
+    50% {box-shadow: inset -5px 0px 20px #ff1313;}
+    75% {box-shadow: inset 0px -5px 20px #ff1313;}
+    100% {box-shadow: inset 5px 0px 20px #ff1313;}
+}
+
+.divinity {
+  color: #ffff00;
+  background: radial-gradient(circle, transparent, #b3b320 0%, #000000 100%);
+  border: 2px solid #dede59;
+  font-weight: bold;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  box-shadow: inset 0px 0px 11px 5px #dede59;  
+}
+.divinity:hover {
+  color: #c4c427;
+  text-shadow: 0px 0px 3px black;
+  background: radial-gradient(circle, transparent, #b3b320 0%, #ffffff 80%);
+}

@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Numbers Get Very Big v1.2</title>
+    <meta
+      name="description"
+      content="Watch numbers go up over time. Very slow! Reach numbers bigger than 1.79e308."
+    />
+    <style>
+      * {
+        font-family: Consolas;
+      }
+      #numDisplay {
+        font-size: 24px;
+      }
+      #text {
+        font-size: 21px;
+      }
+      #a {
+        font-size: 21px;
+      }
+      #about {
+        font-size: 21px;
+      }
+      #minutes {
+        font-size: 20px;
+      }
+      .tabcontent {
+        display: none;
+      }
+      .tablinks {
+        background-color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Numbers Get Very Big - Version 1.2</h1>
+    <p id="numDisplay"></p>
+    <p id="logDisplay"></p>
+    <div class="tab">
+      <button class="tablinks" onclick="tab(event, 'Options')">
+        Number Options
+      </button>
+      <button class="tablinks" onclick="tab(event, 'About')">About</button>
+      <button class="tablinks" onclick="tab(event, 'Stats')">Your Stats</button>
+      <button class="tablinks" onclick="tab(event, 'Log')">Update Log</button>
+      <button class="tablinks" onclick="tab(event, 'List')">Number List</button>
+    </div>
+    <div id="About" class="tabcontent">
+      <h2>About</h2>
+      <p id="about">
+        This number increaser made by the Youtuber Incremental Gameplays.<br />The
+        number starts at 5e-324 and slowly increases every second.<br />Since
+        the increase is so slow, there has been a skip 1 min-hour button.<br />To
+        get past 1.79e308, a certain number variable was used.<br /><br />The
+        use of curly brackets and numbers comes after 1e1000000.<br />The number
+        in the curly bracket represents the number of e's there is.<br />Therefore,
+        it saves tons of space and time to look at and maintain.<br /><br />The
+        inspiration of this comes from Douglas Shamlin Jr, but it was not as<br />complete
+        as this one will be in the future. Expecting more awesome updates<br />soon!<br /><br />Anyways
+        please take a moment and see the numbers rise up quickly!<br />You will
+        enjoy it if you are a big number fan. Can be boring to watch.
+      </p>
+    </div>
+    <div id="Options" class="tabcontent">
+      <h2>Number Options</h2>
+      <button id="update" onclick="update()">Update Number</button>
+      <button id="min" onclick="update60()">Skip 1 minute</button>
+      <button id="hour" onclick="update3600()">Skip 1 hour</button>
+      <br />
+      <br />
+      <button id="day" onclick="update86400()">Skip 1 day (Lag Spike)</button>
+      <button id="reset" onclick="reset()">Reset Numbers</button>
+    </div>
+    <div id="Stats" class="tabcontent">
+      <h2>All-Time Number Stats.</h2>
+      <p id="minutes">
+        Number updated 0 times.<br />You have skipped 0 minutes.<br />Converted
+        to: 0 hours,<br />converted to 0 days,<br />converted to 0 weeks,<br />converted
+        to 0 months,<br />and converted to 0 years.
+      </p>
+      <h3>
+        These stats will count up once you press the 'skip' buttons.<br />All
+        stats will be removed upon reset.
+      </h3>
+    </div>
+    <div id="Log" class="tabcontent">
+      <h2>Total Update Log.</h2>
+      <p>v1.0 (03-23-2021)<br />Started a numbers getting bigger remake.</p>
+      <p>v1.1 (03-25-2021)<br />Numbers go further faster. Updated stats.</p>
+      <p>
+        v1.2 (03-29-2021)<br />Added big number list. Currently under
+        construction.<br />No JavaScript was modified.
+      </p>
+      <p>v1.21 (04-02-2021)<br />Updated number list.</p>
+      <h3>Expect more updates in the near future.</h3>
+    </div>
+    <div id="List" class="tabcontent">
+      <h2>Big number list.</h2>
+      <p>
+        Currently under construction. Colors means the number is extremely
+        large.
+        <br />
+        Just scroll down right now and imagine the numbers and the names! It is
+        insane as heck.
+      </p>
+      <p>
+        1
+        <br />
+        5
+        <br />
+        25
+        <br />
+        150
+        <br />
+        10000
+        <br />
+        1e9
+        <br />
+        1e18
+        <br />
+        1e27
+        <br />
+        1e40
+        <br />
+        1e100 (Googol)
+        <br />
+        1e250
+        <br />
+        1.79e308
+        <br />
+        1e1200
+        <br />
+        1e5000
+        <br />
+        1e30,000
+        <br />
+        1e100,000
+        <br />
+        1e400,000
+        <br />
+        1e1,000,000
+        <br />
+        1e4,000,000
+        <br />
+        1e100,000,000
+        <br />
+        1e1,000,000,000
+        <br />
+        10^10^12
+        <br />
+        10^10^15
+        <br />
+        10^10^18
+        <br />
+        10^10^27
+        <br />
+        10^10^42
+        <br />
+        10^10^60
+        <br />
+        10^10^80
+        <br />
+        10^10^100 (Googolplex)
+        <br />
+        10^10^200
+        <br />
+        10^10^400
+        <br />
+        10^10^2000
+        <br />
+        10^10^15,000
+        <br />
+        10^10^100,000 (Googolplexigong)
+        <br />
+        10^10^10^6
+        <br />
+        10^10^10^10
+        <br />
+        10^10^10^15
+        <br />
+        10^10^10^35
+        <br />
+        10^10^10^60
+        <br />
+        10^10^10^100 (Googolduplex)
+        <br />
+        10^10^10^308
+        <br />
+        10^10^10^1600
+        <br />
+        10^10^10^30,000
+        <br />
+        10^10^10^100,000 (Googolduplexigong)
+        <br />
+        10^10^10^10^6
+        <br />
+        10^10^10^10^12
+        <br />
+        10^10^10^10^30
+        <br />
+        10^10^10^10^50
+        <br />
+        10^10^10^10^75
+        <br />
+        10^10^10^10^100 (Googoltriplex)
+        <br />
+        10^10^10^10^1000
+        <br />
+        10^10^10^10^10,000
+        <br />
+        10^10^10^10^100,000 (Googoltriplexigong)
+        <br />
+        10^^6 (Hexalogue)
+        <br />
+        10^^7 (Heptalogue)
+        <br />
+        10^^8 (Octalogue)
+        <br />
+        10^^9 (Ennalogue)
+        <br />
+        10^^10 (Decker)
+        <br />
+        10^^12
+        <br />
+        10^^15
+        <br />
+        10^^25
+        <br />
+        10^^75
+        <br />
+        10^^100 (Giggol)
+        <br />
+        10^^300
+        <br />
+        10^^1000
+        <br />
+        10^^10,000
+        <br />
+        10^^100,000
+        <br />
+        10^^1,000,000
+        <br />
+        10^^10^9
+        <br />
+        10^^10^10 (Dialogialogue)
+        <br />
+        10^^10^20
+        <br />
+        10^^10^40
+        <br />
+        10^^10^80
+        <br />
+        10^^10^100 (Googolstack)
+        <br />
+        10^^10^1000
+        <br />
+        10^^10^10,000
+        <br />
+        10^^10^100,000
+        <br />
+        10^^10^10^6
+        <br />
+        10^^10^10^10 (Trialogialogue)
+        <br />
+        10^^10^10^50
+        <br />
+        10^^10^10^100 (Googolplexidex)
+        <br />
+        10^^10^10^100,000
+        <br />
+        10^^10^10^10^10 (Tetralogialogue)
+        <br />
+        10^^10^10^10^100 (Googolduplexidex)
+        <br />
+        10^^10^^4
+        <br />
+        10^^10^^5
+        <br />
+        10^^10^^6
+        <br />
+        10^^10^^7
+        <br />
+        10^^10^^8
+        <br />
+        10^^10^^9
+        <br />
+        10^^10^^10 (Tria-taxis)
+        <br />
+        10^^10^^30
+        <br />
+        <span style="color: blue">10^^10^^100 (Giggolplex)</span>
+        <br />
+        10^^10^^1000
+        <br />
+        10^^10^^10,000
+        <br />
+        10^^10^^100,000
+        <br />
+        10^^10^^10^20
+        <br />
+        10^^10^^10^50
+        <br />
+        10^^10^^10^100 (Googoldudex)
+        <br />
+        <span style="color: green">10^^10^^10^^10 (Tetra-taxis)</span>
+        <br />
+        10^^10^^10^^50
+        <br />
+        10^^10^^10^^100 (Giggolduplex)
+        <br />
+        10^^10^^10^^10,000
+        <br />
+        <span style="color: green">10^^10^^10^^10^^10 (Penta-taxis)</span>
+        <br />
+        10^^10^^10^^10^^100 (Giggoltriplex)
+        <br />
+        <span style="color: green">10^^^6 (Hexa-taxis)</span>
+        <br />
+        <span style="color: green">10^^^7 (Hepta-taxis)</span>
+        <br />
+        10^^^8 (Octa-taxis)
+        <br />
+        10^^^9 (Enna-taxis)
+        <br />
+        10^^^10 (Deka-taxis)
+        <br />
+        10^^^35
+        <br />
+        <span style="color: blue">10^^^100 (Gaggol)</span>
+        <br />
+        10^^^1000
+        <br />
+        10^^^10,000
+        <br />
+        10^^^1,000,000
+        <br />
+        10^^^10^10 (Dialogia-taxis)
+        <br />
+        10^^^10^10^10 (Trialogia-taxis)
+        <br />
+        10^^^10^^10 (Dekalogia-taxis)
+        <br />
+        <span style="color: green">10^^^10^^10^^10 (Triataxia-taxis)</span>
+        <br />
+        <span style="color: green">10^^^10^^^4 (Tetrataxia-taxis)</span>
+        <br />
+        <span style="color: green">10^^^10^^^5 (Pentataxia-taxis)</span>
+        <br />
+        <span style="color: green">10^^^10^^^6 (Hexataxia-taxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^10^^^10 (Tria-petaxis)</span>
+        <br />
+        10^^^10^^^100 (Gaggolplex)
+        <br />
+        10^^^10^^^10^100 (Googolduthrex)
+        <br />
+        <span style="color: green"
+          >10^^^10^^^10^^10 (Dekalogiataxia-taxis)</span
+        >
+        <br />
+        <span style="color: green"
+          >10^^^10^^^10^^^3 (Triataxiataxia-taxis)</span
+        >
+        <br />
+        <span style="color: green"
+          >10^^^10^^^10^^^4 (Tetrataxiataxia-taxis)</span
+        >
+        <br />
+        <span style="color: springgreen"
+          >10^^^10^^^10^^^10 (Tetra-petaxis)</span
+        >
+        <br />
+        <span style="color: springgreen">10^^^^5 (Penta-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^6 (Hexa-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^7 (Hepta-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^8 (Octa-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^9 (Enna-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^10 (Deka-petaxis)</span>
+        <br />
+        <span style="color: blue">10^^^^100 (Geegol)</span>
+        <br />
+        10^^^^1000
+        <br />
+        10^^^^1,000,000
+        <br />
+        <span style="color: springgreen">10^^^^10^10 (Dialogia-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^10^^10 (Dekalogia-petaxis)</span>
+        <br />
+        <span style="color: springgreen">10^^^^10^^^3 (Triataxia-petaxis)</span>
+        <br />
+        <span style="color: springgreen"
+          >10^^^^10^^^4 (Tetrataxia-petaxis)</span
+        >
+        <br />
+        <span style="color: springgreen"
+          >10^^^^10^^^5 (Pentataxia-petaxis)</span
+        >
+        <br />
+        <span style="color: springgreen"
+          >10^^^^10^^^10 (Dekataxia-petaxis)</span
+        >
+        <br />
+        <span style="color: teal">10^^^^10^^^^3 (Triapetaxia-petaxis)</span>
+        <br />
+        <span style="color: teal">10^^^^10^^^^4 (Tetrapetaxia-petaxis)</span>
+        <br />
+        <span style="color: teal">10^^^^10^^^^5 (Hexapetaxia-petaxis)</span>
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^10^^^^10 (Tria-exaxis)</span
+        >
+        <br />
+        10^^^^10^^^^100 (Geegolplex)
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^4 (Penta-exaxis)</span
+        >
+        <br />
+        10^^^^10^^^^10^^^^100 (Geegolduplex)
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >5^^^^5^^^^5^^^^5^^^^5 (Tripent)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^5 (Penta-exaxis)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^6 (Hexa-exaxis)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^7 (Hepta-exaxis)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^8 (Octa-exaxis)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^9 (Enna-exaxis)</span
+        >
+        <br />
+        <span style="color: teal; font-weight: bold"
+          >10^^^^^10 (Deka-exaxis)</span
+        >
+        <br />
+        <span style="color: blue">10^^^^^100 (Gigol)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^10^^^^^10 (Tria-eptaxis)</span>
+        <br />
+        10^^^^^10^^^^^100 (Gigolplex)
+        <br />
+        <span style="color: steelblue">10^^^^^^4 (Tetra-eptaxis)</span>
+        <br />
+        10^^^^^10^^^^^10^^^^^100 (Gigolduplex)
+        <br />
+        <span style="color: steelblue">10^^^^^^5 (Penta-eptaxis)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^^6 (Hexa-eptaxis)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^^7 (Hepta-eptaxis)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^^8 (Octa-eptaxis)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^^9 (Enna-eptaxis)</span>
+        <br />
+        <span style="color: steelblue">10^^^^^^10 (Deka-eptaxis)</span>
+        <br />
+        <span style="color: blue">10^^^^^^100 (Goggol)</span>
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^10^^^^^^10 (Tria-octaxis)</span
+        >
+        <br />
+        10^^^^^^10^^^^^^100 (Goggolplex)
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^4 (Tetra-octaxis)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^5 (Penta-octaxis)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^6 (Hexa-octaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >7^^^^^^7^^^^^^7^^^^^^7^^^^^^7^^^^^^7^^^^^^7 (Trisept)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^7 (Hepta-octaxis)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^8 (Octa-octaxis)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^9 (Enna-octaxis)</span
+        >
+        <br />
+        <span style="color: steelblue; font-weight: bold"
+          >10^^^^^^^10 (Deka-octaxis)</span
+        >
+        <br />
+        <span style="color: blue">10^^^^^^^100 (Gagol)</span>
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^3 (Tria-ennaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^4 (Tetra-ennaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^5 (Penta-ennaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^6 (Hexa-ennaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^8 (Octa-ennaxis)</span
+        >
+        <br />
+        <span style="color: slateblue; font-weight: bold"
+          >10^^^^^^^^10 (Deka-ennaxis)</span
+        >
+        <br />
+        <span style="color: royalblue; font-weight: bold"
+          >10^^^^^^^^^3 (Tria-dekaxis)</span
+        >
+        <br />
+        <span style="color: royalblue; font-weight: bold"
+          >10^^^^^^^^^4 (Tetra-dekaxis)</span
+        >
+        <br />
+        <span style="color: royalblue; font-weight: bold"
+          >10^^^^^^^^^4 (Penta-dekaxis)</span
+        >
+        <br />
+        <span style="color: royalblue; font-weight: bold"
+          >10^^^^^^^^^4 (Deka-dekaxis)</span
+        >
+        <br />
+        <span style="color: blue; font-weight: bold"
+          >10{10}3 (Tria-endekaxis)</span
+        >
+        <br />
+        <span style="color: blue; font-weight: bold"
+          >10{10}4 (Tetra-endekaxis)</span
+        >
+        <br />
+        <span style="color: blue; font-weight: bold"
+          >10{10}5 (Penta-endekaxis)</span
+        >
+        <br />
+        <span style="color: blue; font-weight: bold">10{10}10 (Tridecal)</span>
+        <br />
+        <span style="color: blue; font-weight: bold"
+          >10{11}3 (Tria-dodekaxis)</span
+        >
+        <br />
+        <span style="color: blue; font-weight: bold"
+          >10{11}10 (Deka-dodekaxis)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{100}10 (Boogol)</span
+        >
+        <br />
+        <span style="color: magenta; font-weight: bold"
+          >10{1000}10 (Gugoldachime)</span
+        >
+        <br />
+        <span style="color: magenta; font-weight: bold"
+          >10{10,000}10 (Gugoldatoll)</span
+        >
+        <br />
+        <span style="color: magenta; font-weight: bold"
+          >10{100,000}10 (Gugoldagong)</span
+        >
+        <br />
+        <span style="color: magenta; font-weight: bold"
+          >10{1e8}10 (Gugoldabong)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{1e100}10 (Googolsuplex)</span
+        >
+        <br />
+        <span style="color: magenta; font-weight: bold"
+          >10{1e100,000}10 (Googolsuplexigong)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^10^100}10 (Googolplexisuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^10^10^100}10 (Googolduplexisuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^^101}10 (Grangolsuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^^10^^101}10 (Grangoldexisuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^^^^101}10 (Gigangolsuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10^^^^^101}10 (Gorgegolsuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10{10}101}10 (Googondolsuplex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{10{100}10}10 (Boogolplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10{10^100}10}10 (Googoldusuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10{10^^101}10}10 (Grangoldusuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10{10{10}101}10}10 (Googondoldusuplex)</span
+        >
+        <br />
+        <span style="color: darkmagenta; font-weight: bold"
+          >10{10{10{10^^100}10}10}10 (Grangoltrisuplex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >2{2{2{2{2{2{2{12}3}3}3}3}3}3}3 (Little Graham)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}100 (Corporal)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10^100 (Googolsudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10^^100 (Grangolsudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10^^^100 (Greagolsudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10{10}100 (Googondolsudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10{10{10{100}10}10}10 (Gugoldadusplexisuplex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{1}}10{{1}}100 (Corporalplex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10{{1}}10{{1}}100 (Graatagoldadusudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10{{1}}10{{1}}10{{1}}100 (Graatagolda-trisudex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{1}}10{{1}}10{{1}}10{{1}}10{{1}}100
+          (Graatagolda-quadrisudex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{2}}100 (Mulporal)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{2}}10{{1}}100 (Graatagolda-suthrex)</span
+        >
+        <br />
+        <span style="color: navy; font-weight: bold"
+          >3{{3}}3 (Grand tritri)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{2}}10{{2}}100 (Greegolda-suthrex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{2}}10{{2}}10{{2}}100 (Greegolda-dusuthrex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{2}}10{{2}}10{{2}}10{{2}}100 (Greegolda-trisuthrex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{3}}100 (Powporal)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{3}}10{{3}}100 (Grinningolda-sutetrex)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{3}}10{{3}}10{{3}}100 (Grinningolda-dusutetrex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{4}}100 (Terporal)</span
+        >
+        <br />
+        <span style="color: darkviolet; font-weight: bold"
+          >10{{4}}10{{4}}100 (Golaagolda-supentex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{5}}100 (Gruelohgold)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{6}}100 (Gaspgold)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{7}}100 (Ginorgold)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{8}}100 (Gargantuuld)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{9}}100 (Googondold)</span
+        >
+        <br />
+        <span style="color: navy; font-weight: bold"
+          >10{{10}}10 (Grand tridecal)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{19}}100 (Googonkosold)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{29}}100 (Googontritold)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >10{{100}}10 (Biggol)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{99,999}}100 (Gugolthragong)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{10{{1}}10}}10 (Graatagolda-plexitris)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{10{{100}}10}}10 (Biggolplex)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{1}}}100 (Corplodal)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{{1}}}10{{{1}}}100 (Graatagolthra-dexitris)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{{1}}}10{{{1}}}10{{{1}}}100 (Graatagolthra-dudexitris)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{2}}}100 (Greegolthra)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >3{{{3}}}3 (Tetratri)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{{2}}}10{{{2}}}100 (Greegolthra-threxitris)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{3}}}100 (Grinningolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{4}}}100 (Golaagolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{5}}}100 (Gruelohgolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{6}}}100 (Gaspgolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{7}}}100 (Ginorgolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{8}}}100 (Gargantuulthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{9}}}100 (Googondolthra)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{19}}}100 (Googonkosolthra)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >10{{{100}}}100 (Baggol)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{10^100}}}10 (Googolplexitetris)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >10{{{10{{{1}}}100}}}10 (Graatagolthra-plexitetris)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >10{{{10{{{100}}}10}}}10 (Baggolplex)</span
+        >
+        <br />
+        <span style="font-weight: bold"
+          >New number formatting past this point.</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,1,4} (Graatagoltesla)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,2,4} (Greegoltesla)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,3,4} (Grinningoltesla)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{4,4,4,4} (Supertet)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,4,4} (Golaagoltesla)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,5,4} (Gruelohgoltesla)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,6,4} (Gaspgoltesla)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,100,9,4} (Googondoltesla)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >{10,10,100,4} (Beegol)</span
+        >
+        <br />
+        <span style="color: rebeccapurple; font-weight: bold"
+          >{10,10,{10,10,100},4} (Gugolda-plexipentris)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >{10,10,{10,10,100,4},4} (Beegolplex)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,5} (Graatagolpeta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,5} (Greegolpeta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,3,5} (Grinningolpeta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,4,5} (Golaagolpeta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,5,5} (Gruelohgolpeta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,9,5} (Googondolpeta)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >{10,10,100,5} (Bigol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,6} (Graatagolhexa)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,6} (Greegolhexa)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,3,6} (Grinningolhexa)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >{10,10,100,6} (Boggol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,7} (Graatagolhepta)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,7} (Greegolhepta)</span
+        >
+        <br />
+        <span style="color: seagreen; font-weight: bold"
+          >{10,10,100,7} (Bagol)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{10,10,10,10} (General)</span
+        >
+        <br />
+        <span style="color: limegreen; font-weight: bold"
+          >{10,10,10,100} (Troogol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,10,10,1000} (Kilultom)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >{10,10,10,{10,10,10,10}} (Generalplex)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >{10,10,10,{10,10,10,100}} (Troogolplex)</span
+        >
+        <br />
+        <span style="color: red; font-weight: bold"
+          >{4,64,1,1,2} (Fish number 1)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,1,2} (Thrangol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,1,2} (Threagol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,3,1,2} (Thrigangol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,4,1,2} (Throrgegol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,5,1,2} (Thrulgol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,6,1,2} (Thraspgol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,7,1,2} (Thrinorgol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,2,2} (Thraatagold)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,2,2} (Threegold)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,3,2,2} (Thrinningold)</span
+        >
+        <br />
+        <span style="color: limegreen; font-weight: bold"
+          >{10,10,10,100,2} (Triggol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,1,3} (Thrantrigol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,1,3} (Threatrigol)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{3,3,3,3,3} (Pentatri)</span
+        >
+        <br />
+        <span style="color: limegreen; font-weight: bold"
+          >{10,10,10,100,3} (Traggol)</span
+        >
+        <br />
+        <span style="color: limegreen; font-weight: bold"
+          >{10,10,10,100,4} (Treegol)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{5,5,5,5,5} (Superpent)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{10,10,10,10,10} (Pentadecal)</span
+        >
+        <br />
+        <span style="color: red; font-weight: bold"
+          >{10,10,10,10,63} (Fish number 2)</span
+        >
+        <br />
+        <span style="color: lawngreen; font-weight: bold"
+          >{10,10,10,10,100} (Quadroogol)</span
+        >
+        <br />
+        <span style="color: midnightblue; font-weight: bold"
+          >{10,10,10,10,{10,10,10,10,10}} (Pentadecalplex)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,1,1,2} (Tetrangol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,1,1,2} (Tetreagol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,3,1,1,2} (Tetrigangol)</span
+        >
+        <br />
+        <span style="color: lawngreen; font-weight: bold"
+          >{10,10,10,10,100,2} (Quadriggol)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{3,3,3,3,3,3} (Hexatri)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{6,6,6,6,6,6} (Superhex)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{10,10,10,10,10,10} (Hexadecal)</span
+        >
+        <br />
+        <span style="color: greenyellow; font-weight: bold"
+          >{10,10,10,10,10,100} (Quintoogol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,1,1,1,1,2} (Pentangol)</span
+        >
+        <br />
+        <span style="color: mediumorchid; font-weight: bold"
+          >{10,100,2,1,1,1,2} (Penteagol)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{3,3,3,3,3,3,3} (Heptatri)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{7,7,7,7,7,7,7} (Supersept)</span
+        >
+        <br />
+        <span style="color: maroon; font-weight: bold"
+          >{10,10,10,10,10,10,10} (Heptadecal)</span
+        >
+        <br />
+        <span style="background-color: #bbb; color: yellow; font-weight: bold"
+          >{10,10,10,10,10,10,100} (Sextoogol)</span
+        >
+      </p>
+      <p>More big numbers list coming very soon. Sorry!</p>
+    </div>
+    <script>
+      var stuff = {
+        number: 5e-324,
+        part: 308,
+        partV: 308,
+        thirdPart: "e",
+        increaser: 2,
+        valueFixed: 3,
+        autoMultiply: 1.5,
+        x: "1e",
+        y: "e",
+        z: 0,
+        multiply: 1.002,
+        minutesSkipped: 0,
+        hoursSkipped: 0,
+        daysSkipped: 0,
+        weeksSkipped: 0,
+        monthsSkipped: 0,
+        yearsSkipped: 0,
+        numMul: 1.02,
+        numm: 1,
+        nummTwo: 1,
+        nummThree: 1,
+        updateCounter: 0,
+      };
+
+      document.getElementById("numDisplay").innerHTML = stuff.number;
+
+      function update() {
+        stuff.number = stuff.number * stuff.autoMultiply;
+        stuff.autoMultiply = stuff.autoMultiply * 1.000001;
+        document.getElementById("numDisplay").innerHTML = stuff.number;
+        stuff.updateCounter = stuff.updateCounter + 1;
+        if (stuff.number == Number.POSITIVE_INFINITY) {
+          stuff.number = Number.MAX_VALUE;
+          document.getElementById("numDisplay").innerHTML =
+            "Number: " + stuff.x + stuff.part.toFixed(0);
+          stuff.part = stuff.part * stuff.multiply;
+          if (stuff.part >= 1e6 && stuff.numm <= Number.MAX_VALUE) {
+            stuff.numm = stuff.numm + 1 * stuff.numMul;
+            stuff.y = "10{" + stuff.numm.toExponential(0) + "}";
+            stuff.x = "10{" + stuff.numm.toExponential(0) + "}";
+            stuff.part = stuff.part / 1e5;
+            if (stuff.numm >= Number.MAX_VALUE) {
+              stuff.numm = 0;
+              stuff.partV = stuff.partV * 1.01;
+              stuff.x = "10{" + stuff.partV.toFixed(0) + "}";
+              stuff.y = "10{" + stuff.partV.toFixed(0) + "}";
+            }
+          }
+        }
+      }
+
+      setInterval(() => {
+        if (stuff.numm >= 1000000 && stuff.numm <= Number.MAX_VALUE) {
+          stuff.x = "10{" + stuff.numm.toExponential(2) + "}";
+          stuff.y = "10{" + stuff.numm.toExponential(2) + "}";
+          stuff.part = 1;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 4) {
+          stuff.multiply = 1.01;
+          stuff.part = stuff.part * 1.2;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 650) {
+          stuff.part = stuff.part * 1.4;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 1300) {
+          stuff.part = stuff.part * 1.8;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 3000) {
+          stuff.part = stuff.part * 3;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 5000) {
+          stuff.part = stuff.part * 4;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 7000) {
+          stuff.part = stuff.part * 4;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 10000) {
+          stuff.part = stuff.part * 4.5;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 15000) {
+          stuff.part = stuff.part * 4.8;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 22000) {
+          stuff.part = stuff.part * 5.3;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 94000) {
+          stuff.part = stuff.part * 5.8;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 270000) {
+          stuff.part = stuff.part * 6.5;
+        }
+      }, 1000);
+
+      setInterval(() => {
+        if (stuff.numm >= 3e8) {
+          stuff.part = stuff.part * 0.2;
+        }
+      }, 1000);
+
+      setInterval(update, 1000);
+
+      function update60() {
+        update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update(),
+          update();
+        stuff.numMul = stuff.numMul * 1.004;
+        stuff.minutesSkipped = stuff.minutesSkipped + 1;
+        stuff.hoursSkipped = stuff.hoursSkipped + 0.01 * 1.667;
+        stuff.daysSkipped = stuff.daysSkipped + 24 / 1440 / 24;
+        stuff.weeksSkipped = stuff.daysSkipped / 7;
+        stuff.monthsSkipped = stuff.daysSkipped / 30;
+        stuff.yearsSkipped = stuff.daysSkipped / 365;
+      }
+
+      setInterval(() => {
+        if (stuff.minutesSkipped == 1) {
+          document.getElementById("minutes").innerHTML =
+            "Number updated " +
+            stuff.updateCounter +
+            " times.<br>You have skipped " +
+            stuff.minutesSkipped +
+            " minute.<br>Converted to: " +
+            stuff.hoursSkipped.toFixed(2) +
+            " hours,<br>converted to " +
+            stuff.daysSkipped.toFixed(2) +
+            " days,<br>converted to " +
+            stuff.weeksSkipped.toFixed(2) +
+            " weeks,<br>converted to " +
+            stuff.monthsSkipped.toFixed(2) +
+            " months,<br>and converted to " +
+            stuff.yearsSkipped.toFixed(2) +
+            " years.";
+        } else {
+          document.getElementById("minutes").innerHTML =
+            "Number updated " +
+            stuff.updateCounter.toLocaleString() +
+            " times.<br>You have skipped " +
+            stuff.minutesSkipped.toLocaleString() +
+            " minutes.<br>Converted to: " +
+            stuff.hoursSkipped.toFixed(2) +
+            " hours,<br>converted to " +
+            stuff.daysSkipped.toFixed(2) +
+            " days,<br>converted to " +
+            stuff.weeksSkipped.toFixed(2) +
+            " weeks,<br>converted to " +
+            stuff.monthsSkipped.toFixed(2) +
+            " months,<br>and converted to " +
+            stuff.yearsSkipped.toFixed(2) +
+            " years.";
+        }
+      }, 75);
+
+      function update3600() {
+        update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60(),
+          update60();
+        stuff.numMul = stuff.numMul * 1.003;
+      }
+
+      function update86400() {
+        update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600(),
+          update3600();
+        stuff.numMul = stuff.numMul * 1.15;
+      }
+
+      function reset() {
+        let confirmer = confirm(
+          "Warning: You will lose your numbers and stats.\nAre you sure?"
+        );
+        if (confirmer) {
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          localStorage.removeItem("numbers");
+          window.location.reload();
+        }
+      }
+
+      setInterval(save, 2000);
+      load();
+
+      function objectToDecimal(object) {
+        for (let i in object) {
+          if (
+            typeof object[i] == "string" &&
+            new Number(object[i]) instanceof Number &&
+            !(new Number(object[i]).sign == 0 && object[i] != "0")
+          ) {
+            object[i] = new Number(object[i]);
+          }
+          if (typeof object[i] == "object") {
+            objectToDecimal(object[i]);
+          }
+        }
+      }
+
+      function merge(base, source) {
+        for (let i in base) {
+          if (source[i] != undefined) {
+            if (
+              typeof base[i] == "object" &&
+              typeof source[i] == "object" &&
+              !isDecimal(base[i]) &&
+              !isDecimal(source[i])
+            ) {
+              merge(base[i], source[i]);
+            } else {
+              if (isDecimal(base[i]) && !isDecimal(source[i])) {
+                base[i] = new Number(source[i]);
+              } else if (!isDecimal(base[i]) && isDecimal(source[i])) {
+                base[i] = source[i].toNumber();
+              } else {
+                base[i] = source[i];
+              }
+            }
+          }
+        }
+      }
+
+      function isDecimal(x) {
+        if (x.array != undefined && x.plus != undefined) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      var savegame;
+
+      function save() {
+        localStorage.setItem("numbers", JSON.stringify(stuff));
+      }
+
+      function load() {
+        if (localStorage.getItem("numbers")) {
+          savegame = JSON.parse(localStorage.getItem("numbers"));
+          objectToDecimal(savegame);
+          merge(stuff, savegame);
+          if (stuff.numm > 2) {
+            update3600();
+          }
+        }
+      }
+    </script>
+    <script>
+      function tab(evt, tabs) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabs).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <script defer src="src/Small%20Scripts/Animations.js"></script>
+    <script defer src="src/Internal/Formatting.js"></script>
+    <script defer src="src/Internal/BreakEternity.js"></script>
+    <script defer src="src/Small%20Scripts/ourgwa.js"></script>
+    <script defer src="src/Data.js"></script>
+    <script defer src="src/LostDerivatives.js"></script>
+    <script defer src="src/Theories.js"></script>
+    <script defer src="src/Upgrades.js"></script>
+    <script defer src="src/Derivatives.js"></script>
+    <script defer src="src/Small%20Scripts/Automation.js"></script>
+    <script defer src="src/Small%20Scripts/Legends.js"></script>
+    <script defer src="src/Update.js"></script>
+    <script defer src="src/Main.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/miscStyles.css" />
+    <link rel="stylesheet" type="text/css" href="css/classStyles.css" />
+    <link rel="stylesheet" type="text/css" href="css/idStyles.css" />
+    <link rel="icon" href="favicon.png" type="image/x-icon" sizes="16x16">
+    <title>UC-Remake</title>
+</head>
+<body>
+<div>
+    <img src="images/communism.png" id="ourgwa">
+</div>
+<div class="layer" id="topLayer">
+    <div class="flexBox generalTexts" id="oddityDisplay">There are 0 Oddities</div>
+    <div class="flexBox generalTexts" id="lostInDisplay">Lost Derivative Active!</div>
+    <div class="flexBox" id="navBar">
+        <button class="navButton" id="derivNav" onclick="switchTab(1)">Derivatives</button>
+        <button class="navButton" id="mysteriesNav" onclick="switchTab(2)">Theories</button>
+        <button class="navButton" id="milestoneNav" onclick="switchTab(3)">Legends</button>
+        <button class="navButton" id="lostNav" onclick="switchTab(4)">Lost Derivative</button>
+        <button class="navButton" id="stairNav" onclick="switchTab(5)">The Stairway</button>
+        <button class="navButton" id="settingsNav" onclick="switchTab(0)">Settings</button>
+    </div>
+    <div class="flexBox" id="buymaxContainer">
+        <button class="flexBox" id="buymax" onclick="buyMaxDeriv()">Buy the max possible of all Derivatives [M]</button>
+        <button class="flexBox" id="autoBuymax" onclick="autoToggle()">Auto Buymax: OFF</button>
+        <button class="flexBox" id="upgradeBuymax" onclick="buyMaxUpgrades()">Buy the max possible of Upgrades 1-4 [U]</button>
+    </div><br>
+    <div class="flexBox" id="bigDerivativeContainer">
+      <div id="derivativeContainer">
+        <span class="derivPicSpan" onmouseover="data.hovering.deriv=0" onclick="buyDeriv(1)"><img src="https://cdn.glitch.me/4501035e-9e22-4244-ae25-031d5eaf1347%2Fderiv1.png?v=1635110164486" class="derivPic"></span>
+        <span class="derivPicSpan" onmouseover="data.hovering.deriv=1" onclick="buyDeriv(2)"><img src="https://cdn.glitch.me/4501035e-9e22-4244-ae25-031d5eaf1347%2Fderiv2.png?v=1635121424939" class="derivPic"></span>
+        <span class="derivPicSpan" onmouseover="data.hovering.deriv=2" onclick="buyDeriv(3)"><img src="https://cdn.glitch.me/4501035e-9e22-4244-ae25-031d5eaf1347%2Fderiv3.png?v=1635121428368" class="derivPic"></span>
+        <span class="derivPicSpan" onmouseover="data.hovering.deriv=3" onclick="buyDeriv(4)"><img src="https://cdn.glitch.me/4501035e-9e22-4244-ae25-031d5eaf1347%2Fderiv4.png?v=1635121431713" class="derivPic"></span>
+        <span class="derivPicSpan" id="derivVButton" onmouseover="data.hovering.deriv=4" onclick="buyDeriv(5)"><img src="https://cdn.glitch.me/4501035e-9e22-4244-ae25-031d5eaf1347%2Fderiv5.png?v=1635157107499" class="derivPic"></span>
+        <div id="derivInfo" class="generalTexts">
+          <b id="derivName"></b><br><br>
+          <span id="derivCost"></span><br>
+          <span id="derivAmt"></span><br>
+          <span id="derivProduce"></span>
+        </div>
+      </div>
+        <div class="flexBox" id="upgradeContainer">
+          <span class="derivPicSpan" onclick="buyUpgrade(1)" onmouseover="data.hovering.upg=0"><img src="https://cdn.glitch.me/37aa8dbe-dd64-4491-b637-ddb0af6722af/upg1.png?v=1639592420799" class="derivPic"></span>
+          <span class="derivPicSpan" onclick="buyUpgrade(2)" onmouseover="data.hovering.upg=1"><img src="https://cdn.glitch.me/37aa8dbe-dd64-4491-b637-ddb0af6722af/upg2.png?v=1639591666323" class="derivPic"></span>
+          <span class="derivPicSpan" onclick="buyUpgrade(3)" onmouseover="data.hovering.upg=2"><img src="https://cdn.glitch.me/37aa8dbe-dd64-4491-b637-ddb0af6722af/upg3.png?v=1639591672193" class="derivPic"></span>
+          <span class="derivPicSpan" onclick="buyUpgrade(4)" onmouseover="data.hovering.upg=3"><img src="https://cdn.glitch.me/37aa8dbe-dd64-4491-b637-ddb0af6722af/upg4.png?v=1639591676416" class="derivPic"></span>
+          <span class="derivPicSpan" onclick="buyUpgrade(5)" onmouseover="data.hovering.upg=4" id="upgrade5"><img src="https://cdn.glitch.me/37aa8dbe-dd64-4491-b637-ddb0af6722af/upg5.png?v=1639592069748" class="derivPic"></span>
+          <div id="upgInfo" class="generalTexts">
+            <b id="upgName"></b><br><br>
+            <span id="upgCost"></span><br>
+            <span id="upgAmt"></span><br>
+            <span id="upgProduce"></span>
+          </div>
+        </div>
+    </div>
+    <div class="flexBox" id="theoriesContainer">
+        <div class="flexBox theoryRow" id="theoryRow1">
+            <button class="theory" id="theory1" onmouseover="theoryTextUpdate(1)" onclick="buyTheory(1)">Theory I</button>
+            <button class="theory" id="theory2" onmouseover="theoryTextUpdate(2)" onclick="buyTheory(2)">Theory II</button>
+            <button class="theory" id="theory3" onmouseover="theoryTextUpdate(3)" onclick="buyTheory(3)">Theory III</button>
+        </div>
+        <div class="flexBox theoryRow" id="theoryRow2">
+            <button class="theory" id="theory4" onmouseover="theoryTextUpdate(4)" onclick="buyTheory(4)">Theory IV</button>
+            <button class="theory" id="theory5" onmouseover="theoryTextUpdate(5)" onclick="buyTheory(5)">Theory V</button>
+            <button class="theory" id="theory6" onmouseover="theoryTextUpdate(6)" onclick="buyTheory(6)">Theory VI</button>
+            <button class="theory" id="theory7" onmouseover="theoryTextUpdate(7)" onclick="buyTheory(7)">Theory VII</button>
+        </div>
+        <div class="flexBox theoryRow" id="theoryRow3">
+            <button class="theory" id="theory8" onmouseover="theoryTextUpdate(8)" onclick="buyTheory(8)">Theory VIII</button>
+            <button class="theory" id="theory9" onmouseover="theoryTextUpdate(9)" onclick="buyTheory(9)">Theory IX</button>
+            <button class="theory" id="theory10" onmouseover="theoryTextUpdate(10)" onclick="buyTheory(10)">Theory X</button>
+            <button class="theory" id="theory11" onmouseover="theoryTextUpdate(11)" onclick="buyTheory(11)">Theory XI</button>
+        </div>
+        <div class="flexBox theoryRow" id="theoryRow4">
+            <button class="theory" id="theory12" onmouseover="theoryTextUpdate(12)" onclick="buyTheory(12)">Theory XII</button>
+            <button class="theory" id="theory13" onmouseover="theoryTextUpdate(13)" onclick="buyTheory(13)">Theory XII</button>
+            <button class="theory" id="theory14" onmouseover="theoryTextUpdate(14)" onclick="buyTheory(14)">Theory XIV</button>
+            <button class="theory" id="theory15" onmouseover="theoryTextUpdate(15)" onclick="buyTheory(15)">Theory XV</button>
+        </div>
+        <div class="generalTexts" id="theoriesText">Hover over a Theory to learn its effect!</div>
+    </div>
+    <div class="flexBox" id="legendsContainer">
+        <button class="legend" id="legend1">Legend One<br>Discovered by purchasing a Upgrade ⬥<br>Derivative 1 no longer consumes Oddities on purchase</button>
+        <button class="legend" id="legend2">Legend Two<br>Discovered by obtaining a Ancient Particle<br>Unlock a Buymax for Upgrades 1-4</button>
+    </div>
+    <div class="flexBox" id="bigLostContainer">
+        <t class="generalTexts" id="lostTopText">hi</t>
+        <div class="flexBox" id="lostContainer">
+            <button class="lostButton" id="lostDeriv" onclick="lostControl()">
+                <div id="lostTitle">The Lost Derivative</div>
+                <div class=""id="lostEffect">effect</div>
+                <div class=""id="lostInfo">info</div>
+            </button>
+            <button class="lostButton" id="particleEffectsBox">
+                <div id="derivativeParticleEffect">Current Ancient Particle effects:</div>
+                <div id="dreamParticleEffect">Current Dream Particle effects:</div>
+            </button>
+        </div>
+        <div class="flexBox lostRow" id="lostRow1">
+            <button class="lostUpgrade" id="lostTheory1" onclick="buyLostTheory(1)">This would be a Lost Upgrade thingie</button>
+            <button class="lostUpgrade" id="lostTheory2"onclick="buyLostTheory(2)">This would be a Lost Upgrade thingie</button>
+            <button class="lostUpgrade" id="lostTheory3"onclick="buyLostTheory(3)">This would be a Lost Upgrade thingie</button>
+            <button class="lostUpgrade" id="lostTheory4"onclick="buyLostTheory(4)">This would be a Lost Upgrade thingie</button>
+        </div>
+        <div class="flexBox lostRow" id="lostRow2">
+            <button class="lostUpgrade"id="lostCycle1"onclick="buyLostCycle(1)">This would be a Lost Upgrade thingie</button>
+            <button class="lostUpgrade"id="lostCycle2"onclick="buyLostCycle(2)">This would be a Lost Upgrade thingie</button>
+        </div>
+    </div>
+    <div class="flexBox" id="settingsContainer">
+        <button class="settingsButtons" onclick="fullReset()">Export and Delete your Savefile</button>
+        <button class="settingsButtons" onclick="exportSave()">Export your Savefile to the clipboard</button>
+        <button class="settingsButtons" onclick="importSave()">Import your Savefile</button>
+        <div class="generalTexts" id="changelog">
+            <h1 id="changelogHeader">Changelog</h1>
+            <p>(because I love changelogs) <br>
+                Only changes I consider notable are recorded here, no bugfixes or small changes.</p>
+            <h3 id="most-recent">Most Recent</h3>
+            <p><strong>v0.0.15b</strong> More content is hidden until you get close to it. <br></p>
+            <h3 id="pre-alpha">Pre-Alpha</h3>
+            <hr>
+            <p><strong>v0.0.1</strong> Created this repo, created the base files, added Saving, Loading, Import, and Export systems, and added a favicon. <br>
+                <strong>v0.0.1b</strong> Created this Changelog. <br>
+                <strong>v0.0.2</strong> Added the Dosis Font family, and the CSS code required to use the fonts within it on texts. <br>
+                <strong>v0.0.3</strong> Added some simple UI and added the functionality for Derivative I. <br>
+                <strong>v0.0.4</strong> Functionality for all Derivs, Derivative II can be unlocked, the unlock system, and the Deriv production system. <br>
+                <strong>v0.0.5</strong> Buymax for all Derivs, and a hotkey system. <br>
+                <strong>v0.0.6</strong> You can now unlock all Derivs. <br>
+                <strong>v0.0.7</strong> Tab System, Exponents Tab, Settings Tab with an Import/Export System, Exponent and High Exponent display, and you can Exponent Reset. <br>
+                <strong>v0.0.8</strong> Exponent and High Exponent effects. <br>
+                <strong>v0.0.9</strong> Exponential Derivative I and Exponential Derivative systems (unlock, purchasing, production). <br>
+                <strong>v0.0.10</strong> Offline Progress. <br>
+                <strong>v0.0.11</strong> Major UI Update. <br>
+                <strong>v0.0.11b</strong> Improved Full Reset. <br>
+                <strong>v0.0.11c</strong> In-game Changelog Integration. <br>
+                <strong>v0.0.12</strong> Shop unlock systems, Upgrades 1-4, and Upgrade ⬥ <br>
+                <strong>v0.0.13</strong> [The Great Rollback]: Removed the Shop and Exponents. Code Optimizations. <br>
+                <strong>v0.0.14</strong> [Theoretical Update]: Theories 1-9, Legends system, Legend One, AutoBuymax, and a lot of code optimizations! <br>
+                <strong>v0.0.14b</strong> Future tabs now display '???' and can't be accessed until a certain point. <br>
+                <strong>v0.0.14c</strong> Added Import Code 'ourgwa'. <br>
+                <strong>v0.0.15</strong> [Lost Update]: The Lost Derivative, 4 Lost Theories, 2 Lost Cycles, Theories 10-15, Legend 2, and Derivative V! <br>
+                <strong>v0.0.15b</strong> More content is hidden until you get close to it. <br></p>
+        </div>
+    </div>
+</div>
+<canvas class="layer" id="animationCanvas"></canvas>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/dank.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="extend/expantanum.js" defer></script>
+    <script src="extend/ENplus.js" defer></script>
+    <script src="extend/ordinal.js" defer></script>
+    <script src="extend/hardycalc.js" defer></script>
+    <script src="extend/thonkes.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script src="game/levels.js" defer></script>
+    <script src="game/newgame.js" defer></script>
+    <script src="game/saveload.js" defer></script>
+    <script src="game/script.js" defer></script>
+    <script src="game/markdown.js" defer></script>
+  </head>  
+  <body>
+    <div id="notifs"></div>
+    <noscript style="width: 100%; height: 100%; z-index: 10000; background-color:yellow">AEEEEEEEEEEEEEIIIOOUUUUU</noscript>
+    <div id="app">
+      Shrek is love, shrek is life, time to make a progress bomb
+      <h1 v-html="ordinal" id="hardy" style="font-size: 30pt;font-weight: bold;height:50px"></h1>
+      <button v-on:click = "tab = 1" class="tabButton">Ordinal</button>
+      <button v-on:click = "tab = 2" class="tabButton">Options</button>
+      <button v-on:click = "tab = 3" class="tabButton">Milestones</button>
+      <button v-on:click = "tab = 4" class="tabButton" v-if = "milestones.includes('0')" style="font-size: 14pt">Automation</button>
+      <button v-on:click = "tab = 5" class="tabButton" v-if = "milestones.includes('2') || unlockedMarkdown" style="font-size: 14pt">Markdown</button>
+      <br>
+      <br>
+      <div v-if="tab == 1"> 
+        <button onclick="game.ord = game.ord.reduce(1,0)">Reduce the ordinal by one</button>
+        <button onclick="game.ord = game.ord.reduce(0,1)">Unmaximize the ordinal</button>
+        <button onclick="notify('thinkes')">thinkies</button><br><br>
+      </div>
+      <div v-if="tab == 2">
+        <button onclick="exporty()">
+          Export to clipboard
+        </button>
+        <button onclick="exporty(1)">
+          Export to file
+        </button>
+        <button onclick="importy()">
+          Import Save
+        </button>
+        
+      </div>
+      <div v-if="tab == 3">
+        <div v-for="milestoneind in milestoneindexes">
+          <div v-if="milestones.includes(milestoneind)" class="milestones">
+            Level {{milestonereqs[milestoneind]}}: {{milestonedescs[milestoneind]}}
+          </div>
+          <div v-else="true" class="milestoneLocked">
+            Level {{milestonereqs[milestoneind]}}: {{milestonedescs[milestoneind]}} 
+          </div>
+        </div>
+      </div>
+      <div class="absoluteCenter" id="centerpiece" v-if="false">
+        aaaaaaa
+      </div>
+      <div v-if="tab == 4">
+        <button onclick="game.autos[0] = !game.autos[0]+0; app.$data.tab = 1; app.$data.tab = 3">
+          Predecessor Autoclicker: {{["ON","OFF"][autos[0]]}}
+        </button>
+        <button onclick="game.autos[1] = !game.autos[1]+0; app.$data.tab = 1; app.$data.tab = 3" v-if="upgrades.includes(0)">
+          Unmaximize Autoclicker: {{["ON","OFF"][autos[1]]}}
+        </button>
+      </div>
+      <div v-if="tab == 5">
+        You have {{op}} Ordinal Points<br><br>
+        <button onclick="markdown()">
+          Markdown for {{opGain}} OP! This resets milestones and the ordinal (& level)
+        </button>
+        <div v-for="(cost, index) in upgradeCosts">
+          <button class="markdownupg" v-bind:onclick="'buyMarkdownUpg('+index+')'">
+          {{upgradeDescriptions[index]}}
+          <br>Cost: {{cost}} OP
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

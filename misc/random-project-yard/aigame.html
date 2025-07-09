@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mana Wellspring (AI Generated Game)</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Forcing IE to use its latest rendering engine -->
+<style type="text/css">
+    body {
+        font-family: "Arial", sans-serif; /* Common font */
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        text-align: center; /* Center most content */
+    }
+
+    #gameContainer {
+        width: 90%;
+        max-width: 700px;
+        margin: 20px auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Subtle shadow */
+    }
+
+    h1 {
+        color: #2a4b7c;
+        margin-top: 0;
+    }
+    h2 {
+        color: #4a6b9c;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-top: 30px;
+    }
+
+    .resource-display {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #e6f3ff;
+        border: 1px solid #cce0ff;
+    }
+
+    button {
+        background-color: #5c85d6;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px; /* Graceful degradation */
+        min-width: 180px; /* Ensure buttons have some width */
+    }
+
+    button:hover {
+        background-color: #4a6b9c;
+    }
+
+    button:disabled {
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+    }
+
+    .upgrade-section, .generator-section {
+        margin-bottom: 20px;
+        text-align: left; /* Align content within sections to left */
+    }
+
+    .item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .item-info {
+        margin-bottom: 5px;
+    }
+
+    .cost {
+        font-style: italic;
+        color: #777;
+    }
+
+    .level {
+        font-weight: bold;
+        color: #337ab7;
+    }
+
+    /* Simple layout for item details - floats for old browsers */
+    .item-details {
+        overflow: hidden; /* Clearfix for floats */
+    }
+    .item-name-desc {
+        float: left;
+        width: 70%;
+    }
+    .item-action {
+        float: right;
+        width: 28%;
+        text-align: right;
+    }
+    .clear { clear: both; } /* Utility clear */
+
+</style>
+</head>
+<body>
+
+<div id="gameContainer">
+    <h1>Mana Wellspring</h1>
+
+    <div class="resource-display">
+        Mana: <span id="manaDisplay">0</span><br>
+        Mana per second: <span id="mpsDisplay">0</span>
+    </div>
+
+    <button id="channelManaButton" onclick="channelMana()">Channel Mana (+<span id="manaPerClickDisplay">1</span>)</button>
+
+    <h2>Generators</h2>
+    <div class="generator-section">
+        <!-- Mana Wisps -->
+        <div class="item">
+            <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Mana Wisp</strong> (<span class="level" id="wispLevel">0</span> owned)<br>
+                    <small>Generates <span id="wispMpsBase">0.1</span> Mana per second each.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyWispButton" onclick="buyGenerator('wisp')">Buy Wisp</button>
+                    <div class="cost">Cost: <span id="wispCost">10</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- Mana Fountains -->
+        <div class="item">
+            <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Mana Fountain</strong> (<span class="level" id="fountainLevel">0</span> owned)<br>
+                    <small>Generates <span id="fountainMpsBase">1</span> Mana per second each.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyFountainButton" onclick="buyGenerator('fountain')">Buy Fountain</button>
+                    <div class="cost">Cost: <span id="fountainCost">100</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- Leylines -->
+        <div class="item">
+            <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Leyline Focus</strong> (<span class="level" id="leylineLevel">0</span> owned)<br>
+                    <small>Generates <span id="leylineMpsBase">10</span> Mana per second each.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyLeylineButton" onclick="buyGenerator('leyline')">Buy Leyline</button>
+                    <div class="cost">Cost: <span id="leylineCost">1500</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <h2>Upgrades</h2>
+    <div class="upgrade-section">
+        <!-- Channeling Power -->
+        <div class="item">
+            <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Potent Channeling</strong> (Level <span class="level" id="channelingUpgradeLevel">0</span>)<br>
+                    <small>Increases Mana gained per click.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyChannelingUpgradeButton" onclick="buyUpgrade('channeling')">Upgrade</button>
+                    <div class="cost">Cost: <span id="channelingUpgradeCost">50</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!-- Wisp Attunement -->
+        <div class="item">
+             <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Wisp Attunement</strong> (Level <span class="level" id="wispUpgradeLevel">0</span>)<br>
+                    <small>Increases Mana generated by each Wisp by 25% of base.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyWispUpgradeButton" onclick="buyUpgrade('wisp')">Upgrade</button>
+                    <div class="cost">Cost: <span id="wispUpgradeCost">200</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <!-- Fountain Purity -->
+        <div class="item">
+             <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Fountain Purity</strong> (Level <span class="level" id="fountainUpgradeLevel">0</span>)<br>
+                    <small>Increases Mana generated by each Fountain by 25% of base.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyFountainUpgradeButton" onclick="buyUpgrade('fountain')">Upgrade</button>
+                    <div class="cost">Cost: <span id="fountainUpgradeCost">2000</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <!-- Leyline Confluence -->
+        <div class="item">
+             <div class="item-details">
+                <div class="item-name-desc">
+                    <strong>Leyline Confluence</strong> (Level <span class="level" id="leylineUpgradeLevel">0</span>)<br>
+                    <small>Increases Mana generated by each Leyline by 25% of base.</small>
+                </div>
+                <div class="item-action">
+                    <button id="buyLeylineUpgradeButton" onclick="buyUpgrade('leyline')">Upgrade</button>
+                    <div class="cost">Cost: <span id="leylineUpgradeCost">25000</span> Mana</div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    // --- Game State ---
+    var mana = 0;
+    var manaPerClick = 1;
+    var manaPerSecond = 0;
+
+    // Generators: count, baseCost, costGrowth, baseMps
+    var generators = {
+        wisp:       { count: 0, baseCost: 10,   costGrowth: 1.15, baseMps: 0.1, currentMps: 0.1, upgradeLevel: 0, upgradeEffect: 0.25, upgradeBaseCost: 200, upgradeCostGrowth: 2.5 },
+        fountain:   { count: 0, baseCost: 100,  costGrowth: 1.18, baseMps: 1,   currentMps: 1,   upgradeLevel: 0, upgradeEffect: 0.25, upgradeBaseCost: 2000, upgradeCostGrowth: 2.8 },
+        leyline:    { count: 0, baseCost: 1500, costGrowth: 1.22, baseMps: 10,  currentMps: 10,  upgradeLevel: 0, upgradeEffect: 0.25, upgradeBaseCost: 25000, upgradeCostGrowth: 3.2 }
+    };
+
+    // Upgrades
+    var channelingUpgrade = {
+        level: 0,
+        baseCost: 50,
+        costGrowth: 1.8,
+        powerIncrease: 1 // This will be added to manaPerClick
+    };
+
+    // --- DOM Cache (cache elements on load) ---
+    var manaDisplay;
+    var mpsDisplay;
+    var manaPerClickDisplay;
+    // Generator UI
+    var wispLevelDisplay, wispCostDisplay, wispMpsBaseDisplay, buyWispButton;
+    var fountainLevelDisplay, fountainCostDisplay, fountainMpsBaseDisplay, buyFountainButton;
+    var leylineLevelDisplay, leylineCostDisplay, leylineMpsBaseDisplay, buyLeylineButton;
+    // Upgrade UI
+    var channelingUpgradeLevelDisplay, channelingUpgradeCostDisplay, buyChannelingUpgradeButton;
+    var wispUpgradeLevelDisplay, wispUpgradeCostDisplay, buyWispUpgradeButton;
+    var fountainUpgradeLevelDisplay, fountainUpgradeCostDisplay, buyFountainUpgradeButton;
+    var leylineUpgradeLevelDisplay, leylineUpgradeCostDisplay, buyLeylineUpgradeButton;
+
+
+    // --- Game Logic Functions ---
+
+    function formatNumber(num) {
+        if (num < 1000) return num.toFixed(1).replace(/\.0$/, ''); // Show one decimal, remove .0
+        if (num < 1000000) return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        if (num < 1000000000) return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+    }
+    
+    function formatNumberExact(num) { // For precise display like costs
+        if (num < 100 && num !== Math.floor(num)) {
+            return num.toFixed(1);
+        }
+        return Math.floor(num).toString();
+    }
+
+
+    function channelMana() {
+        mana += manaPerClick;
+        updateDisplay();
+    }
+
+    function calculateGeneratorCost(generatorKey) {
+        var gen = generators[generatorKey];
+        return Math.floor(gen.baseCost * Math.pow(gen.costGrowth, gen.count));
+    }
+    
+    function calculateUpgradeCost(upgradeTypeKey) {
+        if (upgradeTypeKey === 'channeling') {
+            var upg = channelingUpgrade;
+            return Math.floor(upg.baseCost * Math.pow(upg.costGrowth, upg.level));
+        } else { // Generator specific upgrades
+            var gen = generators[upgradeTypeKey];
+            return Math.floor(gen.upgradeBaseCost * Math.pow(gen.upgradeCostGrowth, gen.upgradeLevel));
+        }
+    }
+
+    function buyGenerator(key) {
+        var gen = generators[key];
+        var cost = calculateGeneratorCost(key);
+        if (mana >= cost) {
+            mana -= cost;
+            gen.count++;
+            updateManaPerSecond();
+            updateDisplay();
+        }
+    }
+
+    function buyUpgrade(type) {
+        if (type === 'channeling') {
+            var cost = calculateUpgradeCost('channeling');
+            if (mana >= cost) {
+                mana -= cost;
+                channelingUpgrade.level++;
+                manaPerClick += channelingUpgrade.powerIncrease * Math.pow(1.5, channelingUpgrade.level -1) ; // Make subsequent upgrades more powerful
+                manaPerClick = parseFloat(manaPerClick.toFixed(1)); // Keep it tidy
+                updateDisplay();
+            }
+        } else { // wisp, fountain, leyline upgrades
+            var gen = generators[type];
+            var cost = calculateUpgradeCost(type);
+             if (mana >= cost) {
+                mana -= cost;
+                gen.upgradeLevel++;
+                // Recalculate currentMps for this generator type
+                gen.currentMps = gen.baseMps * (1 + gen.upgradeLevel * gen.upgradeEffect);
+                gen.currentMps = parseFloat(gen.currentMps.toFixed(2)); // Keep it tidy
+                updateManaPerSecond(); // MPS depends on this, so recalculate
+                updateDisplay();
+            }
+        }
+    }
+
+    function updateManaPerSecond() {
+        manaPerSecond = 0;
+        for (var key in generators) {
+            if (generators.hasOwnProperty(key)) {
+                var gen = generators[key];
+                manaPerSecond += gen.count * gen.currentMps;
+            }
+        }
+        manaPerSecond = parseFloat(manaPerSecond.toFixed(2)); // Keep it tidy
+    }
+    
+    function updateDisplay() {
+        manaDisplay.innerHTML = formatNumber(mana);
+        mpsDisplay.innerHTML = formatNumber(manaPerSecond);
+        manaPerClickDisplay.innerHTML = formatNumber(manaPerClick);
+
+        // Generators
+        var genKeys = ['wisp', 'fountain', 'leyline'];
+        for (var i = 0; i < genKeys.length; i++) {
+            var key = genKeys[i];
+            var gen = generators[key];
+            var cost = calculateGeneratorCost(key);
+            document.getElementById(key + 'Level').innerHTML = gen.count;
+            document.getElementById(key + 'Cost').innerHTML = formatNumberExact(cost);
+            document.getElementById('buy' + key.charAt(0).toUpperCase() + key.slice(1) + 'Button').disabled = (mana < cost);
+            
+            // Update displayed MPS per unit if it changes due to upgrades
+            document.getElementById(key + 'MpsBase').innerHTML = formatNumberExact(gen.currentMps);
+        }
+        
+        // Channeling Upgrade
+        var channelingCost = calculateUpgradeCost('channeling');
+        channelingUpgradeLevelDisplay.innerHTML = channelingUpgrade.level;
+        channelingUpgradeCostDisplay.innerHTML = formatNumberExact(channelingCost);
+        buyChannelingUpgradeButton.disabled = (mana < channelingCost);
+
+        // Generator Upgrades (wisp, fountain, leyline)
+        for (var i = 0; i < genKeys.length; i++) {
+            var key = genKeys[i]; // 'wisp', 'fountain', 'leyline'
+            var gen = generators[key];
+            var upgradeCost = calculateUpgradeCost(key);
+            document.getElementById(key + 'UpgradeLevel').innerHTML = gen.upgradeLevel;
+            document.getElementById(key + 'UpgradeCost').innerHTML = formatNumberExact(upgradeCost);
+            document.getElementById('buy' + key.charAt(0).toUpperCase() + key.slice(1) + 'UpgradeButton').disabled = (mana < upgradeCost);
+        }
+    }
+
+    function gameLoop() {
+        mana += manaPerSecond / 10; // Game ticks 10 times per second
+        updateDisplay();
+    }
+
+    // Initialization function to run once the page is loaded
+    function initGame() {
+        // Cache DOM elements
+        manaDisplay = document.getElementById('manaDisplay');
+        mpsDisplay = document.getElementById('mpsDisplay');
+        manaPerClickDisplay = document.getElementById('manaPerClickDisplay');
+
+        wispLevelDisplay = document.getElementById('wispLevel');
+        wispCostDisplay = document.getElementById('wispCost');
+        wispMpsBaseDisplay = document.getElementById('wispMpsBase');
+        buyWispButton = document.getElementById('buyWispButton');
+
+        fountainLevelDisplay = document.getElementById('fountainLevel');
+        fountainCostDisplay = document.getElementById('fountainCost');
+        fountainMpsBaseDisplay = document.getElementById('fountainMpsBase');
+        buyFountainButton = document.getElementById('buyFountainButton');
+
+        leylineLevelDisplay = document.getElementById('leylineLevel');
+        leylineCostDisplay = document.getElementById('leylineCost');
+        leylineMpsBaseDisplay = document.getElementById('leylineMpsBase');
+        buyLeylineButton = document.getElementById('buyLeylineButton');
+
+        channelingUpgradeLevelDisplay = document.getElementById('channelingUpgradeLevel');
+        channelingUpgradeCostDisplay = document.getElementById('channelingUpgradeCost');
+        buyChannelingUpgradeButton = document.getElementById('buyChannelingUpgradeButton');
+        
+        wispUpgradeLevelDisplay = document.getElementById('wispUpgradeLevel');
+        wispUpgradeCostDisplay = document.getElementById('wispUpgradeCost');
+        buyWispUpgradeButton = document.getElementById('buyWispUpgradeButton');
+        
+        fountainUpgradeLevelDisplay = document.getElementById('fountainUpgradeLevel');
+        fountainUpgradeCostDisplay = document.getElementById('fountainUpgradeCost');
+        buyFountainUpgradeButton = document.getElementById('buyFountainUpgradeButton');
+        
+        leylineUpgradeLevelDisplay = document.getElementById('leylineUpgradeLevel');
+        leylineUpgradeCostDisplay = document.getElementById('leylineUpgradeCost');
+        buyLeylineUpgradeButton = document.getElementById('buyLeylineUpgradeButton');
+
+        // Initial display update
+        updateManaPerSecond(); // Calculate initial MPS (should be 0)
+        updateDisplay();
+
+        // Start game loop (10 times per second for smoother updates)
+        setInterval(gameLoop, 100); // 100 milliseconds = 10 times per second
+    }
+
+    // --- Game Start ---
+    // Use window.onload for old browser compatibility, ensures DOM is ready
+    window.onload = initGame;
+
+</script>
+
+</body>
+</html>

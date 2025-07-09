@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="/ExpantaNum.js" defer></script>
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+    <text class="center" id="number">1000</text>
+    <text class="center" id="numberps" style="margin-bottom: 10pt">1000</text>
+    <div class="center">
+      <button class="tabButton normalButton">Layers</button>
+      <button class="tabButton normalButton" style="display: none">Options</button>
+    </div>
+    <div id="mainSubTabs" class="center" style="margin-bottom: 10pt">
+      <button class="tabButton subTabButton" onclick="subTab(EN(0))">Normal</button><text class="invisible">l</text>
+    </div>
+    <p class="center">You have <text id="prestigePoints"></text></p>
+    <p class="center">Your multiplier is x<text id="prestigeMult"></text></p>
+    <p class="center" id="prestigeAuto">You have x Tier 1 autobuyers</p>
+    <p><button class="center normalButton" id="doubleProd" onclick="buyDoubleProd()">Double all production for 10 points</button></p>
+    <p><button class="center normalButton" id="lowerProd" onclick="lowerProd()">Increase all lower production by 100% for 1 Infinity point</button></p>
+    <p><button class="center normalButton" id="autoBuy" onclick="buyAutoBuy()">Buy an autobuyer for 3 Infinity points</button></p>
+    <p><button class="center normalButton" id="prestige" onclick="prestige()">Prestige for 1 Infinity point</button></p>
+    <div id="upgrades">
+      <text class="center" style="font-size: 20pt">Upgrades</text>
+      <p id="ubupgrade2"><button class="center normalButton" id="upgrade2" onclick="buyUp(2)">Gain 1% of Infinity points gained on Infinity each second for 10 Eternity points</button></p>
+      <p id="ubupgrade1"><button class="center normalButton" id="upgrade1" onclick="buyUp(1)">Make the Infinity formula better for 1000 Infinity points</button></p>
+      <text class="center" style="font-size: 20pt">Bought Upgrades</text>
+      <p id="bupgrade2"><button class="center normalButton" id="uupgrade2">Gain 1% of Infinity points gained on Infinity each second for 10 Eternity points</button></p>
+      <p id="bupgrade1"><button class="center normalButton" id="uupgrade1">Make the Infinity formula better for 1000 Infinity points</button></p>
+    </div>
+  </body>
+</html>

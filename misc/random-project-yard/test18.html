@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stars and motion blur simulation</title>
+    <style>
+      *,
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        text-align: center;
+      }
+      canvas {
+        width: auto;
+        height: 100%;
+      }
+      #controls {
+        width: 100%;
+        height: 7.5%;
+        background: rgba(0,0,0,0.5);
+        position: absolute;
+      }
+      p {
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="controls">
+      <p style="left: 1%; top: 10%; position: absolute">
+        Amount of stars to draw:
+      </p><input id="starsone" type="number" style="height: 15%; left: 12.5em; top: 10%; position: absolute" min="1" max="1000">
+      <p style="left: 1%; top: 30%; position: absolute">
+        Star sizes:
+      </p><input id="starsize" type="number" style="height: 15%; left: 12.5em; top: 30%; position: absolute" min="1" max="1000">
+      <button onclick="reloadStars()" style="left: 18em; top: 10%; height: 20%; position: absolute">
+        Reload Stars
+      </button>
+      <button onclick="havetrails()" style="left: 18em; top: 30%; height: 20%; position: absolute">
+        Have Trails
+      </button>
+      <p style="left: 25.5em; top: 10%; position: absolute">
+        Speed:
+      </p><input id="speed" type="range" style="height: 15%; left: 28em; top: 12%; position: absolute" min="100" max="10000">
+      <p style="left: 25.5em; top: 30%; position: absolute">
+        Opacity:
+      </p><input id="transparency" type="range" style="height: 15%; left: 28em; top: 32%; position: absolute" min="1" max="100">
+      <input id="colorforstars" type="color" style="height: 30%; left: 40.5em; top: 12%; position: absolute" min="0">
+      <input id="colorforbg" type="color" style="height: 30%; left: 40.5em; top: 42%; position: absolute" min="0">
+       <button onclick="changetype()" id="mtype" style="left: 46em; top: 15%; height: 20%; position: absolute">
+        sin()
+      </button>
+    </div>
+    <canvas id="canvasone" width="69" height="42"></canvas>
+  </body>
+  <script>
+    // star colors
+    var red0 = 255;
+    var green0 = 255;
+    var blue0 = 0;
+    // background
+    var red1 = 255;
+    var green1 = 255;
+    var blue1 = 255;
+    var starstodraw = 250;
+    document.getElementById("starsone").value = starstodraw;
+    document.getElementById("starsone").oninput = function() {
+      starstodraw = Number(this.value);
+    }
+    var starsize = 50;
+    document.getElementById("starsize").value = starsize;
+    document.getElementById("starsize").oninput = function() {
+      starsize = Number(this.value);
+    }
+    var starspeed = 5000;
+    document.getElementById("speed").value = starspeed;
+    document.getElementById("speed").oninput = function() {
+      starspeed = Number(this.value);
+    }
+    var bgopacity = 25;
+    document.getElementById("transparency").value = bgopacity;
+    document.getElementById("transparency").oninput = function() {
+      bgopacity = Number(this.value);
+    }
+    var starcolor = "#ffff00"
+    document.getElementById("colorforstars").value = starcolor;
+    document.getElementById("colorforstars").oninput = function(e) {
+      var color = e.target.value;
+      console.log(e.target.value);
+      red0 = parseInt(color.substr(1, 2), 16);
+      green0 = parseInt(color.substr(3, 2), 16);
+      blue0 = parseInt(color.substr(5, 2), 16);
+    }
+    var bgcolor = "#ffffff"
+    document.getElementById("colorforbg").value = bgcolor;
+    document.getElementById("colorforbg").oninput = function(e) {
+      var color2 = e.target.value;
+      console.log(e.target.value);
+      red1 = parseInt(color2.substr(1, 2), 16);
+      green1 = parseInt(color2.substr(3, 2), 16);
+      blue1 = parseInt(color2.substr(5, 2), 16);
+    }
+    var canvas = document.getElementById("canvasone");
+    var ctx = canvas.getContext("2d");
+    let currentTime = new Date();
+    let currentMonth = currentTime.getUTCMonth();
+    let currentHours = currentTime.getUTCHours();
+    var w = canvas.width;
+    var h = canvas.height;
+    var large0 = 0;
+    var large1 = 0;
+    var cleartherect = true;
+    var mathtypes = ["sin", "cos", "tan"];
+    var num0 = 0;
+    function changetype() {
+      num0 = (++num0) % 3;
+      document.getElementById("mtype").innerHTML = mathtypes[num0] + "()";
+    }
+    function getRndInteger(min, max) {
+      return (Math.random() * (max - min)) + min;
+    }
+    function havetrails() {
+      cleartherect = !cleartherect;
+    }
+    if (currentHours >= 8 && currentHours <= 14) {
+      large0 = getRndInteger(0, 1000000);
+      large1 = getRndInteger(0, 1000000);
+    } else if (currentHours >= 15 && currentHours <= 23) {
+      large0 = getRndInteger(675500, 675520);
+      large1 = getRndInteger(387440, 387460);
+    } else {
+      large0 = getRndInteger(0, 675510);
+      large1 = getRndInteger(0, 387450);
+    }
+
+    function reloadStars() {
+      if (currentHours >= 8 && currentHours <= 14) {
+        large0 = getRndInteger(0, 1000000);
+        large1 = getRndInteger(0, 1000000);
+      } else if (currentHours >= 15 && currentHours <= 23) {
+        large0 = getRndInteger(675500, 675520);
+        large1 = getRndInteger(387440, 387460);
+      } else {
+        large0 = getRndInteger(0, 675510);
+        large1 = getRndInteger(0, 387450);
+      }
+    }
+    function drawStars2(amount, size, color) {
+      for (let i = 0; i < amount; i++) {
+        let x =
+          (20 +
+            20 *
+              Math[mathtypes[num0]](
+                i * large0 +
+                  Date.now() / (starspeed)
+              )) *
+          w;
+        let y =
+          (20 +
+            20 *
+              Math[mathtypes[num0]](
+                i * large1 +
+                  Date.now() / (starspeed)
+              )) *
+          h;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        /*if (!game.settings.snow) {
+          ctx.ellipse(
+            x,
+            y,
+            (h / 300) * size,
+            (h / 300) * size,
+            0,
+            0,
+            2 * Math.PI
+          );
+        } else {*/
+          ctx.ellipse(
+            x + i,
+            y + i,
+            (h / 300) * size,
+            (h / 300) * size,
+            0,
+            0,
+            2 * Math.PI
+          );
+        //}
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+    function updatestars() {
+      if(cleartherect) ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if(!cleartherect) {
+        ctx.fillStyle = "rgb(" + red1 + "," + green1 + "," + blue1 + ", " + (bgopacity/1000) + ")";
+      } else {
+        ctx.fillStyle = "rgb(" + red1 + "," + green1 + "," + blue1 + ", " + (bgopacity) + ")";
+      }
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawStars2(starstodraw, starsize, "rgb(" + red0 + "," + green0 + "," + blue0 + ")")
+      requestAnimationFrame(updatestars);
+    }
+    requestAnimationFrame(updatestars);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    onresize = e => resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  </script>
+</html>

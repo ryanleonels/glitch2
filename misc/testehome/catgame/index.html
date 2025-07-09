@@ -1,0 +1,225 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+      <meta property="og:site_name" content="gaming with cats">
+    <meta property="og:title" content="CatGame">
+    <meta property="og:description" content="get cat">
+  <title>Cat Game</title>
+  <link href="catgame/dark.css" rel="stylesheet" type="text/css" />
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/catgamelogo.png?v=1694041923462"
+  />
+   <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+ <script src="https://cdn.jsdelivr.net/npm/notifyjs-browser"></script>
+    <script src="cmowre/tslib.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_eternity.js"></script>
+
+</head>
+
+<body>
+  <div id="overlay"></div>
+  <div id="loafing">
+    Loafing...<br>
+  </div>
+  <div style="position: sticky; top: 0px; background-color: #222222;">
+  <p id="newstickernomar">
+    <span id="newsticker">
+    newsticker 
+    </span>
+  </p>
+  
+  <h2 class="nomarginh2"><span class="unimport" id="catlimitnonmar">The Cat Limit is <span id="catlim">[cl here]</span> cats</span></h2>
+  <div id="myturn">
+  <span data-value="0" style="top: -1px; text-align: center; width:40%;" id="catbarpercent"></span>
+  <progress value="0" max="1" id="catlimbar"></progress>
+  </div>
+  <h1><span class="unimport">You have </span><span id="cats">[insert cat amont here]</span><span class="unimport"> cats</span></h1>
+  <h2><span class="unimport">You gain </span><span id="cps">[insert cps amont here]</span><span class="unimport"> cats per second</span></h2><br>
+  
+  <h2><span id="tabs">
+  <button class="tabbutton" onclick="tab='main'">Main</button>
+  <button class="tabbutton" onclick="tab='catgod'" id="catgodbutton">Cat God</button>
+  <button class="tabbutton" onclick="tab='catcoins'" id="catcoinbutton">Cat Coins</button>
+  <button class="tabbutton" onclick="tab='hypercats'" id="hypercatsbutton">Hyper-Cats</button>
+  <button class="tabbutton" onclick="tab='energy'" id="energybutton">Energy</button>
+  <button class="tabbutton" onclick="tab='catlimit'" id="catlimbutton">Cat Limit</button>
+  <button class="tabbutton" onclick="tab='void'" id="voidbutton">Void</button>
+  <button class="tabbutton" onclick="tab='options'">Options</button>
+  </span></h2></div><br>
+  
+  <span id="main">
+  <table align="center">
+    <tr>
+      <td></td>
+      <td><button class="button" id="buyall" onclick="BuyAll()"><b><span id="buyallbutton">Buy All (CL5)</span></b></button></td>
+    </tr>
+    <tr>
+      <td>(<span id="catsummoners"></span>)</td>
+      <td>Cat Summoner</td>
+      <td><button class="button" onclick="BuyItem(1,1)">Buy for <span id="cscost"></span> <span class="main">Cats</span></button></td>
+      <td><span id="basecats"></span> Base <span class="main">Cats</span>/s</td>
+    </tr>
+    <tr>
+      <td>(<span id="catfood"></span>)</td>
+      <td>Cat Food</td>
+      <td><button class="button" onclick="BuyItem(2,1)">Buy for <span id="cfcost"></span> <span class="main">Cats</span></button></td>
+      <td>*<span id="catmulti"></span> <span class="main">Cats</span>/s</td>
+    </tr>
+  </table>
+</span>
+<span id="catlimit">
+  <h2 class="blue">You are at CL<span id="catlimitnum"></span></h2>
+  <button class="button" onclick="CatLimReset()">Reset for Cat Limit Increase</button><br>
+  <span id="catlimitboost" class="blue">lol</span>
+</span>
+  <span id="catcoins">
+  <h2 class="yellow">You have <span id="ccs"></span>/<span id="maxccs"></span> Cat Coins <button class="button" onclick="Respec(1)">Respec</button></h2>
+    <table align="center">
+      <tr>
+        <td>(<span id="ls"></span>)</td>
+        <td>Less Space</td>
+        <td><button class="button" onclick="BuyItem(1,2)">Buy for <span id="lscost"></span> Cat Coins</button></td>
+        <td><span id="lsboost"></span>% <span class="blue">Cat Limit</span></td>
+      </tr>
+      <tr>
+        <td>(<span id="bm"></span>)</td>
+        <td>Better Magic</td>
+        <td><button class="button" onclick="BuyItem(2,2)">Buy for <span id="bmcost"></span> Cat Coins</button></td>
+        <td>^<span id="bmboost"></span> to <span class="main">Cat Summoners</span></td>
+      </tr>
+    </table>
+  </span>
+  <span id="catgod">
+    <span class="unimport">shut up i know its a diffrent word<br>also its she/they</span><br>
+    <h2 class="red">You have sacrificed <span id="catssacrificed"></span> <span class="main">Cats</span> to the Cat God</h2>
+    <h3 class="red">Due to all the cats sacrificed, you get a <span class="main">*<span id="sacrificedboost"></span> boost</span>!</h3>
+    <button class="button" onclick="CatGodSacrifice()">Sacrifice all your cats</button>
+  </span>
+  <span id="hypercats">
+  <h2 class="green">You have <span id="hc"></span> Hyper-Cats</h2>
+    <h3 class="green">*<span id="hcboost"></span> More <span class="main">Cats</span></h3>
+  <button class="button" onclick="HyperCatsReset(0)"><span id="hcbutton"></span></button>
+    <br><br>
+    <span id="voidhypercatstuff">
+    <h2 class="magenta">You Have <span id="hypervoidcats"></span> Void Hyper-Cats</h2>
+    <h3 class="magenta">*<span id="hypervoidcatsboost"></span> More Void Cats</h3>
+    <button class="button" onclick="VHyperCatsReset(0)" id="hvcbutton"></button>
+    </span>
+  </span>
+  <span id="energy">
+  <h2 class="cyan">You have <span id="energycats"></span> Energy Cats<br>
+    <span class="unimport" style="color: #00ffff">You gain <span id="ecps"></span> Energy Cats per second</span></h2>
+    <table align="center">
+      <tr>
+        <td class="energytable">
+          <b><span class="main">Cat Summoner </span> Autobuyer 
+            <button class="button" onclick="d.eautobuycs = new Decimal(d.eautobuycs.gte(1) ? 0 : 1)"><span id="csas"></span></button>
+          </b>
+          <br>Autobuys Cat Summoners<br><span id="csaem">10'000 EC</span></td>
+        <td class="energytable">
+          <b><span class="main">Cat Food </span> Autobuyer 
+            <button class="button" onclick="d.eautobuycf = new Decimal(d.eautobuycf.gte(1) ? 0 : 1)"><span id="cfas"></span></button>
+          </b>
+          <br>Autobuys Cat Food<br><span id="cfaem">75'000 EC</span></td>
+      </tr><tr>
+      <td class="energytable">
+        <b><span class="blue">Limit</span> Autoreset 
+          <button class="button" onclick="d.eautobuyl = new Decimal(d.eautobuyl.gte(1) ? 0 : 1)"><span id="las"></span></button>
+        </b>
+        <br>Does a Cat Limit automatically<br><span id="earem">50'000 EC</span></td>
+      <td class="energytable">
+        <b>Auto-<span class="red">Sacrifice</span> 
+          <button class="button" onclick="d.eautobuys = new Decimal(d.eautobuys.gte(1) ? 0 : 1)"><span id="sas"></span></button>
+        </b>
+        <br>Sacrifices 5% of all cats every second<br><span id="asem">100'000 EC</span></td>
+      </tr>
+    </table>
+  </span>
+<span id="void">
+  <span class="magenta"><h2>You have <span id="voidc"></span> Void Cats</h2>
+    <span class="cyan">(and also <span id="exenercat"></span> Energy Cats)</span></span><br>
+    <span class="magenta">You are gaining <span id="voidg"></span> Void Cats per second
+  </span>
+  <p>
+    <button onclick="d.voidgain = d.voidgain.gte(1) ? new Decimal(0) : new Decimal(1)" class="button">Turn on/off VC gain</button>
+    <h3 class="nomarginh3"><span class="magenta">
+      becuse of your Void Cats, you get a *<span id="voidb"></span> boost!<br></span></h3>
+      <span class="magenta">(You also have <span id="voidpower"></span> Void Power)
+  <table align="center">
+    <tr>
+      <td><button class="vu0button" id="voidup1" onclick="BuyItem(1,3)">Cat God Boost<br>
+      1e30 Sacrificed Cats<br>
+      -<span id="catgodvboost"></span> log removal
+        </button></td></tr><tr><td><button class="vu0button" id="voidup2" onclick="BuyItem(2,3)">
+    Hyper-Cat Boost<br>
+    10 Hyper-Cats<br>
+    ^<span id="hypercatvboost"></span> more boost
+    </button></td></tr><tr><td><button class="vu0button" id="voidup3" onclick="BuyItem(3,3)">
+    Cat Limit Boost<br>
+    1e35 Cats<br>
+    +<span id="catlimitvboost"></span> more boost
+    </button></td></tr>
+        </table></span>
+  </p>
+  </span>
+<span id="options">
+    <div style="position: fixed; bottom: 0; left: 0; text-align:left; color: #888888;">
+    CatGame Version 1.028 <br> frinkfail's Optimization Update + log/lin option stuff
+  </div>
+  You have played since <span id="timeplayed"></span> ago <br>
+  Your highest cats is <span id="highcats"></span> Cats<br>
+  <span class="unimport">just becuse a layer is past CL doesnt mean it will not be reset</span><br>
+  The size of your cats is <span id="catsize"></span> cm<sup>3</sup> and its weight is <span id="catweight"></span> kg <br>
+  <span class="unimport">assuming that every cat is 11470.9448cm<sup>3</sup> big and 0.00106202412 kg/cm<sup>3</sup> dense, and that they are as dense as paw-sible <br>(every cat is 12.1824201 kg)</span><br>
+  
+  <h3>Options</h3>
+  <button onclick="HardReset()" class="button">Hard Reset</button>
+  <button class="button" onclick="d.cats = catspersecond.lte(1) ? new Decimal(11) : d.cats">Reset cats to 11</button>
+  <button class="button" onclick="options.progresstype = 1 - options.progresstype">
+    Progress Bar: <span id="pbloglin"></span>
+  </button>
+  <a href="https://discord.gg/V6EXRxGYbt"><button class="button">Server :3</button></a><br>
+  
+  <button onclick="Import()" class="button">Import</button>
+  <button onclick="Export()" class="button">Export</button>
+  <button onclick="Save()" class="button">Save</button>
+  <br><textarea spellcheck="false" id="savedata" style="resize: both" placeholder="save here"></textarea>
+  
+  <h3>Secret Codes</h3>
+  <button class="button" onclick="VerifyCode(document.getElementById('secretpasses').value)">
+    <div style="font-size:20px;">Input</div><textarea spellcheck="false" rows="1" cols="14" id="secretpasses" maxlength="16" onkeyup="this.value = this.value.replace(/[A-Z\s\.:;\\\[\]\*\+\-\?!{}]/g, '')"></textarea></button>
+  <h3>Credits</h3>
+  Me, Teste! (most stuff you see here)<br>
+  Boomerkbom (helping me)<br>
+  frinkfail (fixing my shitty code)<br>
+  Garf, just Garf (for making the <a id="catspacesong" href="https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/Cat_Space_By_Garf.mp3?v=1710013826955">first ever fan-song</a>!)<br>
+  And you. :3
+</span>
+
+<!-- secret codes -->
+<!-- hyper specific-cats-->
+<span id="hyperspecificats">
+You have <span id="hyperspecificcats"></span> Cats<br>
+Your highest Cats is <span id="hyperspecifichighcats"></span> Cats<br>
+The size of your cats are <span id="hyperspecificcatsize"></span> cm<sup>3</sup><br>
+and their weight is <span id="hyperspecificcatweight"></span> kg
+<!-- exit --><br><button onclick="tab = 'options'" class="button">Return to Options</button>
+</span>
+
+<!-- dont think of dogs -->
+<span id="dogsdogsdogsdogs">
+you have commited a sin, an atrocity to the world of CatGame and you shall be punished<br> (all regular cats have been removed)<br> -Cat God(dess)
+<!-- exit --><br><button onclick="tab = 'options'" class="button">Return to Options</button></span>
+  
+<!-- stupid options -->
+<span id="stupidoptionslol">
+  this is not done lol
+<button class="button" onclick="d.cats = d.cats">Always Power Outage</button><br>
+<!-- exit --><br><button onclick="tab = 'options'" class="button">Return to Options</button>
+</span>
+  
+
+  <script src="catgame/script.js"></script>
+</body>

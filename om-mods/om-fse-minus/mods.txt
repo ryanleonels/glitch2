@@ -1,0 +1,4 @@
+Nerfs:
+- The Base is always 100
+
+e2.356e7 OP for Prod Chal 5

@@ -1,0 +1,109 @@
+/* CSS files add styling rules to your content */
+:root {
+  --aeiou: "Ordinal Markdown";
+}
+body::before {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+  content: var(--aeiou);
+}
+.tabButton {
+  font-family: sans-serif;
+  color: #000000;
+  background: #FFFFFF;
+  border-radius: 5px;
+  border-color: #000000;
+  border-weight: 10px;
+  cursor: pointer;
+  transition-duration: 0.1s;
+  width: 120px;
+  height: 40px;
+  font-size: 15pt;
+  font-weight: bold;
+  margin: 5px;
+}
+button:not(.tabButton):not(.markdownupg) {
+  font-family: sans-serif;
+  color: #000000;
+  background: #FFFFFF;
+  border-radius: 2px;
+  border-color: #000000;
+  border-width: 1.5px;
+  cursor: pointer;
+  transition-duration: 0.1s;
+  font-size: 20px;
+  height: 60px;
+}
+
+.absoluteCenter {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#centerpiece {
+  width: 200px;
+  height: 200px;
+  background: yellow;
+}
+
+.notification {
+  background: yellow;
+  margin-bottom: 3px;
+  text-align: center;
+  color: black;
+  width: 200px;
+  height: 40px;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  border-color: #202020;
+}
+
+#notifs {
+  float: right;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  position: absolute;
+  right: 15px;
+  pointer-events: none;
+}
+.milestones {
+  background: darkgreen;
+  color: black;
+  border-style: solid;
+  border-radius: 15px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.milestoneLocked {
+  background: darkgray;
+  color: black;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 255);
+  border-radius: 15px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.markdownupg {
+  font-family: sans-serif;
+  color: #FFFFFF;
+  background: #000000;
+  border-radius: 2px;
+  border-color: #B67F33;
+  border-width: 2px;
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+/*LOLOLOOLOL IT WORKS*/

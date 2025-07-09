@@ -1,0 +1,20 @@
+Successor: s, succ, successor
+Maximize: m, maxim, maximize
+
+Infinity: i, inf, infinity
+
+Factor Shift: S, sh, shift
+
+Buy Successor Autoclicker: a1, auto1
+Buy Maximize Autoclicker: a2, auto2
+Buy Factor x: f_x, fact_x, buyfactor_x
+
+Max All: M, max, maxall
+Max Factors: mf, mfact, maxfactors
+Max Autoclickers: ma, mauto, maxautoclickers
+
+Repitition Command: REP_n_c1_c2_c3_c4...cx
+The repition command will repeat command sequence c1, c2...cx n times. It does not support nesting commands yet.
+
+Anything else will do nothing.
+Spaces and line breaks have no effect on parsing.

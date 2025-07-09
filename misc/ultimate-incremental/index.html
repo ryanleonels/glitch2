@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script> </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ultimate Incremental</title>
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+     <!-- import the webpage's javascript file -->
+  </head>  
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="expantanum.js"></script>
+    <div id="app">
+      <div id="heading" v-if="!player.data.started">
+        <h1>Ultimate Incremental</h1><h2>An incremental that will reach ExpantaNum's limit.</h2><p>Current End-game: {{ currentEndgameString }}</p>
+        <br><br><button style="height: 80%; width: 80%;" @click="player.data.started=true;player.data.canGainPoints=true">PLAY</button><br><br><credits></credits></div>
+      <div id="main" v-if="player.data.started"><div id="tabs">
+        <button class="tab" @click="player.data.tab=1">Main</button>
+        <button class="tab" @click="player.data.tab=2">Options</button>
+        <button class="tab" @click="player.data.tab=3">Changelog</button>
+        <button class="tab" @click="player.data.tab=4">Achievements</button></div><br>
+        <b style="font-size:18px">Current End-game: {{ currentEndgameString }}</b><br><br><center><progress-bar color="percentToEndgameColor" percentage="percentToEndgame"></progress-bar></center>
+        <h1>You have {{format(player.points)}} points.</h1>
+          <h2 v-if="player.gainingPower==false">You are gaining {{format(pointGain().mul(1))}} points every second.</h2>
+          <h2 v-if="player.gainingPower==true" class="color: #ff0000;">You are losing {{format(player.points.div(hasUpgrade("energy",0)?4:2))}} points every second.</h2>
+        <h2 v-if="D(player.stniop).lt(1)">You have {{player.stniop.toFixed(2)}} stniop.</h2><div v-if="player.data.tab.toString()=='1'">
+          <div id="subtabs" v-if="player.data.tab.toString()=='1'"><button class="subtab" @click="changeTab(1,'subtab')" v-if="player.unlocks.booster">Boosters</button>
+            <button class="subtab" @click="changeTab(2,'subtab')" v-if="player.unlocks.fly">Fly</button>
+            <button class="subtab" @click="changeTab(3,'subtab')" v-if="player.unlocks.power">Power</button>
+            <button class="subtab" @click="changeTab(4,'subtab')" v-if="player.unlocks.planets">Planets</button>
+            <button class="subtab" @click="changeTab(5,'subtab')" v-if="player.planets.amt.gt(5.5)">{redacted}</button></div><br><br>
+          <div id="boosters" v-if="player.data.subtab.toString()=='1'"><div v-if="player.data.tab.toString()=='1'"><button v-if="player.points.lt(boosterData.cost())" style="width:450px;height:90px;border-color:#ff0000;border-width:5px;" @click="boosterData.buy()">
+                <b>{{"BUY "+(player.boosters.gte(720)?"ATOMIC ":player.boosters.gte(650)?"HYPER ":player.boosters.gte(150)?"SUPERSCALED ":"" )+"BOOSTER"}}</b><br>Cost: {{format(boosterData.cost())}} points<br>Effect: {{format(D(2).add(rebuyableAmt("boosters",0).div(100)).pow(player.boosters).pow(inAnyChallenge("energy")?0.5:1))}}x<br>
+              Amount: {{player.boosters.toFixed(2)}}{{boosterData.extra().gt(0)?` (+${format(boosterData.extra())})`:""}}
+            </button><button v-if="player.points.gte(boosterData.cost())" style="width:450px;height:90px;border-color:#00ff00;border-width:5px;" @click="boosterData.buy()">
+              <b>BUY BOOSTER</b><br>Cost: {{format(boosterData.cost())}} points<br>Effect: {{format(D(2).add(rebuyableAmt("boosters",0).div(100)).pow(player.boosters).pow(inAnyChallenge("energy")?0.5:1))}}x<br>
+              Amount: {{player.boosters.toFixed(2)}}{{boosterData.extra().gt(0)?` (+${format(boosterData.extra())})`:""}}
+            </button>
+            <div v-if="hasUpgrade('air',9)">
+              <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.boosters.gte(rebuyableCost('boosters',0)),upgradeCantBuy:player.boosters.lt(rebuyableCost('boosters',0))}" @click="buyRebuyable('boosters',0)">
+                Booster Rebuyable 1<br>{{rebuyableData.boosters.effect[0]}}<br>Cost: {{rebuyableCost("boosters",0)}} boosters.<br>Cost Scaling: {{rebuyableData.boosters.costScaling[0]}}.<br>
+                Effect: +{{format(rebuyableAmt("boosters",0).div(100))}}.<br>Amount Bought: {{rebuyableAmt("boosters",0).toFixed(2)}}.
+              </button>
+              <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.boosters.gte(rebuyableCost('boosters',1)),upgradeCantBuy:player.boosters.lt(rebuyableCost('boosters',1))}" @click="buyRebuyable('boosters',1)">
+                Booster Rebuyable 2<br>{{rebuyableData.boosters.effect[1]}}<br>Cost: {{rebuyableCost("boosters",1)}} boosters.<br>Cost Scaling: {{rebuyableData.boosters.costScaling[1]}}.<br>
+                Effect: {{format(D(25).pow(rebuyableAmt("boosters",1)))}}x.<br>Amount Bought: {{rebuyableAmt("boosters",1).toFixed(2)}}.
+              </button>
+              <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.boosters.gte(rebuyableCost('boosters',2)),upgradeCantBuy:player.boosters.lt(rebuyableCost('boosters',2))}" @click="buyRebuyable('boosters',2)">
+                Booster Rebuyable 3<br>{{rebuyableData.boosters.effect[2]}}<br>Cost: {{rebuyableCost("boosters",2)}} boosters.<br>Cost Scaling: {{rebuyableData.boosters.costScaling[2]}}.<br>
+                Effect: +{{format(D(20).mul(rebuyableAmt("boosters",2)))}}.<br>Amount Bought: {{rebuyableAmt("boosters",2).toFixed(2)}}.
+              </button>
+            </div>
+            <p v-if="!player.unlocks.booster">Try getting 4 boosters....</p></div></div>
+        <div v-if="player.data.subtab.toString()=='2'&&player.data.tab.toString()=='1'">
+            <h2>You have lost {{format(player.boostersLost)}} boosters from flying, giving you {{format(flyData.boost())}}x more points.</h2>
+            <div v-if="player.data.tab.toString()=='1'">
+              <button class="subsubtab" @click="player.data.subsubtab=1" v-if="player.unlocks.air">Main</button>
+              <button class="subsubtab" @click="player.data.subsubtab=2" v-if="player.unlocks.air">Air</button>
+              <button class="subsubtab" @click="player.data.subsubtab=3" v-if="hasUpgrade('air',4)">Space</button></div>
+            <div v-if="player.data.subsubtab.toString()=='1'"><br><br><button class="airReset" @click="flyData.reset()" v-if="flyData.gain().eq(0)" style="border-width:5px;border-color:#004444;"><h3>FLY</h3>You can not fly right now.</button>
+          <button class="airReset" @click="flyData.reset()" v-if="flyData.gain().gt(0)" style="border-width:5px;border-color:#00dddd;"><h3>FLY</h3>
+            <p v-if="flyData.gain().gt(0)">Upon flying, you will:<br><br><span style="color:red">Lose {{format(flyData.gain())}} boosters</span><br><p v-if="player.unlocks.air">AND <span style="color:green">obtain {{format(airData.gain())}} air</span>.</p></p></button>
+              <!--<p v-if="flyData.gain().gt(0)">If you were to fly right now, you would lose {{format(flyData.gain())}} boosters.<p v-if="player.unlocks.air">However, you will get {{format(airData.gain())}} air.</p></p></button>-->
+              <p v-if="!player.unlocks.air">Try getting 7 boosters. That might help....</p></div><div v-if="player.data.subsubtab.toString()=='2'">
+              <h3 v-if="!hasUpgrade('air',2)">You have {{format(player.air)}} air.</h3>
+              <h3 v-if="hasUpgrade('air',2)">You have {{format(player.air)}} air, which multiplies your point gain by {{format(airData.boost())}}.</h3>
+              <row><span v-for="id in 5"><upgrade layer="air" :upgid="id-1"></upgrade></span></row>
+              <row v-if="hasUpgrade('energy',5)"><span v-for="id in 5"><upgrade layer="air" :upgid="id+4"></upgrade></span></row>
+        </div>
+          <div v-if="player.data.subsubtab.toString()=='3'">
+            <h3>You have {{format(player.space)}} space (+{{format(spaceData.gain())}}/s).</h3><table align="center"><tr><td>
+            <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.space.gte(rebuyableCost('space',0,true)),upgradeCantBuy:player.space.lt(rebuyableCost('space',0,true))}" @click="buyRebuyable('space',0)">
+              <b>Rebuyable 1</b><br><br>{{rebuyableData.space.effect[0]}}<br><br>Cost: {{format(rebuyableCost("space",0,true))}} space<br>Cost Scaling: {{rebuyableData.space.costScaling[0]}}x<br>
+              Effect: {{D(1.2).pow(rebuyableAmt("space",0)).toFixed(2)}}x<br>Amount Bought: {{rebuyableAmt("space",0).toFixed(2)}}</button></td><td>
+            <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.space.gte(rebuyableCost('space',1,true)),upgradeCantBuy:player.space.lt(rebuyableCost('space',1,true))}" @click="buyRebuyable('space',1)">
+              <b>Rebuyable 2</b><br><br>{{rebuyableData.space.effect[1]}}<br><br>Cost: {{format(rebuyableCost("space",1,true))}} space<br>Cost Scaling: {{rebuyableData.space.costScaling[1]}}x<br>
+              Effect: /{{D(1.5).pow(rebuyableAmt("space",1)).toFixed(2)}}<br>Amount Bought: {{rebuyableAmt("space",1).toFixed(2)}}</button></td><td>
+            <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.space.gte(rebuyableCost('space',2,true)),upgradeCantBuy:player.space.lt(rebuyableCost('space',2,true))}" @click="buyRebuyable('space',2)">
+              <b>Rebuyable 3</b><br><br>{{rebuyableData.space.effect[2]}}<br><br>Cost: {{format(rebuyableCost("space",2,true))}} space<br>Cost Scaling: {{rebuyableData.space.costScaling[2]}}x<br>
+              Effect: {{D(2).pow(rebuyableAmt("space",2)).toFixed(2)}}x<br>Amount Bought: {{rebuyableAmt("space",2).toFixed(2)}}</button></td>
+            <td>
+            <button v-if="hasUpgrade('air',6)" style="width:225px;height:200px" :class="{upgradeCanBuy:player.space.gte(rebuyableCost('space',3,true)),upgradeCantBuy:player.space.lt(rebuyableCost('space',3,true))}" @click="buyRebuyable('space',3)">
+              <b>Rebuyable 4</b><br><br>{{rebuyableData.space.effect[3]}}<br><br>Cost: {{format(rebuyableCost("space",3,true))}} space<br>Cost Scaling: {{rebuyableData.space.costScaling[3]}}x<br>
+              Effect: {{D(1.5).pow(rebuyableAmt("space",3)).toFixed(2)}}x<br>Amount Bought: {{rebuyableAmt("space",3).toFixed(2)}}</button>
+            </td>
+            </tr>
+              </table><row><span v-for="(value,id) in milestoneData.space.effect"><milestone layer="space" :upgid="id"></milestone></span></row> </div></div>
+        <div v-if="player.data.subtab.toString()=='3'">
+          <h2>You have {{format(player.power)}} power ({{format(powerData.gain())}}/s).<br>This is boosting your points by {{format(powerData.boost())}}x.</h2>
+          <br>When you gain power, your points get divided by {{powerData.lossEffectOnPoints().toFixed(2)}} every second, AND you don't gain any points.<div v-if="player.data.tab.toString()=='1'">
+            <button class="subsubtab" @click="player.data.subsubtab=1" v-if="player.unlocks.power">Power</button>
+            <button class="subsubtab" @click="player.data.subsubtab=2" v-if="player.unlocks.energy">Energy</button>
+            <button class="subsubtab" @click="player.data.subsubtab=3" v-if="hasAllChallenges('energy')">Automation</button>
+          <div v-if="player.data.subsubtab.toString()=='0'">Click a subtab!</div>
+          </div><div v-if="player.data.subsubtab.toString()=='1'"><br><br>
+            <button style="height:200px;width:200px;border-color:#AA0000;border-width:5px;" v-if="player.gainingPower==false" @click="player.points.gte(1e7)?player.gainingPower=!player.gainingPower:''">
+              <b>GAIN POWER</b><br><br>You need at least 1e7 points.<br><br>
+              <p :class="{gainingPower:player.gainingPower,notGainingPower:player.gainingPower==false}">You are currently not gaining power.</p>
+            </button><button style="height:200px;width:200px;border-color:#AAAA00;border-width:5px;" v-if="player.gainingPower==true" @click="player.points.gte(1e7)?player.gainingPower=!player.gainingPower:''">
+              <b>GAIN POWER</b><br><br>You need at least 1e7 points.<br><br>
+              <p :class="{gainingPower:player.gainingPower,notGainingPower:player.gainingPower==false}">You are currently gaining power.</p>
+            </button></div><div v-if="player.data.subsubtab.toString()=='2'">
+            <h3>You have {{player.energy.toFixed(2)}} energy, which boosts power gain by {{format(energyData.boost())}}.</h3>
+            <div v-if="player.power.gte(energyData.cost())"><br><br><button style="height:175px;width:200px;border-color:#aaaa00;border-width:5px;" @click="energyData.buy()">
+                <h2>ENERGY</h2><br>You can gain {{energyData.costMax()[0].toFixed()}} energy for {{format(energyData.costMax()[1])}} power.</button></div>
+          <div v-if="player.power.lt(energyData.cost())"><br><br><button style="height:175px;width:200px;border-color:#aa0000;border-width:5px;" @click="energyData.buy()">
+                <h2>ENERGY</h2><br>You don't have enough power, get {{format(energyData.cost())}} and try again.</button></div>
+          <p>Scroll down!</p>
+          <br><br>
+          <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.energy.gte(rebuyableCost('energy',0,false)),upgradeCantBuy:player.energy.lt(rebuyableCost('energy',0,false))}" @click="buyRebuyable('energy',0,false)">
+              Energy Rebuyable 1<br>{{rebuyableData.energy.effect[0]}}<br>Cost: {{rebuyableCost("energy",0,false)}} energy.<br>Cost Scaling: +{{rebuyableData.energy.costScaling[0]}}.<br>
+              Effect: /{{format(D(2).pow(rebuyableAmt("energy",0)))}}.<br>Amount Bought: {{rebuyableAmt("energy",0).toFixed(2)}}.
+          </button>
+          <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.energy.gte(rebuyableCost('energy',1,false)),upgradeCantBuy:player.energy.lt(rebuyableCost('energy',1,false))}" @click="buyRebuyable('energy',1,false)">
+              Energy Rebuyable 2<br>{{rebuyableData.energy.effect[1]}}<br>Cost: {{rebuyableCost("energy",1,false)}} energy.<br>Cost Scaling: +{{rebuyableData.energy.costScaling[1]}}.<br>
+              Effect: +{{format(rebuyableAmt("energy",1))}}.<br>Amount Bought: {{rebuyableAmt("energy",1).toFixed(2)}}.
+          </button>
+          <button style="width:225px;height:200px" :class="{upgradeCanBuy:player.energy.gte(rebuyableCost('energy',2,false)),upgradeCantBuy:player.energy.lt(rebuyableCost('energy',2,false))}" @click="buyRebuyable('energy',2,false)">
+              Energy Rebuyable 3<br>{{rebuyableData.energy.effect[2]}}<br>Cost: {{rebuyableCost("energy",2,false)}} energy.<br>Cost Scaling: +{{rebuyableData.energy.costScaling[2]}}.<br>
+              Effect: {{format(D(2).pow(rebuyableAmt("energy",2)))}}x.<br>Amount Bought: {{rebuyableAmt("energy",2).toFixed(2)}}.
+          </button>
+          <br>
+          <br>
+          <h2>CHALLENGES</h2><br>
+            <p>A challenge resets everything pre-space, so be sure to get all the power and space rebuyables you can get before starting a challenge.</p>
+            <p>You enter and finish a challenge by clicking on the challenge.</p>
+            <p>Completing all challenges unlocks <b>autobuyers</b>.</p>
+            <button style="height:200px;width:200px;" @click="oldexitchallbtn()" v-if="inAnyChallenge('energy')">
+              <b>Exit challenge</b><br><br>Exit your current challenge.<br> This will also complete any challenges you have the requirements for.</button>
+          <exitchallengebtn>Exit challenges on this layer. This will also complete any challenges you have the requirements for.</exitchallengebtn>
+          <row><span v-for="id in 4">
+                <challenge layer="energy" :upgid="id-1"></challenge></span></row>
+          <div v-if="hasAllChallenges('energy')">
+            <br><br><h3><b>Energy Upgrades:</b></h3><br><br>
+            <row><span v-for="(value,id) in upgradeData.energy.cost"><upgrade layer="energy" :upgid="id"></upgrade></span></row>
+          </div>
+          </div>
+          <div v-if="player.data.subsubtab.toString()=='3'">
+            <h2>Automation</h2><br><br>Toggle autobuyers by clicking on their buttons or by pressing a.<br><br>
+            <button @click="player.automation[0]=!player.automation[0]" style="border-width:5px;border-color:#00ff00" v-if="player.automation[0]==true"><h3>Boosters Autobuyer (Enabled)</h3></button>
+            <button @click="player.automation[0]=!player.automation[0]" style="border-width:5px;border-color:#ff0000" v-if="player.automation[0]==false"><h3>Boosters Autobuyer (Disabled)</h3></button>
+            <button @click="player.automation[1]=!player.automation[1]" v-if="player.unlocks.spaceAutobuyer && player.automation[1]==true" style="border-width:5px;border-color:#00ff00"><h3>Space Rebuyables Autobuyer (Enabled)</h3></button>
+            <button @click="player.automation[1]=!player.automation[1]" v-if="player.unlocks.spaceAutobuyer && player.automation[1]==false" style="border-width:5px;border-color:#ff0000"><h3>Space Rebuyables Autobuyer (Disabled)</h3></button>
+            <button @click="player.automation[2]=!player.automation[2]" v-if="player.unlocks.brAutobuyer && player.automation[2]==true" style="border-width:5px;border-color:#00ff00"><h3>Booster Rebuyables Autobuyer (Enabled)</h3></button>
+            <button @click="player.automation[2]=!player.automation[2]" v-if="player.unlocks.brAutobuyer && player.automation[2]==false" style="border-width:5px;border-color:#ff0000"><h3>Booster Rebuyables Autobuyer (Disabled)</h3></button>
+            <h3>Milestones</h3>
+            <row><span v-for="(value,id) in milestoneData.energy.effect"><milestone layer="energy" :upgid="id"></milestone></span></row>
+          </div></div>
+      <div v-if="player.data.subtab.toString()=='4'">
+        <h2>You have discovered {{format(player.planets.total)}} planets, boosting point gain by {{format(planetData.totalPlanetBoost())}}.<br>You have explored {{format(planetData.exploredPlanetsAmt())}} planets, boosting point gain by {{format(planetData.finishedPlanetBoost())}}.</h2>
+        <button style="width:225px;height:200px" @click="planetData.buy()" :class="{upgradeCanBuy:player.points.gte(planetData.cost()),upgradeCantBuy:player.points.lt(planetData.cost())}" v-if="player.planets.onPlanet==false">
+          Find a planet for {{format(planetData.cost())}} points!
+        </button>
+        <p v-if="player.planets.onPlanet">Scroll down!</p>
+        <button style="width:225px;height:200px;border-width:5px;border-color:#aaff00;" @click="player.planets.total=player.planets.total.minus(1);delete player.planets.planet[player.planets.amt];player.planets.onPlanet=false;player.planets.atWall=false" v-if="player.planets.onPlanet==true">
+            Explode planet!<br>This will remove the current planet you are on.<br>Use this if you get stuck.
+        </button><br><br>
+        <row><span v-for="(value,id) in milestoneData.planets.effect"><milestone layer="planets" :upgid="id"></milestone></span></row>
+        <div v-if="player.planets.onPlanet&&!player.planets.amt.eq(player.planets.total)">
+          <br><br><h2>You are on planet {{player.planets.planet[player.planets.amt.toNumber()].name}}.</h2>
+          <h3>There are {{format(Object.keys(player.planets.planet[player.planets.amt.toNumber()].walls).length)}} walls on this planet.<br>You have beat {{format(player.planets.planet[player.planets.amt.toNumber()].wallsBeat.toFixed(2))}} of them.</h3>
+          <p>You have explored <b>{{format(player.planets.planet[player.planets.amt.toNumber()].progress)}}%</b> of the planet.</p>
+          <button v-if="!player.planets.atWall && !player.planets.planet[player.planets.amt.toNumber()].completed" style="border-color:#ff0000;border-width:5px;height:165px;width:425px;">
+            <b>THERE ARE NO VISIBLE WALLS YET.</b><br>
+            Explore the planet more for another wall.
+          </button>
+          <button v-if="player.planets.atWall && !player.planets.planet[player.planets.amt.toNumber()].completed" :class="{upgradeCanBuy:planetData.canBeatWall(),upgradeCantBuy:!planetData.canBeatWall()}" @click="planetData.beatWall()">
+            <b>YOU ARE AT A WALL.</b><br>
+            You need the following to break through the wall:<br><br>{{format(planetData.wallCost().points)}} points.<br>{{format(planetData.wallCost().boosters)}} boosters.<br>
+            {{format(planetData.wallCost().air)}} air.<br>{{format(planetData.wallCost().power)}} power.<br><br>Get all this to break through the wall.
+          </button>
+          <button v-if="player.planets.planet[player.planets.amt.toNumber()].completed" class="upgradeCanBuy" style="width:200px;height:200px;border-color:#00ff00;border-width:5px;" @click="planetData.completePlanet()">
+            <b>YOU HAVE EXPLORED THE PLANET!</b><br>Click this button to finish your journey!
+          </button></div></div></div><div v-if="player.data.tab.toString()=='2'">
+        <button class="settingsButton" @click="save()">Save</button><button class="settingsButton" @click="importSave()">Import</button><button class="settingsButton" @click="exportSave()">Export</button><br><button class="settingsButton" @click="hardReset()">Hard Reset</button><div class="dropdown">
+  <button class="settingsbutton" @click="myFunction()">Style: {{ getThemeName() }}</button>
+  <div id="myDropdown" class="dropdown-content">
+    <div @click="changeTheme(0)" class="db">{{theme_names[0]}}</div>
+    <div @click="changeTheme(1)" class="db">{{theme_names[1]}}</div>
+    <div @click="changeTheme(2)" class="db">{{theme_names[2]}}</div>
+    <div @click="changeTheme(3)" class="db">{{theme_names[3]}}</div>
+    <div @click="changeTheme(4)" class="db">{{theme_names[4]}}</div>
+    <div @click="changeTheme(5)" class="db">{{theme_names[5]}}</div>
+    <div @click="changeTheme(6)" class="db">{{theme_names[6]}}</div>
+    <div @click="changeTheme(7)" class="db">{{theme_names[7]}}</div>
+  </div>
+</div><div class="dropdown">
+  <button class="settingsbutton" @click="myFunction2()">Font: {{ getFontName() }}</button>
+  <div id="myDropdown2" class="dropdown-content">
+    <div @click="changeFont(0)" class="db">{{font[0]}}</div>
+    <div @click="changeFont(1)" class="db">{{font[1]}}</div>
+      <div @click="changeFont(2)" class="db">{{font[2]}}</div>
+      <div @click="changeFont(3)" class="db">{{font[3]}}</div>
+          <div @click="changeFont(4)" class="db">{{font[4]}}</div>
+  </div>
+</div>
+        <br><br><h3>Hotkeys</h3>B - Buy a Booster<br>
+        <div v-if="player.unlocks.fly">F - Perform a Fly Reset<br></div>
+        <div v-if="player.unlocks.power">P - Toggle Power Gain<br></div>
+        <div v-if="player.unlocks.energy">E - Buy Energy<br></div>
+        <div v-if="hasAllChallenges('energy')">A - Toggle Automators<br></div>
+        <div v-if="player.unlocks.planets">Shift + P - Buy a Planet/Bypass a Wall</div>
+        <br><credits></credits>
+        <br><a href="https://discord.gg/YmbpFzcscy" target="_blank" rel="Discord Server">Join the discord server!</a></div>
+      <div v-if="player.data.tab.toString() == '3'">
+      <h3><b>CHANGELOG</b></h3>
+      NOTE: The patch that is not white is the most recent.
+      <h4>ALPHA</h4>
+        <div style="color: #bbbbbb"><changelog-alpha v-for="i in Object.keys(changelogData.alpha)" :ver="i"></changelog-alpha>
+      </div>
+    </div>
+      <div v-if="player.data.tab.toString()=='4'">
+        <b>You have currently collected {{ getTotalAchsCompleted() }}/{{ Object.keys(achievementData).length }} achievements.</b>
+        <br><br><center><progress-bar color="percentToAchCompletionColor" percentage="percentToAchCompletion"></progress-bar></center>
+        <br><b v-bind:class="{show:areAllAchsCompleted(), hide:!areAllAchsCompleted()}">You have completed all of the current achievements. Congratulations!</b>
+        <br><div style="display: grid; grid-auto-rows: 1fr; grid-auto-columns: 1fr; gap: 5px; margin: 5px">
+            <achievement v-for="ach in Object.keys(achievementData)" :class="{ach:true, achIncomplete:player.achs[ach]!=true, achComplete:player.achs[ach]==true}" v-bind:achid="ach" :key="player.achs"></achievement>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="/scripts/changeloginfo.js"></script>
+    <script src="/scripts/saveload.js"></script>
+    <script src="/scripts/ach.js"></script>
+    <script src="/scripts/components.js"></script>
+    <script src="/scripts/theme.js"></script>
+    <script src="/scripts/gameData.js"></script>
+    <script src="/scripts/gameFeatures.js"></script>
+    <script src="/script.js"></script>
+  <!-- here's your next string: 56 6d 70 4b 4d 46 55 78 55 6e 4e 69 4d 32 52 50 56 6d 31 6f 56 31 5a 71 53 6c 4e 55 4d 58 42 59 5a 55 56 6b 61 57 4a 48 55 6e 6c 57 56 7a 46 33 57 56 55 78 52 56 5a 72 62 46 64 57 62 56 4a 79 56 6b 52 4b 56 32 4d 78 53 6e 52 4f 56 6d 68 6f 54 56 56 77 55 46 59 79 63 45 4a 4e 56 6d 52 48 56 6d 78 6f 59 56 4a 55 56 6e 4e 5a 61 31 5a 68 5a 46 5a 5a 65 57 52 47 54 6c 56 69 52 7a 6b 7a 56 47 78 61 62 31 5a 73 57 58 6c 56 62 45 4a 68 56 6a 4e 6f 57 46 6c 74 65 47 74 6a 62 46 5a 79 54 6c 64 47 54 6c 4a 47 57 6b 70 57 62 46 70 72 59 54 46 52 65 56 5a 75 54 6c 64 69 56 46 5a 5a 57 56 52 47 53 31 51 78 5a 48 46 52 56 45 5a 59 55 6d 78 61 57 56 64 72 56 54 46 69 52 30 70 48 56 32 35 57 56 30 31 75 55 6c 52 57 52 33 68 32 5a 44 41 31 56 32 46 47 57 6c 64 4e 62 45 70 52 56 32 78 6b 4e 46 49 79 53 6e 4e 61 53 45 70 57 59 6c 68 43 61 46 52 56 55 6c 64 58 56 6c 70 58 57 6b 64 30 56 57 4a 57 57 6e 70 56 62 54 41 78 56 30 64 46 65 46 4e 72 4f 56 68 68 61 30 56 34 56 6a 42 61 56 31 64 47 63 45 5a 50 56 33 68 70 55 6c 5a 77 4d 56 5a 71 53 6a 42 56 4d 56 4a 7a 59 6a 4e 6b 54 31 5a 74 61 46 64 57 61 6b 70 54 56 44 46 77 57 47 56 47 5a 47 6c 69 52 31 4a 35 56 6c 64 7a 4d 56 6c 56 4d 55 56 57 62 47 78 58 56 6d 31 53 63 6c 5a 48 4d 56 64 6a 4d 55 70 30 54 6c 5a 6f 61 45 31 56 63 48 68 57 4d 6e 42 43 54 56 5a 4f 52 31 5a 73 61 47 46 53 56 46 5a 7a 57 57 74 57 59 57 52 57 57 58 6c 6b 52 6b 35 56 59 6b 63 35 4d 31 52 73 57 6d 39 57 62 46 6c 35 56 57 73 35 59 56 59 7a 61 46 68 5a 62 58 68 72 59 32 78 57 63 6b 35 58 52 6b 35 53 52 6c 70 4b 56 6d 78 61 61 32 45 78 55 58 6c 57 62 6b 35 54 59 6c 52 57 57 56 6c 55 52 6b 74 55 4d 57 52 78 55 56 52 47 57 46 4a 73 57 6c 6c 58 61 31 55 78 59 6b 64 4b 52 31 64 75 56 6c 64 4e 62 6c 4a 55 56 6b 64 34 64 6d 51 77 4e 56 64 68 52 6c 70 58 54 57 78 4b 55 46 64 73 5a 44 52 53 4d 6b 70 7a 57 6b 68 4b 56 6d 46 36 56 6d 68 55 56 56 4a 58 56 31 5a 61 56 31 70 48 64 46 56 69 56 6c 70 36 56 6d 30 77 4d 56 64 48 52 58 68 54 62 6b 5a 59 59 57 74 46 65 46 55 77 57 6c 64 58 52 6e 42 47 54 31 64 34 61 56 4a 57 63 44 46 57 61 6b 6f 77 56 54 46 53 63 32 49 7a 5a 45 39 57 62 57 68 58 56 6d 70 4b 55 31 51 78 63 46 68 6c 52 6d 52 70 59 6b 64 53 65 56 5a 58 4d 58 64 5a 56 54 46 46 56 6d 74 73 56 31 5a 74 55 6e 4a 57 52 7a 46 58 59 7a 46 4b 64 45 35 57 61 47 68 4e 56 58 42 51 56 6a 4a 77 51 6b 31 57 5a 45 64 57 62 47 68 68 55 6c 52 57 63 31 6c 72 56 6d 46 6b 56 6c 6c 35 5a 45 5a 4f 61 47 4a 48 4f 54 4e 55 62 46 5a 76 56 6d 78 5a 65 56 56 73 51 6d 46 57 4d 32 68 49 57 57 31 34 61 32 4e 73 56 6e 4a 4f 56 30 5a 4f 55 6b 5a 61 53 6c 5a 73 57 6d 74 68 4d 56 46 35 56 6d 35 4f 56 32 4a 55 56 6c 6c 5a 56 45 5a 4c 56 44 46 6b 63 56 46 55 52 6c 52 53 62 46 70 5a 56 32 74 56 4e 57 4a 48 53 6b 5a 58 62 6c 5a 58 54 57 35 53 56 46 5a 48 65 48 5a 6b 4d 44 56 58 59 55 5a 61 56 30 31 73 53 6c 42 58 62 47 51 30 56 6a 4a 4b 63 31 70 49 53 6c 5a 69 57 45 4a 6f 56 46 56 53 56 31 4e 57 57 6c 64 61 52 33 52 56 54 57 78 61 65 6c 56 74 4d 44 46 58 52 30 56 34 55 32 73 35 57 47 46 72 52 58 68 57 4d 46 70 58 56 30 5a 77 52 6b 35 58 65 47 6c 53 62 48 41 78 56 6d 70 4b 4d 46 55 79 52 6e 4e 69 4d 32 52 50 56 6c 64 6f 56 31 5a 71 53 6c 4e 55 4d 58 42 59 5a 55 56 6b 61 57 4a 48 55 6e 6c 57 56 33 4d 78 57 56 55 78 52 56 5a 73 62 46 64 57 62 56 4a 79 56 6b 63 78 56 32 4d 78 53 6e 52 4f 56 6d 68 6f 54 56 56 77 65 46 59 79 63 45 4a 4e 56 6b 35 48 56 6d 78 6f 59 56 4a 55 56 6e 4e 5a 61 31 70 68 5a 46 5a 5a 65 57 52 47 54 6c 56 69 52 7a 6b 7a 56 47 78 57 62 31 5a 73 57 58 6c 56 62 45 4a 68 56 6a 4e 6f 57 46 6c 74 65 47 74 6a 62 46 5a 30 59 30 64 47 54 6c 4a 47 57 6c 70 57 62 46 70 72 59 54 46 53 64 46 5a 75 54 6c 64 57 52 33 4d 35 -->
+  </body>
+</html>
+<!--
+// please shut the fuck up already dude
+// ^
+// who was that
+// what
+->

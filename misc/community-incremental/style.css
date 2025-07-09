@@ -1,0 +1,19 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+}
+
+#game {
+  width: 100vw;
+  height: 100vh;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+}

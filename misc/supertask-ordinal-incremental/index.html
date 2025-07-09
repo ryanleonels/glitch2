@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>RPG Dimensions</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="something.css"
+      media="screen"
+    />
+    <script src="break_infinity.min.js"></script>
+    <script src="save.js"></script>
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div id="dimNum">
+      Dimension #: 1
+    </div>
+    <div id="dimStats">
+      Dimension Health: 10/10
+    </div>
+    <div id="otherDimStats">
+      Dimension Attack: 1
+      <br />
+      Dimension Defense: 1
+      <br />
+      Dimension Regen: 0.1
+    </div>
+    <br />
+    <div id="health">
+      Your Health: 20/20
+    </div>
+    <div id="attack">
+      Your Attack: 1
+    </div>
+    <div id="defence">
+      Your Defence: 0
+    </div>
+    <div id="regen">
+      Your Regen: 0.1
+    </div>
+    <br />
+    <div id="energy">
+      Your Total Energy: 0/500
+    </div>
+    <div id="idleEnergy">
+      Your Idle Energy: 0/500
+    </div>
+    <div id="attackEnergy">
+      Your Attack Energy: 0/500
+    </div>
+    <div id="DefenceEnergy">
+      Your Defence Energy: 0/500
+    </div>
+    <button class="button" onclick="assignToAttackTraining()">
+      assign energy to attack training 1
+    </button>
+    <button class="button" onclick="unassignToAttackTraining()">
+      unassign energy from attack training 1
+    </button>
+    <button class="button" onclick="assignToDefenceTraining()">
+      assign energy to defence training 1
+    </button>
+    <button class="button" onclick="unassignToDefenceTraining()">
+      unassign energy from defence training 1
+    </button>
+    <br />
+    <br />
+    <br />
+    <button class="button" onclick="save()">
+      Save your game
+    </button>
+    <button class="button" onclick="wipeSave()">
+      Wipe your save
+    </button>
+  </body>
+</html>

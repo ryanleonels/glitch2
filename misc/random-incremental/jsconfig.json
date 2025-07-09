@@ -1,0 +1,9 @@
+{
+  "include": [
+    "**/*.js",
+    "**/*.d.ts"
+  ],
+  "compilerOptions": {
+    "target": "ESNext"
+  }
+}

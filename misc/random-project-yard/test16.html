@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .flexcontainer {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #000;
+      }
+    </style>
+    <title>Speech Synthesis Test</title>
+  </head>
+  <body style="background-color: #888">
+    <input type="text" id="speech">
+    <button onclick="speak(document.getElementById('speech').value)">
+      Speak!
+    </button>
+    <script>
+      function speak (phrase) { // from annoyingsite.glitch.me
+        window.speechSynthesis.speak(new window.SpeechSynthesisUtterance(phrase))
+      }
+    </script>
+  </body>
+</html>

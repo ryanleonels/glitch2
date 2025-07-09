@@ -1,0 +1,175 @@
+body {
+  font-family: 'Cascadia Mono', monospace;
+  margin: 10px;
+  background-color: #333333;
+  color: #f0f0f0;
+  text-align: center;
+}
+h1 {
+  margin: 5px
+}
+.noimport{
+  font-size:0.55em;
+  color: #aaaaaa;
+}
+.hp{
+  color: #00aa00;
+}
+.atk{
+  color: #aa0000;
+}
+.button{
+  background-color: #bbbbbb;
+  border-color:#bbbbbb
+}
+.button:hover{
+  background-color: #888888;
+    border-color: #888888
+}
+#clickattack{
+  background-color: #ee0000;
+   border-color: #ff0000
+}
+#clickattack:hover{
+  background-color: #990000;
+  border-color: #aa0000
+}
+.Wmove{
+    background-color: #0055ee;
+  border-color: #0055ee;
+}
+.Wmove:hover{
+    background-color: #003399;
+  border-color: #003399;
+}
+.blue{
+  color:#44bbff;
+  font-size:0.6em;
+}
+.prestige{
+  color: #cc00ff
+}
+.prestigebutton{
+  background-color:#cc00ff;
+  border-color: #cc00ff
+}
+.prestigebutton:hover{
+  background-color:#660088;
+      border-color: #7700aa
+}
+.infinity{
+  color: #cc0000;
+}
+.infinitybutton{
+  background-color:#aa0000;
+}
+.infinitybutton:hover{
+  background-color:#880000;
+  color:white
+}
+textarea{
+  background-color:#222222;
+  color:white;
+  resize: none;
+}
+td{
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align:center;
+}
+button{
+  user-select: none;
+  font-family: 'Cascadia Mono', monospace;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.achbu{
+  height: 50px;
+  width: 50px;
+  background-color: #222222;
+  color: #ffffff;
+    border-color:#000000
+}
+.achbc{
+  height: 50px;
+  width: 50px;
+  background-color: #00ee00;
+  color: #000000;
+  border-color: #00ee00
+}
+.achieve{
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 15px;
+}
+.gwabutton{
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+}
+/* jackorb [] tooltip */
+    [tooltip] {
+      position: relative;
+      z-index: 2;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    [tooltip]:before,
+    [tooltip]:after {
+      visibility: hidden;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+      pointer-events: none;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:before {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-bottom: 5px;
+      margin-left: -80px;
+      padding: 7px;
+      width: 160px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: white;
+      content: attr(tooltip);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.2;
+      transition-duration: 0.5s;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:after {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      width: 0;
+      border-top: 5px solid rgba(0, 0, 0, 0.75);
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+      content: " ";
+      font-size: 0;
+      line-height: 0;
+      transition-duration: 0.5s;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:hover:before,
+    [tooltip]:hover:after {
+      visibility: visible;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+      opacity: 1;
+      white-space: pre-wrap;
+    }
+  

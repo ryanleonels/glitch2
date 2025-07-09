@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ordinal Markup</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://cdn.glitch.com/310d7aca-4728-445f-9084-db26ceccd7b5%2FOrdinal%20Markup%20logo.png?v=1587927427273"/>
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style/mobile.css">
+    <link rel="stylesheet" href="style/style.css">
+    <div id="theme"><link rel="stylesheet" href="style/dark.css"></div>
+    <!-- import the webpage's javascript file -->
+    <script src="script/ExpantaNum.js" defer></script>
+    <script src="script/ordMarks.js" defer></script>
+    <script src="script/saveload.js" defer></script>
+    <script src="script/function.js" defer></script>
+    <script src="script/color.js" defer></script>
+    <script src="script/challenges.js" defer></script>
+    <script src="script/hotkeys.js" defer></script>
+    <script src="script/prestige.js" defer></script>
+    <script src="script/script.js" defer></script>
+  </head>  
+  <body id="body">
+    <audio src="https://cdn.glitch.com/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FGoing%20Down%20by%20Jake%20Chudnow%20%5BHD%5D.mp3?v=1581538237884" id="music"></audio>
+    <b id="decrementyText">There is 1 decrementy</b>
+    <h1 id="hardy" style="font-size: 30pt;font-weight: bold;height:50px">H<sub>0</sub> (10)=10</h1>
+    <button onclick="Tab(1)" class="tabButton">Ordinals</button><text class="invisible invisTab">0</text>
+    <button onclick="Tab(2)" class="tabButton">Options</button><text class="invisible invisTab">0</text>
+    <button onclick="Tab(4)" class="tabButton">Objectives</button><text class="invisible invisTab">0</text>
+    <button onclick="Tab(5)" id="infinityTabButton" class="infinityTabButton">Markup</button><text class="invisible invisTab">0</text>
+    <button onclick="Tab(6)" id="boosterTabButton" class="boosterTabButton">Boosters</button><text class="invisible invisTab">0</text>
+    <button onclick="Tab(7)" id="collapseTabButton" class="collapseTabButton">Collapse</button><text class="invisible invisTab">0</text>
+    <p></p>
+    <div id="Tab1">
+      <button onclick="increment(1)" class="normalButton thicc canThicc">Increase Ordinal by 1</button>
+        <button onclick="maximize(1)" class="normalButton thicc canThicc">Maximize ordinal, but number does not increase</button>
+      <p><button onclick="infinity(1)" id="infinityButton" class="normalButton thicc canThicc">Reach 10240 to Markup</button></p>
+    </div>
+    <div id="Tab2">
+      <button onclick="save()" class="normalButton" style="border:2px solid #00FF00">Save your game</button>
+      <button onclick="exporty()" class="normalButton" style="border:2px solid #00FF00">Export your game file</button>
+      <button onclick="importy()" class="normalButton" style="border:2px solid #0080FF">Import your game file</button>
+      <button onclick="resetConf()" style="color:#FF0000;border:2px solid #FF0000">RESET YOUR GAME</button>
+      <p></p>
+      <button onclick="changeOfflineProg()" class="normalButton" id="changeOffline">Offline Progress: ON</button>
+      <button onclick="changeInt()" class="normalButton" id="changeInt">Millisecond Interval: 50ms</button>
+      <button onclick="changeOrdLengthLess()" class="normalButton" id="changeOrdLengthLess">Maximum Ordinal Length below e0: 50ms</button>
+      <button onclick="changeOrdLengthMore()" class="normalButton" id="changeOrdLengthMore">Maximum Ordinal Length above e0: 50ms</button>
+      <p></p>
+      <button onclick="changeOrdNotation()" class="normalButton" id="changeOrdNotation">Current Ordinal Notation: Madore's</button>
+      <button onclick="changeTheme()" class="normalButton" id="changeTheme">Current Theme: Light</button>
+      <p></p>
+      <button onclick="changeMusic()" class="normalButton" id="changeMusic">Music: OFF</button>
+      <button onclick="changeColor()" class="normalButton" id="changeColor">Color: OFF</button>
+      <p></p>
+      <button onclick="game.hotkeysOn=1-game.hotkeysOn" class="normalButton" id="changeHotKeys">Hotkeys: ON</button>
+      <button onclick="game.thicc=1-game.thicc" class="normalButton" id="changeThicc">T H I C C Buttons: ON</button>
+      <p><a href="howtoplay.html">How to play</a> | <a href="https://discordapp.com/invite/RerPeNA">Discord</a> | <a href="changelog.html">Changelog</a> | Game autosaves every ten seconds</p>
+      <p><i>This work is licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a></i></p>
+    </div>
+    <div id="Tab3">
+      <p>Your highest Ordinal was w [WIP]</p>
+      <p>You have Marked up 100 times [WIP]</p>
+      <p>Your last Markup was 1 second ago [WIP]</p>
+      <p>You have done 1 Factor Shift [WIP]</p>
+      <p>Your last Factor Shift was 1 second ago [WIP]</p>
+      <p>You have played for 3 days and 5 hours [WIP]</p>
+    </div>
+    <div id="Tab4">
+<!--<p>The Tower of Infinity: a tale told throughout the lands,<br>
+Yet over hundreds of years, undefeated it still stands.<br>
+The reward at the end is infinite power,<br>
+  For the one who is able to ascend this tower.</p>
+
+<p>However climbing the tower had a twist,<br>
+Soon seen by any who entered its mist;<br>
+The stairs on each floor were far too small,<br>
+And the amount of layers ever so tall.</p>
+
+<p>However, this started to end on a fateful day,<br>
+When there was a visitor who would come to stay.<br>
+They started climbing and reached the second floor,<br>
+Only to find the exact same climb once more.</p>-->
+      Psi Level: Coming Soon!
+      <ol style="display:none">
+        <li>Reach the number 20</li>
+        <li>Perform a Markup</li>
+        <li>Perform a Factor Shift</li>
+        <li>Buy a Factor</li>
+        <li>Reach Base 4</li>
+        <li>Get your ordinal to ω^ω^ω</li> <!-- <sup>s or ^s? -->
+        <li>Perform a Factor Boost</li>
+        <li>Buy 3 Booster Upgrades</li>
+        <li>Unlock Challenges</li>
+        <li>Complete a Challenge</li>
+        <li>Unlock Incrementy</li>
+        <li>Extend Incrementy</li>
+        <li>Get four Extended Incrementy Upgrades</li>
+        <li>Unlock the next layer</li>
+        <li>Obtain one of each Aleph</li>
+        <li>Unlock Darkness</li>
+        <li>Complete all of the sluggish milestones</li>
+        <li>Unlock the Singularity</li>
+        <li>Reach Level 20 Singularity</li>
+      </ol>
+    </div>
+    <div id="Tab5">
+      <text id="ordinalPointsDisplay">You have 100 Ordinal Points</text><text class="invisible">____</text><button onclick="infinity(1)" id="infinityButton2" class="infinityButton">Reach 10240 to Ma</button>
+      <p></p>
+      <button onclick="subTab(1)" class="infinityButton subtab">Autoclickers</button>
+      <button onclick="subTab(2)" class="infinityButton subtab">Factors</button>
+      <button onclick="subTab(3)" class="infinityButton subtab" id="dynamicFactorButton">Dynamic Factors</button>
+      <button onclick="subTab(4)" class="darkButton subtab" id="darkUpButton">Dark Upgrades</button>
+      <p></p>
+      <div id="subTab1">
+        <b>Tier 1 Automation</b>
+        <p id="succAutoAmount">You have 0 successor autobuyers</p>
+        <p id="limAutoAmount">You have 0 maximize autobuyers</p>
+        <p></p>
+        <button onclick="buysucc(1)" id="buysucc" class="infinityButton">Buy Successor Autobuyer for 100 OP</button>
+        <button onclick="buylim(1)" id="buylim" class="infinityButton">Buy Maximize Autobuyer for 100 OP</button>
+        <button onclick="maxall()" class="infinityButton">Max All (M)</button>
+      </div>
+      <div id="subTab2" class="long">
+        <div id="factorContainer" style="height: 270px">
+        <div id="factorList">Factors: <button onclick="maxFactors()" class="infinityButton">Max All (M)</button>
+          <ul id="factorListMain">
+            <li>Factor 1: x2 <button onclick="buyFactor(0)">Increase Factor 1 for 10 OP</button></li>
+            <li>Factor 2: x2 <button onclick="buyFactor(1)">Increase Factor 2 for 100 OP</button></li>
+            <li>Factor 3: x2 <button onclick="buyFactor(2)">Increase Factor 3 for 1000 OP</button></li>
+            <li>Factor 4: x2 <button onclick="buyFactor(3)">Increase Factor 4 for 10000 OP</button></li>
+            <li>Factor 5: x2 <button onclick="buyFactor(4)">Increase Factor 5 for 100000 OP</button></li>
+            <li>Factor 6: x2 <button onclick="buyFactor(5)">Increase Factor 6 for 1.000e6 OP</button></li>
+            <li>Factor 7: x2 <button onclick="buyFactor(6)">Increase Factor 7 for 1.000e7 OP</button></li>
+            <li>Factor 8: x2 <button onclick="buyFactor(7)">Increase Factor 8 for 1.000e8 OP</button></li>
+          </ul>
+          <text id="factorMult">Your factors are multiplying your autoclickers by 1</text>
+       </div>
+        
+        <p id="noFactors">You have no factors. Perform a Factor Shift to get one!</p>
+          
+        <p class="invisible">.</p></div>
+        <text id="factorShift">Factor Shift (0): Requires 200 OP</text> <button onclick="factorShift(1)" class="infinityButton">Do a Factor Shift (S)</button>
+        <p>When you Factor Shift, you gain a new factor and the base decreases by 1</p>
+        <div id="factorBoostText" class="long">
+          <text id="factorBoost">Factor Boost (0): Requires g10 (10) OP</text> <button onclick="factorBoost(1)" class="boosterButton" id="gainBoosters">Gain 2 Boosters</button>
+          <p id="fbps">You are getting a total of 30 Factor Boosts per second (assuming it's not limited by computational speed)</p>
+          <p><b id="checkIncrementy">REMEMBER TO CHECK INCREMENTY UPGRADES!!!</b></p>
+          <p><button id="flashIncrementy" class="boosterButton" onclick="game.flashIncrementy=1-game.flashIncrementy">Flashing Incrementy Reminder: ON</button><button style="margin-left: 5px"id="fbConfirm" class="boosterButton" onclick="game.fbConfirm=1-game.fbConfirm">Factor Boost Confirmation: OFF</button><button id="bulkBoost" class="boosterButton" style="margin-left: 5px" onclick="game.bulkBoost=1-game.bulkBoost">Bulk Boosting: ON</button></p>
+          <p>You are currently bulking in a set of <text id="bulking">0</text></p>
+          <p><text id="nextBulkTime">32d 15h 48m 9s</text></p>
+          <p><div id="factorBoostProgBar"><div id="factorBoostProg"></div></div></p>
+        </div>
+        <div id="completeChallenge">
+          <button class="boosterButton" id="finishChallenge" onclick="completeChallenge()">Complete the challenge!<br>100 OP</button>
+        </div>
+      </div>
+      <div id="subTab3">
+        <text id="dynamicMult">Your Dynamic Multiplier is x529.001</text>
+        <p id="manifoldIncrease">It is increasing by 0.002 per second</p>
+        <p id="dynamicDecreaseText">It is also decreasing by <text id="dynamicDecrease">10.000</text> per second</p>
+        <p>Dynamic Factors reset on Markups</p>
+      </div>
+      <div id="subTab4">
+        Your Decrementy is multiplying by <text id="decrementyRate"></text> per second
+        <p>Unmultiplied Pending OP speeds up decrementy by x^0.2</p>
+        <div><table>
+          <tr>
+            <td><button class="treeButton darkButton" id="dup1" onclick="dup(1)">Reduce the potency of decrementy by 5%<br><br>Cost: 1.00e5</button></td>
+            <td><button class="treeButton darkButton" id="dup2" onclick="dup(2)">Halve decrementy growth below ω^(ω3), otherwise double it<br>Cost: 1.00e1000</button></td>
+            <td><button class="treeButton darkButton" id="dup3" onclick="dup(3)">Gain a 1.2x multiplier to Tier 1 and 2<br><br>Cost: 1.00e9</button></td>
+          </tr>
+          <tr style="display: none">
+            <td><button class="treeButton locked" id="dup4" onclick="dup(4)">Dark Manifolds are 3x as effective, and increase the 1e8 cap to 1e17<br>Cost: ??</button></td>
+            <td><button class="treeButton locked" id="dup5" onclick="dup(5)">Dark Manifolds are 26% more effective<br><br>Cost: ??</button></td>
+            <td><button class="treeButton locked" id="dup6" onclick="dup(6)">Reduce Dark Manifold requirement scaling<br><br>Cost: ??</button></td>
+          </tr>
+          <tr style="display: none">
+            <td><button class="treeButton locked" id="dup7" onclick="dup(7)">Dynamic increases 100x faster<br><br>Cost: ??</button></td>
+            <td><button class="treeButton locked" id="dup8" onclick="dup(8)">Dynamic Factor Cap multiply decrementy growth<br>Cost: ??</button></td>
+            <td><button class="treeButton locked" id="dup9" onclick="dup(9)">The 4.00e27 Incrementy upgrade ignores decrementy past ω^(ω3)<br>Cost: ??</button></td>
+          </tr>
+        </table></div>
+        <div id="darkManifoldShift" style="display: inline-block">
+          <br>
+          You have <span id="darkManifoldAmount">0</span> Dark Manifolds, translating to a <span id="darkManifoldBoost">1</span>x multiplier to Dynamic Factor Cap only
+          <br>
+          <center><button class="treeButton darkButton" id="getDarkManifolds" onclick="getDarkManifolds()">Get a Dark Manifold<br><br>Need: 3 Decrementy</button>
+          <button class="treeButton darkButton" style="display:block;height: 30px;font-size: 12pt" id="darkManifoldMaxMode" onclick="game.darkManifoldMax = 1-game.darkManifoldMax">Max Mode: ON</button></center>
+        </div>
+      </div>
+      <div id="subTab5" style="font-size: 15pt;font-weight:bold">
+        <center><p>The World is upon for a crude awakening</p></center>
+        <center><p>Upon reaching ω^(ω3) in Challenge 8, the Dark Awakening gets invoked</p></center>
+        <center><p>When this happens, Decrementy increases very rapidly, the "Halve Decrementy Growth"</p>upgrade becomes "Double Decrementy Growth," and other Decrementy Upgrades may apply.</center>
+      </div>
+    </div>
+    <div id="Tab6" style="width: 100%">
+      <button onclick="bsubTab(1)" class="boosterButton subtab">Upgrades</button>
+      <button onclick="bsubTab(2)" class="boosterButton subtab">Autobuyers</button>
+      <button onclick="bsubTab(3)" class="boosterButton subtab" id="challengeSubTab">Challenges</button>
+      <button onclick="bsubTab(4)" class="boosterButton subtab" id="incrementySubTab">Incrementy</button>
+      <p></p>
+      <div id="bsubTab1"><div id="bsubTab1sub"><text id="boostersText" style="text-align:center;display:block;margin-bottom:10px">You have 1 Boosters</text>
+      <button id="refundBoosters" class="trueCenter" style="margin-bottom: 10px" onclick="refund()">Refund back 0 boosters, but reset all factor shifts</button>
+      <div class="trueCenter"><button id="refundConfirmation" style="margin-bottom: 10px" onclick="game.bConf.ref=1-game.bConf.ref">Refund Confirmation: ON</button>
+      <button id="refundFB" style="margin-bottom: 10px" onclick="game.bConf.refFB=1-game.bConf.refFB">Factor Boost if possible on Refund: OFF</button></div>
+      <div>
+        <table class="trueCenter long" style="width: 810px"><tbody class="trueCenter long">
+        <tr>
+          <td><button class="treeButton locked" id="bup1" onclick="bup(1)">Each Factor is twice as powerful<br><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup2" onclick="bup(2)">Unlock autoclicker for maxing all<br><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup3" onclick="bup(3)">Unlock Markup autoclicker<br><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup4" onclick="bup(4)">Unlock Challenges<br><br>Need 10 Boosters</button></td>
+        </tr>
+        <tr>
+          <td><button class="treeButton locked" id="bup5" onclick="bup(5)">Gain 5x as much OP<br><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup6" onclick="bup(6)">Boosters boost Tier 1 and 2 automation by x<text id="bup6 current">1.00</text><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup7" onclick="bup(7)">Gain 20 OP per second<br><br>1 Booster</button></td>
+          <td><button class="treeButton locked" id="bup8" onclick="bup(8)">Unlock Incrementy<br><br>Need 21 Boosters</button></td>
+        </tr>
+        <tr>
+          <td><button class="treeButton locked" id="bup9" onclick="bup(9)">The base is reduced by 4 if it's over 7<br><br>50 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup10" onclick="bup(10)">The base is always 5 below ψ(Ω)<br>50 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup11" onclick="bup(11)">You get 3 free factors each<br><br>5 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup12" onclick="bup(12)">Extend Incrementy<br>Need 72 Boosters and 7 Challenge Completions</button></td>
+        </tr>
+        <tr>
+          <td><button class="treeButton locked" id="bup13" onclick="bup(13)">In odd numbered challenges, Dynamic factor is squared<br>50 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup14" onclick="bup(14)">Dynamic decreases 1.00e299 times slower<br><br>50 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup15" onclick="bup(15)">Markup gives 666666x OP if the base is less than six<br>50 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup16" onclick="bup(16)"><b>Unlock the next layer<br>Need 324 Boosters and 22 Challenge Completions</b></button></td>
+        </tr>
+        <tr id="bottomBoosterUpgrades">
+          <td><button class="treeButton locked" id="bup17" onclick="bup(17)">???</button></td>
+          <td><button class="treeButton locked" id="bup18" onclick="bup(18)">???</button></td>
+          <td><button class="treeButton locked" id="bup19" onclick="bup(19)">The above upgrade applies to passive OP gain<br>8e8 Boosters</button></td>
+          <td><button class="treeButton locked" id="bup20" onclick="bup(20)">Unlock the Singularity<br>Need 2e11 Boosters and 33 Challenge Completions</button></td>
+        </tr>
+        <tr id="bottomBoosterUpgrades2">
+          <td><button class="treeButton locked" id="bup21" onclick="bup(21)">???</button></td>
+          <td><button class="treeButton locked" id="bup22" onclick="bup(22)">???</button></td>
+          <td><button class="treeButton locked" id="bup23" onclick="bup(23)">???</button></td>
+          <td><button class="treeButton locked" id="bup24" onclick="bup(24)">???</button></td>
+        </tr>
+        </tbody></table><p style="text-align: center"><i id="mobileMessage">You may have to rotate your phone on mobile to see all of the upgrades. The right column of upgrades doesn't consume your boosters.</i><br>You also start with a free Maximize Autoclicker as a gift :)</p></div>
+      </div></div>
+      <div id="bsubTab2">
+        <text><b>Tier 2 Automation</b></text>
+        <p id="maxAllAuto">Your Max All Autobuyer is clicking the Max All button 1 times per second</p>
+        <p id="infinityAuto">Your Markup Autobuyer is clicking the Markup button 1 times per second</p>
+        <p></p>
+        <button onclick="toggleAutoMax()" id="autoMaxButton" class="boosterButton">Max All Autobuyer: ON</button>
+        <button onclick="toggleAutoInf()" id="autoInfButton" class="boosterButton">Markup Autobuyer: ON</button>
+      </div>
+      <div id="bsubTab3">
+        Challenges can be completed up to 3 times, each one giving a bigger reward. <p id="chalMult">Your 0 challenge completions have multiplied Tier 1 and 2 by x</p><text id="runChal">You're currently in Challenge 1.</text><p></p>
+        <button class="boosterButton" onclick="exitChallenge()">Exit Challenge</button>
+        <button class="boosterButton" id="chalConf" onclick="game.bConf.chal=1-game.bConf.chal">Challenge Confirmation: OFF</button>
+        <button class="boosterButton" id="chalFB" onclick="game.bConf.chalFB=1-game.bConf.chalFB">Factor Boost if possible on Challenge: OFF</button><p></p>
+        <table>
+        <tr>
+        <td><button class="challenge boosterButton" onclick="enterChallenge(1)" id="challenge1" style="font-size: 10pt">Challenge 1<br>Autoclicker costs scales a lot worse, and you gain 125x the passive OP if you have the 5x OP upgrade<p></p><text id="challenge1Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 1 boosts Tier 1 and 2<br>Currently: <text id="challenge1Effect">x1.00 (0/3)</text></button></td>
+        <td><button class="challenge boosterButton" onclick="enterChallenge(2)" id="challenge2">Challenge 2<br>You can't buy factors, Challenge 1 multiplier is useless<p></p><text id="challenge2Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 2 boosts Tier 1 and 2<br>Currently: <text id="challenge2Effect">x1.00 (0/3)</text></button></td>
+        </tr>
+        <tr>
+          <td><button class="challenge boosterButton" onclick="enterChallenge(3)" id="challenge3">Challenge 3<br>The base is 5 higher, all free factors are doubled (doesn't affect challenge mults)<p></p><text id="challenge3Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 3 boosts Tier 1 and 2<br>Currently: <text id="challenge3Effect">x1.00 (0/3)</text></button></td>
+          <td><button class="challenge boosterButton" onclick="enterChallenge(4)" id="challenge4">Challenge 4<br>Factor Shifts don't reduce the base<p></p><text id="challenge4Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 4 boosts Tier 1 and 2<br>Currently: <text id="challenge4Effect">x1.00 (0/3)</text></button></td>
+        </tr>
+        <tr>
+          <td><button class="challenge boosterButton" onclick="enterChallenge(5)" id="challenge5">Challenge 5<br>You can do a maximum of 2 factor shifts<p></p><text id="challenge5Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 5 boosts Tier 1 and 2<br>Currently: <text id="challenge5Effect">x1.00 (0/3)</text></button></td>
+          <td><button class="challenge boosterButton" onclick="enterChallenge(6)" id="challenge6" style="font-size: 9pt">Challenge 6<br>Dynamic drops by 1.00e300 per second, keep no OP on Markup, you can't buy Booster Upgrades, and you can do a maximum of 1000 manual successor clicks per Markup<p></p><text id="challenge6Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 6 boosts Tier 1 and 2<br>Currently: <text id="challenge6Effect">x1.00 (0/3)</text></button></td>
+        </tr>
+        <tr>
+          <td><button class="challenge boosterButton" onclick="enterChallenge(7)" id="challenge7" style="font-size: 10pt">Challenge 7<br><b>ALL PREVIOUS CHALLENGES AT ONCE,</b> and Challenge 6 Completions boost OP gain from Markups<p></p><text id="challenge7Goal">Goal: 1.000e33 OP</text><br>Reward: Factor 7 boosts Tier 1 and 2<br>Currently: <text id="challenge7Effect">x1.00 (0/3)</text></button></td>
+          <td><button class="challenge boosterButton" onclick="enterChallenge8()" id="challenge8" style="font-size: 8pt">Challenge 8<br>There's exponentially rising decrementy dividing Tier 1 production, immediately Refund if you have any Booster Upgrades, all challenge effects are disabled, Challenge 7 completions boost OP, keep no OP on Markup, you can do a maximum of 1000 manual successor clicks per Markup<p></p><text id="challenge8Goal">Goal: 1.000e10 OP</text><br>Reward: Dynamic Factor Cap boosts Tier 1 and 2<text id="chal8Incrementy"> and Incrementy</text>, Currently: <text id="challenge8Effect">x1.00 (0/3)</text><text id="chal8IncrementyBoost"><br>To Incrementy: x1.00</text></button></td>
+        </tr> 
+        </table>
+        <p><i>Note: In challenge 8, if you have less than 1.00e10 decrementy, all ticks simulates 50 milliseconds, regardless of the millisecond interval.<br>That also means that offline progression in Challenge 8 is disabled if you have less than 1.00e10 decrementy in the challenge.</i></p>
+      </div>
+      <div id="bsubTab4">
+        <text id="incrementyText">You have 0 incrementy, multiplying Tier 2 by 1x</text><br>
+        <p><text id="incrementyText2">You are getting 0 incrementy per second</text>, but they reset on Factor Boosts and similar</p>
+        <p id="incrementyText3">You start gaining Incrementy when you reach e0, but it caps at 1.000e25 Incrementy</p>
+        <div><table>
+          <tr>
+            <td><button class="treeButton boosterButton" id="iup1" onclick="iup(1)">Raise Incrementy multiplier to the 1.05<br><br>Cost: 1.00e5</button></td>
+            <td><button class="treeButton boosterButton" id="iup2" onclick="iup(2)">Double production of incrementy<br><br>Cost: 1.00e3</button></td>
+            <td><button class="treeButton boosterButton" id="iup3" onclick="iup(3)">Multiply multiplier by 1.2<br><br>Cost: 1.00e9</button></td>
+          </tr>
+          <tr>
+            <td><button class="treeButton boosterButton" id="iup4" onclick="iup(4)">Manifolds are 3x as effective, and boost Tier 2 up to 1e8/s<br>Cost: 1.00e17</button></td>
+            <td><button class="treeButton boosterButton" id="iup5" onclick="iup(5)">Manifolds are 26% more effective<br><br>Cost: 2.00e22</button></td>
+            <td><button class="treeButton boosterButton" id="iup6" onclick="iup(6)">Reduce manifold requirement scaling<br><br>Cost: 4.00e23</button></td>
+          </tr>
+          <tr>
+            <td><button class="treeButton boosterButton" id="iup7" onclick="iup(7)">Dynamic increases 100x faster<br><br>Cost: 1.00e19</button></td>
+            <td><button class="treeButton boosterButton" id="iup8" onclick="iup(8)">Dynamic Factor Cap multiplies incrementy gain<br>Cost: 2.00e25</button></td>
+            <td><button class="treeButton boosterButton" id="iup9" onclick="iup(9)">Double the OP gain from Markups<br><br>Cost: 4.00e27</button></td>
+          </tr>
+        </table></div>
+        <div id="manifoldShift">
+          <br>
+          You have <span id="manifoldAmount">0</span> manifolds, translating to a <span id="manifoldBoost">1</span>x multiplier to Dynamic Factor output and cap
+          <br>
+          <center><button class="treeButton boosterButton" id="getManifolds" onclick="getManifolds()">Reset incrementy for a manifold.<br><br>Need: x10 mult</button></center>
+        </div>
+      </div>
+    </div>
+    <div id="collapseScreen" style="display: none;z-index: 10;width:100%;length:100%">
+      <text id="collapseScreenText">YOU HAVE COLLAPSED!</text>
+    </div>
+    <div id="Tab7" style="width: 100%; height: 100%">
+      <div>
+      <button onclick="csubTab(1)" class="collapse subtab">Aleph Power</button>
+      <button onclick="csubTab(2)" class="collapse subtab">Sluggish Milestones</button>
+      <button onclick="csubTab(3)" class="collapse subtab">Aleph Upgrades</button>
+      <button onclick="csubTab(4)" class="collapse subtab" id="autoPrestigeSubTab">Autoprestigers</button>
+      <button onclick="csubTab(5)" class="singularity subtab" id="singularitySubTab">Singularity</button>
+        <button onclick="csubTab(6)" class="singularity subtab" id="singularityFunction">Reach level 20 Singularity</button>
+      </div>
+      <div id="csubTab1" style="width: 100%">
+        <p id="cardinalText" style="font-size: 20pt;text-align: center;font-weight: bold">You have 1 cardinal</p>
+        <button id="collapseButton" class="trueCenter collapse" style="font-size: 15pt;text-align: center;height: 60px" onclick="collapse(1)"><text style="margin: 10px">Reach the BHO to collapse!</text></button>
+        <p id="collapseCardHelp" style="text-align:center">Next Cardinal in 3 Factor Boosts (5.896s in collapse)</p>
+        <button class="trueCenter collapse" style="margin-bottom:18px" id="collapseConf" onclick="game.collapseConf=1-game.collapseConf">Collapse Confirmation: ON</button>
+        <button class="trueCenter collapse" style="font-size: 15pt;text-align: center;height: 40px" id="distributeCard" onclick="distributeCard()">Distribute All Cardinals</button>
+        <br>
+        <table id="cardinalTable" style="width: 100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <text style="font-size: 16pt;font-weight: bold" id="cardText1">You have 1 ℵ<sub>0</sub></text>
+              <p class="assignButtons"><button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(1,1,0)">Assign 1</button><invisible class="invisTab">0</invisible>
+              <button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(1,1,1)">Assign all</button></p>
+              <text id="cardPow1">You have 100 ℵ<sub>0</sub> Power (+1/s)</text><br><br>Translated to a
+              <p style="font-size: 20pt;font-weight: bold" id="cardMult1">x100.00</p>multiplier to Tier 1 automation<p id="cardExtra1" class="invisible"> and ??</p>
+            </td>
+            <td>
+              <text style="font-size: 16pt;font-weight: bold" id="cardText2">You have 1 ℵ<sub>1</sub></text>
+              <p class="assignButtons"><button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(2,1,0)">Assign 1</button><invisible class="invisTab">0</invisible>
+              <button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(2,1,1)">Assign all</button></p>
+              <text id="cardPow2">You have 100 ℵ<sub>1</sub> Power (+1/s)</text><br><br>Translated to a
+              <p style="font-size: 20pt;font-weight: bold" id="cardMult2">x100.00</p>multiplier to Tier 2 automation<p id="cardExtra2" class="invisible"> and Dynamic Factor Cap</p>
+            </td>
+            <td>
+              <text style="font-size: 16pt;font-weight: bold" id="cardText3">You have 1 ℵ<sub>2</sub></text>
+              <p class="assignButtons"><button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(3,1,0)">Assign 1</button><invisible class="invisTab">0</invisible>
+              <button class="collapse" style="font-size: 14pt;width: 125px;height: 40px" onclick="assign(3,1,1)">Assign all</button></p>
+              <text id="cardPow3">You have 100 ℵ<sub>2</sub> Power (+1/s)</text><br><br>Translated to a
+              <p style="font-size: 20pt;font-weight: bold" id="cardMult3">x100.00</p>multiplier to OP gain<p id="cardExtra3" class="invisible"> and Incrementy gain</p>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <p style="text-align: center"><i>Cardinals are based on the amount of Factor Boost and the time, where a faster collapse yields more cardinals. Time is capped between 1,000 seconds and 100,000 seconds.<br><del>Cardinals don't decay when offline time is disabled.</del> Cardinals don't decay at hard, but getting more is harder the longer the collapse is, until you reach 100,000 seconds. You can change offline time in Options. The formula for cardinals past 100,000 seconds is sqrt(Factor Boosts-24), and you should thank me for removing cardinal decay, since it is such a trash mechanic</i></p>
+      </div>
+      <div id="csubTab2" style="width: 100%">
+        <h1 style="text-align: center">Sluggish Milestones</h1>
+        <h4 style="font-weight:normal;text-align: center">Complete the collapse in the required amount of Factor Boosts or less to recieve a prize!<br>Each prize also starts you with an extra Booster<br></h4>
+        <table id="slugTable" style="width: auto;display: block" class="long trueCenter">
+          <tbody class="long trueCenter">
+          <tr class="trueCenter long">
+            <td id="slug0"><br>∞ Boosts<br><br><p>You gain 1% of OP gained per second if your OP is less than your pending OP</p></td>
+            <td id="slug1"><br>20 Boosts<br><br><p>Challenges 1-7 without completions give a reduced boost (x^0.25)</p></td>
+            <td id="slug2"><br>15 Boosts<br><br><p>Gain 15 OP per second, Markup requirement is now 100, and you can bulk complete challenges</p></td>
+    <td id="slug3"><br>12 Boosts<br><br><p>Unlock Tier 3 automation, the 4 booster upgrade is improved</p></td>
+            <td id="slug4"><br>10 Boosts<br><br><p>Unlock Distribute All and upgrades for Tier 3 automation</p></td>
+          </tr>
+          <tr class="trueCenter long">
+            <td id="slug5" style="width: 775px"><br>1 Boost<br><p>You keep all Incrementy Upgrades, Dark Upgrades, Manifolds, and Dark Manifolds on collapse, unlock an Autobuyer for Booster Upgrades, you can autocomplete Challenges, unlock an Autoprestiger for Collapse, you get a free Maximize Autobuyer and you always have a Max All Autobuyer, you can complete Challenge 8 multiple times, reduce the Markup requirement to 10, Auto-Markup activates if you're not making autoclicks from Tier 1, and extend the Booster upgrades<p></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="csubTab3" style="width: 100%">
+        <h1 id="alephOmegaText" style="font-size: 20pt;text-align: center;font-weight: bold">You have 1 ℵ<sub>ω</sub></h1>
+        <div class="trueCenter"><button class="collapse" style="height: 30px" onclick="getAlephOmega()">Buy ℵ<sub>ω</sub> for 1 of each ℵ</button>
+        <button class="collapse" style="height: 30px" onclick="getHalfAlephOmega()">Buy half of max ℵ<sub>ω</sub></button></div>
+        <br>
+        <table id="alephOmegaUps"><tbody class="trueCenter">
+          <tr>
+            <td><button class="treeButton collapse" id="aup1" onclick="aup(1)">Manifolds boost Tier 2<br><br>Cost: 1 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup2" onclick="aup(2)">Tier 1 autoclickers boost each other<br>Cost: 2 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup3" onclick="aup(3)">Unlock Dark Upgrades in the Markup Tab<br>Cost: 4 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup4" onclick="aup(4)">OP boost Tier 1 and 2 by<br><br>Cost: 8 ℵ<sub>ω</sub></button></td>
+          </tr>
+          <tr id="auprow2">
+            <td><button class="treeButton collapse" id="aup5" onclick="aup(5)">ℵ<sub>2</sub> boosts Incrementy gain<br><br>Cost: 16 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup6" onclick="aup(6)">ℵ<sub>1</sub> boosts Dynamic Factor Cap<br><br>Cost: 256 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup7" onclick="aup(7)">ℵ<sub>ω</sub> boosts Tier 2 by x4.000<br><br>Cost: 65536 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup8" onclick="aup(8)">Gain 3% of most cardinals gained at once per second<br>Cost: 4.29e9 ℵ<sub>ω</sub></button></td>
+          </tr>
+          <tr id="auprow3">
+            <td><button class="treeButton collapse" id="aup9" onclick="aup(9)">Keep 10% of Factor Boosts on Collapse<br><br>Cost: 1.84e19 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup10" onclick="aup(10)">Redacted<br><br>Cost: 3.40e38 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup11" onclick="aup(11)">Redacted<br><br>Cost: 1.16e77 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup12" onclick="aup(12)">Redacted<br><br>Cost: 1.34e154 ℵ<sub>ω</sub></button></td>
+          </tr>
+          <tr id="auprow4">
+            <td><button class="treeButton collapse" id="aup13" onclick="aup(13)">HACKER!!!<br><br>Cost: 1.84e19 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup14" onclick="aup(14)">Keep 1% of Factor Boosts on Collapse<br><br>Cost: 3.40e38 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup15" onclick="aup(15)">Redacted<br><br>Cost: 1.16e77 ℵ<sub>ω</sub></button></td>
+            <td><button class="treeButton collapse" id="aup16" onclick="aup(16)">Redacted<br><br>Cost: 1.34e154 ℵ<sub>ω</sub></button></td>
+          </tr>
+        </tbody></table>
+        <p style="text-align: center"><i id="mobileMessageAleph">You may have to rotate your phone on mobile to see all of the upgrades. Why does this text even exist?</i></p>
+      </div>
+      <div id="csubTab4">
+        <p><b>Tier 3 Automation (Works Offline)</b></p>
+        <p id="factorShiftAutoText">Your Factor Shift Autoprestiger is Factor Shifting 1 time per second</p>
+        <p id="factorBoostAutoText">Your Factor Boost Autoprestiger is Factor Boosting 1 time per second</p>
+        <button class="collapse" id="factorShiftAutoToggle" onclick="game.cAutoOn.shift=1-game.cAutoOn.shift">Factor Shift Autoprestiger: ON</button>
+        <button class="collapse" id="factorBoostAutoToggle" onclick="game.cAutoOn.boost=1-game.cAutoOn.boost">Factor Boost Autoprestiger: ON</button>
+        <div id="autoPrestigeBuy">
+        <p style="font-weight:bold">Tier 3 Automation Upgrades</p>
+        <p id="alephOmegaText2">You have 10 ℵ<sub>ω</sub></p>
+        <p><button class="collapse" onclick="buyFactorShiftAuto()">Buy a Factor Shift Autoprestiger for 500 ℵ<sub>ω</sub></button></p>
+        <p><button class="collapse" onclick="buyFactorBoostAuto()">Buy a Factor Boost Autoprestiger for 500 ℵ<sub>ω</sub></button></p>
+        <p><button class="collapse" onclick="maxAutoprestige()">Max-Distribute 50% of ℵ<sub>ω</sub></button></p>
+        </div>
+        <div id="autoBup">
+          <p style="font-weight:bold">Booster Upgrades</p>
+          <p><button class="collapse" id="abu" onclick="game.qolSM.abu=1-game.qolSM.abu">Autobuy Booster Upgrades: ON</button></p>
+          <p><button class="collapse" id="ig73" onclick="game.qolSM.ig73=1-game.qolSM.ig73">Ignore the 73 Booster Upgrade unless in Challenge 4, 6, or 7: ON</button></p>
+          <p><button class="collapse" id="igc8" onclick="game.qolSM.igc8=1-game.qolSM.igc8">Ignore in challenge 8: ON</button></p>
+          <p style="font-weight:bold">Challenges</p>
+          <p><button class="collapse" id="acc" onclick="game.qolSM.acc=1-game.qolSM.acc">Autocomplete Challenges: ON</button></p>
+          <p>Amount of challenges to complete (non-challenge 8): <input type="number" value="0" id="nonC8Auto"></input></p>
+          <p>Amount of challenges to complete (challenge 8): <input type="number" value="0" id="C8Auto"></input></p>
+          <p style="font-weight:bold">Collapsing (Doesn't work offline)</p>
+          <p><button class="collapse" id="ca" onclick="game.qolSM.ca=1-game.qolSM.ca">Collapse Autoprestiger: ON</button></p>
+          <p>Time to wait until collapse in seconds: <input type="number" value="10000" id="ttnc"></input></p>
+        </div>
+      </div>
+      <div id="csubTab5" style="width:100%;height:100%">
+        <p style="width:auto;text-align: center" id="singMaterial">You have 25 Dark Manifolds, 2 Manifolds, and 1.000e20 ℵ<sub>ω</sub></p>
+        <h1 id="singText" style="width:auto;font-size: 20pt;text-align: center;font-weight: bold">Singularity Level: 1</h1>
+        <p style="width:auto;text-align: center" id="singEffect">Translated to a x51 multiplier to Factor Boosts and a raise of cap to psi(w^w^w)</p>
+        <svg id="blackHole" height="40" width="100%">
+        <circle cx="50%" cy="20" r="10" stroke="white" stroke-width="1" fill="black" id="blackHoleCircle"/></svg>
+        <table id="cardinalTable" style="width: 100%" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <button class="singSacr singularity" onclick="getSingularity(0)" id="sacrDM">Upgrade with<br>1.00e6<br>Dark Manifolds</button>
+            </td>
+            <td>
+              <button class="singSacr singularity" onclick="getSingularity(1)">Upgrade with<br>1<br>Manifold</button>
+            </td>
+            <td>
+              <button class="singSacr singularity" onclick="getSingularity(2)" id="sacrNw">Upgrade with<br>1e20 ℵ<sub>ω</sub></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <button style="margin-top: 40px;margin-bottom:20px" class="singSacr boosterButton" onclick="getSingManifold()">Downgrade the Singularity for a Manifold</button>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </table>
+        <p style="text-align: center" id="singFBtext">You are currently getting 1000 Factor Boosts per second</p>
+      </div>
+      <div id="csubTab6" class="long">
+        <h1 style="width:auto;font-size: 20pt;text-align: center;font-weight: bold" id="getRekt20sing">Get Rekt Weakling!<br>You need a larger singularity before you even think about unlocking this mechanic!</h1>
+        <div id="singFuncContent">
+        <div id="singFunc"><div style="margin-top:20px;font-size:16pt">This is a test<br>This is coming soon!</div></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

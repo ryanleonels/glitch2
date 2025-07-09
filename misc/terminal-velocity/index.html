@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="TV%20favicon.png?v=1704421555857">
+    <title>Terminal Velocity</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Dosis:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
+    <script src="js/save.js" defer></script>
+    <script src="js/break_eternity.js" defer></script>
+    <script src="js/accelerators/accelerators.js" defer></script>
+    <script src="js/achievements.js" defer></script>
+    <script src="js/accelerators/golden-accelerators.js" defer></script>
+    <script src="js/accelerators/particle-accelerators.js" defer></script>
+    <script src="js/ranks/ranks.js" defer></script>
+    <script src="js/ranks/milestones.js" defer></script>
+    <script src="js/ranks/meta-points.js" defer></script>
+    <script src="js/ranks/hexachamber.js" defer></script>
+    <script src="js/galactic/galactic.js" defer></script>
+    <script src="js/galactic/space-studies.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/format.js" defer></script>
+   
+    <!--- Willem defer !--->
+  </head>
+  <body>
+    <div id="app">
+      <div id="tabs">
+        <button @click="player.currentTab = 'accelerators'; player.subtab='normal'">
+          Accelerators
+        </button>
+        <button @click="player.currentTab = 'ranks'; player.subtab='ranks'" v-if="player.unlocks.ranks">
+          Ranks
+        </button>
+        <button @click="player.currentTab = 'galactic'; player.subtab='spacestudies'" class="galacticBtn" v-if="player.unlocks.galactic">
+          Galactic
+        </button>
+        <button @click="player.currentTab = 'statistics'">
+          Statistics
+        </button>
+        <button @click="player.currentTab = 'achievements'">
+          Achievements
+        </button>
+        <button @click="player.currentTab = 'options'">
+          Options
+        </button>
+      </div>
+      <h3 class="center">
+        You have traveled {{format(player.speed)}} planck lengths
+      </h3>
+      <span class="center">You are moving at {{format(speedPerSecond())}} planck lengths per second</span>
+      <br>
+      <div v-if="player.currentTab=='accelerators'">
+        <br>
+        <button class="center" @click="player.subtab='normal'" style="font-size: 14px;">
+          Accelerators
+        </button>
+        <button class="center" @click="player.subtab='golden'" style="font-size: 14px;" v-if="player.unlocks.goldenAccelerators">
+          Golden Accelerators
+        </button>
+        <button class="center" @click="player.subtab='particle'" style="font-size: 14px;" v-if="player.unlocks.galactic">
+          Particle Accelerators
+        </button>
+        <br>
+        <div v-if="player.subtab=='normal'">
+          <div v-for="a in 6">
+            <h3 class="center">
+              {{format(player.accelerators[a].bought)}} Accelerator {{a}} ({{format(Accelerators.multiplier(a))}}x) <br> 
+              {{format(player.accelerators[a].power)}} power (+{{format(Accelerators.producePower(a))}}/s)
+            </h3>
+            <button class="center" type="button" id="btn" @click="Accelerators.buy(a)">Buy Accelerator {{a}} for {{format(Accelerators.cost(a))}} PLs ({{a}})</button>
+            <button class="center" id="autobuyer" v-if="player.milestones.includes(a)" @click="player.autobuyers[a-1] = !player.autobuyers[a-1]">Auto: {{player.autobuyers[a-1] ? "ON" : "OFF"}}</button>
+          </div>
+        </div>
+        <div v-if="player.subtab=='golden'">
+          <br>
+          <span style="color:yellow">
+            Instead of boosting planck lengths gain, Golden Accelerators boost the production of all Accelerator powers. Enjoy!<br>
+            Total Golden Accelerator Multiplier: {{format(GoldenAccelerators.totalMult())}}x
+          </span><br>
+          
+          <div v-for="a in 6">
+            <h3 class="center">
+              <span style="color:yellow">{{format(player.goldenAccelerators[a].bought)}} Golden Accelerator {{a}} ({{format(GoldenAccelerators.multiplier(a))}}x) <br> 
+              {{format(player.goldenAccelerators[a].power)}} power (+{{format(GoldenAccelerators.producePower(a))}}/s)</span>
+            </h3>
+            <button class="center" type="button" id="btn" @click="GoldenAccelerators.buy(a)">Buy Golden Accelerator {{a}} for {{format(GoldenAccelerators.cost(a))}} PLs</button>
+            <button class="center" id="autobuyer" v-if="player.milestones.includes(a+12)" @click="player.goldenAutobuyers[a-1] = !player.goldenAutobuyers[a-1]">Auto: {{player.goldenAutobuyers[a-1] ? "ON" : "OFF"}}</button>
+          </div>
+        </div>
+        <div v-if="player.subtab=='particle'">
+          <br>
+          <div style="color:#a371c9">
+            Instead of boosting planck lengths gain, Particle Accelerators boost pre-galactic game speed. Enjoy!<br>
+            Your Particle Accelerators are making {{format(ParticleAccelerators.totalSpeed())}} particle speed, giving {{formatWhole(ParticleAccelerators.totalShards())}} particle shards. Next at {{format(ParticleAccelerators.nextAt())}} particle speed.<br>
+            Total pre-galatic game speed multiplier: {{format(ParticleAccelerators.speedMult())}}
+          </div>
+          
+          
+          <div style="color:#cc88ff; font-size:20px;">You have {{format(player.cosmicFragments)}} cosmic fragments</div>
+          
+          <div v-for="a in 6">
+            <h3 class="center">
+              <span style="color:#a371c9">{{format(player.particleAccelerators[a].bought)}} Particle Accelerator {{a}} ({{format(ParticleAccelerators.multiplier(a))}}x)<br> 
+              {{format(player.particleAccelerators[a].power)}} power (+{{format(ParticleAccelerators.producePower(a))}}/s)</span>
+            </h3>
+            <button class="center" type="button" id="btn" @click="ParticleAccelerators.buy(a)">Buy Particle Accelerator {{a}} for {{format(ParticleAccelerators.cost(a))}} cosmic fragments</button>
+          </div>
+        </div>
+      </div>
+      <div v-if="player.currentTab=='ranks'">
+        <br>
+        <button class="center" @click="player.subtab='ranks'" style="font-size: 14px;">
+          Ranks
+        </button>
+        <button class="center" @click="player.subtab='perks';player.minitab='normal'" style="font-size: 14px;">
+          Perks
+        </button>
+        <button class="center" @click="player.subtab='metapoints'" style="font-size: 14px;" v-if="player.unlocks.metapoints">
+          Meta Points
+        </button>
+        <button class="center" @click="player.subtab='hexachamber'" style="font-size: 14px;" v-if="player.unlocks.hexachamber">
+          Hexachamber
+        </button>
+        <button class="center" @click="player.subtab='collider'" style="font-size: 14px;" v-if="player.unlocks.collider">
+          The Collider
+        </button>
+        <br><br>
+        <div v-if="player.subtab=='ranks'">
+          You are currently at rank {{formatWhole(player.ranks.rank)}}.<br>
+          <button @click="rankUp()">
+            Reset accelerators and planck lengths, but rank up.<br>
+            Req: {{format(rankReq())}} planck lengths
+          </button>
+          <br><br>
+          <div v-if="player.unlocks.tiers">
+            You are currently at tier {{formatWhole(player.ranks.tier)}}.<br>
+            <button @click="tierUp()">
+              Reset accelerators, planck lengths, and ranks, but tier up.<br>
+              Req: Rank {{formatWhole(tierReq())}}
+            </button>
+            <br><br>
+          </div>
+          <div v-if="player.unlocks.prestige">
+            You are currently at prestige level {{formatWhole(player.ranks.prestige)}}.<br>
+            <button @click="prestige()">
+              Reset accelerators, planck lengths, ranks, and tiers, but gain a prestige level.<br>
+              Req: Tier {{formatWhole(prestigeReq())}}
+            </button><br><br><button @click="unprestige()" v-if="player.ranks.prestige.gte(1)">
+            Lose a prestige.<br>Req: Prestige level 1
+            </button><br><br>
+          </div>
+          <table>
+            <tr>
+              {{rankBoostDisplay()}}
+            </tr><br><br>
+            <tr>
+              {{tierBoostDisplay()}}
+            </tr><br><br>
+            <tr>
+              {{prestigeBoostDisplay()}}
+            </tr>
+          </table>
+        </div>
+        <div v-if="player.subtab=='perks'">
+          <button class="center" @click="player.minitab='normal'" style="font-size: 14px;">
+            Accelerators
+          </button>
+          <button class="center" @click="player.minitab='golden'" style="font-size: 14px;" v-if="player.unlocks.goldenAccelerators">
+            Golden Accelerators
+          </button>
+          <br><br>
+          You have {{formatWhole(player.perkPoints)}} perk points.
+          <table class="autocenter" v-if="player.minitab=='normal'">
+            <tr v-for="a in 4">
+              <td v-for="b in 3">
+                <button :class="{milestoneLocked:!player.milestones.includes(a*3-3+b),milestoneBought:player.milestones.includes(a*3-3+b)}" @click="Milestones.activate(a*3-3+b)">
+                  {{Milestones.desc(a*3-3+b)}}
+                </button>
+              </td>
+            </tr>
+          </table>
+          <table class="autocenter" v-if="player.minitab=='golden'">
+            <tr v-for="a in 4">
+              <td v-for="b in 3">
+                <button :class="{milestoneLocked:!player.milestones.includes(a*3-3+b+12),milestoneBought:player.milestones.includes(a*3-3+b+12)}" @click="Milestones.activate(a*3-3+b+12)">
+                  {{Milestones.desc(a*3-3+b+12)}}
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div v-if="player.subtab=='metapoints'">
+        The bar fills based on Accelerator and Golden Accelerator purchases.<br>
+        <h1 class="bar" style="background: repeating-radial-gradient(#000000, #000000, #00FF00, #000000, #000000 10%); background-size: 500px 500px;background-position: top 270px right 430px; color: rgb(000,203,052);">
+          {{formatWhole(player.meta.purchases)}}/{{formatWhole(MetaPoints.lapLength())}}
+        </h1>
+        <h1 class="bar" style="background: repeating-radial-gradient(#000000, #000000, #FF00FF, #000000, #000000 2.5%); background-size: 750px 750px;background-position: top 395px right 750px; width: 750px; color: #FF00FF; letter-spacing: 5px;" v-if="MetaPoints.hasUpgrade(12)">
+          {{formatWhole(player.meta.hyperPurchases)}}/{{formatWhole(MetaPoints.hyperLapLength())}}
+        </h1>
+        <h3>
+          You have {{formatWhole(player.meta.points)}} Meta Points
+          <br>
+          <span style="color:gray" v-if="MetaPoints.gainFormula().gt(1e200)">Meta Point gain is softcapped past 1e200, sorry :(<br></span>
+          <span style="color:gray" v-if="MetaPoints.gainFormula().gt('1e500')">Meta Point gain is (extremely softcapped) past 1e500, sorry :(<br></span>
+          <span style="color:purple">You are currently at Lap {{formatWhole(player.meta.lap.add(1))}}, giving a {{format(MetaPoints.lapEffect())}}x multiplier to planck lengths gain<br></span>
+          <span style="color:purple" v-if="MetaPoints.lapLength().lte(49)">Lap retaliates back past 49 length, sorry not sorry :]<br></span>
+          <span style="color:purple" v-if="MetaPoints.lapLength().lte(16)">Due to terminal lap velocity, lap compression is much harder past length 16.<br></span>
+          <span style="color:purple" v-if="player.meta.lap.gte(101)&&player.ranks.tier.lt(12)"><br>Your lap effect has been softcapped to the power of ^{{format(new Decimal(0.99).pow(player.meta.lap.sub(100)))}}, increasingly getting worse per lap</span>
+          <span style="color:#FF00FF" v-if="MetaPoints.hasUpgrade(12)"><br>You are currently at Hyper-Lap {{formatWhole(player.meta.hyperLap.add(1))}}, shortening lap length by {{format(Decimal.pow(0.94,MetaPoints.hyperLapEffect()).pow(player.meta.ascenderUpgrades.includes(6) ? 0.75 : 1))}}x</span>
+          <span style="color:#FF00FF" v-if="MetaPoints.hasUpgrade(12)&&player.meta.hyperLap.gte(101)"><br>Your hyper lap effect has been softcapped to the power of the power of ^{{format(new Decimal(0.99).pow(player.meta.hyperLap.sub(100)))}}, increasingly getting worse per hyper lap</span>
+        </h3>
+        <button class="center" type="button" @click="MetaPoints.reset()">Reset for {{formatWhole(MetaPoints.gainFormula())}} meta points (this does a rank reset) (M)</button><br><br>
+        You can only pick one upgrade out of each row.<br>
+        <button class="center" style="font-size: 14px;" @click="MetaPoints.respec()">
+          Respec MP Upgrades
+        </button>
+        <span v-if="player.unlocks.ascenders">
+          <button class="center" style="font-size: 14px;" @click="MetaPoints.respecAscenders()">
+            Respec Ascenders
+          </button>
+          <br><br>
+          You have {{formatWhole(player.meta.ascenders)}} ascenders ({{formatWhole(player.meta.totalAscenders)}} total)<br>
+          <button class="center" type="button" @click="MetaPoints.buyAscender()">Buy an ascender for {{format(MetaPoints.ascenderCost())}} meta points</button>
+        </span>
+        <br><br>
+        <table class="autocenter">
+            <tr v-for="a in 6">
+              <td v-for="b in 2">
+                <button :class="{milestoneLocked:!player.meta.upgrades.includes(a*2-2+b) && MetaPoints.canBuy(a*2-2+b),milestoneBought:player.meta.upgrades.includes(a*2-2+b),upgradeLocked:!player.meta.upgrades.includes(a*2-2+b) && !MetaPoints.canBuy(a*2-2+b)}" style="height: 150px; width: 200px;" @click="MetaPoints.buy(a*2-2+b)">
+                  <h2>
+                    {{MetaPoints.upgrades[a*2-2+b].title}}
+                  </h2>
+                  {{MetaPoints.upgrades[a*2-2+b].desc}}<br>
+                  Cost: {{format(MetaPoints.upgrades[a*2-2+b].cost)}} meta points<br>
+                  <span v-if="MetaPoints.upgrades[a*2-2+b].effectDisplay != null">Currently: {{MetaPoints.upgrades[a*2-2+b].effectDisplay()}}</span>
+                </button>
+              </td>
+              <td v-if="player.unlocks.ascenders">
+                <button :class="{milestoneLocked:!player.meta.ascenderUpgrades.includes(a),milestoneBought:player.meta.ascenderUpgrades.includes(a)}" style="height: 150px; width: 200px;" @click="MetaPoints.buyAscenderUpgrade(a)">
+                  You can now buy both upgrades in this pair{{a > 3 ? ", but both upgrade effects are weakened" : ""}}.<br>
+                  Cost: 1 ascender
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div v-if="player.subtab=='hexachamber'">
+          
+            <tr>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px; background: linear-gradient(to right, violet, pink, violet)" @click="Hexachamber.enter(6)">
+                  {{Hexachamber.description(6)}}
+                </button>
+              </td>
+              <td align="center">
+                <button style="height: 0px; width: 164px; padding: 0px; border: 0px; border-radius: 0px; color:#FFFFFF"><br><br><br>-----------------></button>
+              </td>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px; background: linear-gradient(to right, red, orange, red)" @click="Hexachamber.enter(1)">
+                  {{Hexachamber.description(1)}}
+                </button>
+              </td>
+            </tr>
+          <br>{{"∧                                                                                                                                               \\"}}
+          <br>{{"/                                                                                                                                                    \\"}}
+          <br>{{"/                                                                                                                                                         \\"}}
+          <br>{{"/                                                                                                                                                              \\"}}
+          <br>{{"/                                                                                                                                                                   \\"}}
+          <br>{{"/                                                                                                                                                                        v"}}
+          <br>
+            <tr>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px; background: linear-gradient(to right, lightblue, violet, lightblue)" @click="Hexachamber.enter(5)">
+                  {{Hexachamber.description(5)}}
+                </button>
+              </td>
+              <td align="center">
+                <button style="height: 0px; width: 492px; padding: 0px; border: 0px; border-radius: 0px; color:#FFFFFF">{{Hexachamber.centerDisplay()}}</button>
+              </td>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px;; background: linear-gradient(to right, orange, lightyellow, orange)" @click="Hexachamber.enter(2)">
+                  {{Hexachamber.description(2)}}
+                </button>
+              </td>
+            </tr>
+          <br>{{"∧                                                                                                                                                                        /"}}
+          <br>{{"\\                                                                                                                                                                   /"}}
+          <br>{{"\\                                                                                                                                                              /"}}
+          <br>{{"\\                                                                                                                                                         /"}}
+          <br>{{"\\                                                                                                                                                    /"}}
+          <br>{{"\\                                                                                                                                               v"}}
+          <br>
+            <tr>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px; background: linear-gradient(to right, green, lightblue, green)" @click="Hexachamber.enter(4)">
+                  {{Hexachamber.description(4)}}
+                </button>
+              </td>
+              <td align="center">
+                <button style="height: 0px; width: 164px; padding: 0px; border: 0px; border-radius: 0px; color:#FFFFFF"><br><br><br><-----------------</button>
+              </td>
+              <td>
+                <button class="milestoneLocked" style="height: 164px; width: 164px; background: linear-gradient(to right, yellow, lightgreen, yellow)" @click="Hexachamber.enter(3)">
+                  {{Hexachamber.description(3)}}
+                </button>
+              </td>
+            </tr>
+          
+        </div>
+        <div v-if="player.subtab=='collider'">
+          <span style="font-size: 30px;">
+            <b>The Collider</b>
+          </span><br>
+          You need at least 6 completions of a chamber to generate its resource.<br>
+          <span style="color:#FF8888">You have {{format(player.hexachamber.resources[0])}} accelerator flux (produced based on Chamber 1 completions) <i>({{format(Hexachamber.resourcePerSec(0))}}/sec)</i>, multiplying all Accelerator and Golden Accelerator production by {{format(Hexachamber.colliderEffect(1))}}x</span><br>
+          <span style="color:orange">You have {{format(player.hexachamber.resources[1])}} scaling sulfur (produced based on Chamber 2 completions) <i>({{format(Hexachamber.resourcePerSec(1))}}/sec)</i>, dividing the rank requirement by /{{format(Hexachamber.colliderEffect(2),4)}}</span><br>
+          <span style="color:#FFFF88">You have {{format(player.hexachamber.resources[2])}} meta crystals (produced based on Chamber 3 completions) <i>({{format(Hexachamber.resourcePerSec(2))}}/sec)</i>, raising meta point upgrades 2, 3, and 8 to the ^{{format(Hexachamber.colliderEffect(3),4)}}</span><br>
+          <span style="color:#88FF88">You have {{format(player.hexachamber.resources[3])}} lap dust (produced based on Chamber 4 completions) <i>({{format(Hexachamber.resourcePerSec(3))}}/sec)</i>, dividing Hyper-Lap length by /{{format(Hexachamber.colliderEffect(4))}}</span><br>
+          <span style="color:#8888FF">You have {{format(player.hexachamber.resources[4])}} parity points (produced based on Chamber 5 completions) <i>({{format(Hexachamber.resourcePerSec(4))}}/sec)</i>, {{player.ranks.prestige.mod(2).eq(1)?"raising odd chamber requirements to the ^"+format(Hexachamber.colliderEffect(5),4):"multiplying even chamber requirements by "+format(Hexachamber.colliderEffect(5),4)}} (based on parity of prestiges)</span><br>
+          <span style="color:#FF88FF">You have {{format(player.hexachamber.resources[5])}} scaling silicon (produced based on Chamber 6 completions) <i>({{format(Hexachamber.resourcePerSec(5))}}/sec)</i>, decreasing tier requirement by -{{format(Hexachamber.colliderEffect(6))}}</span><br><br>
+          <div v-if="player.unlocks.crafting">
+            You have {{format(player.hexachamber.crafted[0])}} hexa fluid, increasing accelerator multiplier per buy by +{{format(Hexachamber.colliderEffect(7),4)}} (based on laps)<br>
+            <button @click="Hexachamber.craft(0)">Craft {{formatWhole(Decimal.min(player.hexachamber.resources[0].div(1e6),player.hexachamber.resources[3].div(10)).floor())}} hexa fluid  (cost: 1e6 accelerator flux, 10 lap dust)</button><br>
+            You have {{format(player.hexachamber.crafted[1])}} hexa energy, raising the parity point effect to the ^{{format(Hexachamber.colliderEffect(8),4)}} (based on ranks)<br>
+            <button @click="Hexachamber.craft(1)">Craft {{formatWhole(Decimal.min(player.hexachamber.resources[1],player.hexachamber.resources[4].div(1e5)).floor())}} hexa energy (cost: 1 scaling sulfur, 1e5 parity points)</button><br>
+            You have {{format(player.hexachamber.crafted[2])}} hexa matter, dividing tier requirement by /{{format(Hexachamber.colliderEffect(9),4)}} (based on ascenders)<br>
+            <button @click="Hexachamber.craft(2)">Craft {{formatWhole(Decimal.min(player.hexachamber.resources[2].div(1000),player.hexachamber.resources[5].div(1000)).floor())}} hexa matter (cost: 1000 meta crystals, 1000 scaling silicon)</button>
+          </div>
+          
+        </div>
+        <div v-if="player.subtab=='golden'">
+          Golden Accelerators
+        </div>
+      </div>
+      <div v-if="player.currentTab=='statistics'">
+        <br>
+        You have played for {{formatTime(player.timePlayed)}}.<br>
+        You have traveled {{format(player.totalSpeed)}} total planck lengths.<br>
+        You have bought {{formatWhole(player.accelerators[1].bought.add(player.accelerators[2].bought).add(player.accelerators[3].bought).add(player.accelerators[4].bought).add(player.accelerators[5].bought).add(player.accelerators[6].bought))}} Accelerators in total.<br>
+        <span v-if="player.unlocks.ranks">
+          Your best-ever Rank is {{formatWhole(player.bestRank)}}.<br>
+          Your best-ever Tier is {{formatWhole(player.bestTier)}}.<br>
+          <span v-if="player.unlocks.prestige">
+            Your best-ever Prestige is {{formatWhole(player.bestPrestige)}}.<br>
+          </span>
+          <span v-if="player.unlocks.goldenAccelerators">
+            You have bought {{formatWhole(player.goldenAccelerators[1].bought.add(player.goldenAccelerators[2].bought).add(player.goldenAccelerators[3].bought).add(player.goldenAccelerators[4].bought).add(player.goldenAccelerators[5].bought).add(player.goldenAccelerators[6].bought))}} Golden Accelerators in total.<br>
+          </span>
+        </span>
+        <span v-if="player.unlocks.metapoints">
+          You have bought {{formatWhole(player.meta.upgrades.length)}} Meta Point Upgrades.<br>
+        </span>
+        <span v-if="player.unlocks.hexachamber">
+          You have {{formatWhole(player.hexachamber.completions[0].add(player.hexachamber.completions[1]).add(player.hexachamber.completions[2]).add(player.hexachamber.completions[3]).add(player.hexachamber.completions[4]).add(player.hexachamber.completions[5]))}} total chamber completions.<br>
+        </span>
+      </div>
+      <div v-if="player.currentTab=='achievements'">
+        <br>
+        <table class="autocenter achievementWrapper">
+          <tr v-for="a in 2">
+            <td v-for="b in 10">
+              <button :style="player.achievementDisplay==b+(a-1)*10?'transform: scale(1.1, 1.1); box-shadow: 0px 0px 5px black;':''" type="button" @click="player.achievementDisplay=b+(a-1)*10" class="achievement" :class="{achievementObtained:player.achievements.includes(b+(a-1)*10),achievementDisplayed:player.achievementDisplay==b+(a-1)*10}">
+                {{Achievements.display(b+(a-1)*10)}}
+              </button>
+            </td>
+          </tr>
+        </table>
+        <br>
+        {{Achievements.tooltip()}}
+      </div>
+      <div v-if="player.currentTab == 'galactic'">
+        <br>
+        <span style="color:#cc88ff; font-size:20px;">You have {{format(player.cosmicFragments)}} cosmic fragments</span><br><br>
+        <button class="galacticBtn" @click="Galactic.prestige()">
+          Go Galactic for {{formatWhole(Galactic.gainFormula())}} cosmic fragments<br>
+          Next cosmic fragment at {{format(Galactic.nextAt())}} MP
+        </button>
+        <br><br>
+        <button class="center, galacticBtn" @click="player.subtab='spacestudies'" style="font-size: 14px;">
+          Space Studies
+        </button>
+        <div v-if="player.subtab=='spacestudies'">
+          <br>
+          You have {{formatWhole(player.space.theorems)}} space theorems ({{formatWhole(player.space.total)}} total)<br>
+          <button onclick="player.space.respec = !player.space.respec">
+            Respec Space Studies on Galactic: {{player.space.respec ? "ON" : "OFF"}}
+          </button><br><br>
+          <table class="autocenter">
+            <tr>
+              <td>
+                <button :class="{milestoneLocked:player.speed.lt(SpaceStudies.theoremCost(1)),galacticBtn:player.speed.gte(SpaceStudies.theoremCost(1))}" style="height: 150px; width: 200px;" onclick="SpaceStudies.buyTheorem(1)">
+                  Buy a space theorem<br>
+                  {{format(SpaceStudies.theoremCost(1))}} Planck Lengths
+                </button>
+              </td>
+              <td>
+                <button :class="{milestoneLocked:player.meta.points.lt(SpaceStudies.theoremCost(2)),galacticBtn:player.meta.points.gte(SpaceStudies.theoremCost(2))}" style="height: 150px; width: 200px;" onclick="SpaceStudies.buyTheorem(2)">
+                  Buy a space theorem<br>
+                  {{format(SpaceStudies.theoremCost(2))}} Meta Points
+                </button>
+              </td>
+              <td>
+                <button :class="{milestoneLocked:player.cosmicFragments.lt(SpaceStudies.theoremCost(3)),galacticBtn:player.cosmicFragments.gte(SpaceStudies.theoremCost(3))}" style="height: 150px; width: 200px;" onclick="SpaceStudies.buyTheorem(3)">
+                  Buy a space theorem<br>
+                  {{format(SpaceStudies.theoremCost(3))}} Cosmic Fragments
+                </button>
+              </td>
+            </tr>
+          </table>
+          <br><br>
+          <table class="autocenter">
+            <tr>
+              <td v-for="a in 1">
+                <button :class="{galacticBtn:!player.space.studies.includes(10+a) && SpaceStudies.canBuy(10+a),studyBought:player.space.studies.includes(10+a),studyLocked:!player.space.studies.includes(10+a) && !SpaceStudies.canBuy(10+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(10+a)">
+                  {{SpaceStudies.upgrades[10+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[10+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[10+a].effectDisplay() != null">Currently: {{SpaceStudies.upgrades[10+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 2">
+                <button :class="{galacticBtn:!player.space.studies.includes(20+a) && SpaceStudies.canBuy(20+a),studyBought:player.space.studies.includes(20+a),studyLocked:!player.space.studies.includes(20+a) && !SpaceStudies.canBuy(20+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(20+a)">
+                  {{SpaceStudies.upgrades[20+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[20+a].cost)}} ST<br>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 3">
+                <button :class="{galacticBtn:!player.space.studies.includes(30+a) && SpaceStudies.canBuy(30+a),studyBought:player.space.studies.includes(30+a),studyLocked:!player.space.studies.includes(30+a) && !SpaceStudies.canBuy(30+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(30+a)">
+                  {{SpaceStudies.upgrades[30+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[30+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[30+a].effectDisplay != null">Currently: {{SpaceStudies.upgrades[30+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 2">
+                <button :class="{galacticBtn:!player.space.studies.includes(40+a) && SpaceStudies.canBuy(40+a),studyBought:player.space.studies.includes(40+a),studyLocked:!player.space.studies.includes(40+a) && !SpaceStudies.canBuy(40+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(40+a)">
+                  {{SpaceStudies.upgrades[40+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[40+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[40+a].effectDisplay != null">Currently: {{SpaceStudies.upgrades[40+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 1">
+                <button :class="{galacticBtn:!player.space.studies.includes(50+a) && SpaceStudies.canBuy(50+a),studyBought:player.space.studies.includes(50+a),studyLocked:!player.space.studies.includes(50+a) && !SpaceStudies.canBuy(50+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(50+a)">
+                  {{SpaceStudies.upgrades[50+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[50+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[50+a].effectDisplay != null">Currently: {{SpaceStudies.upgrades[50+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 2">
+                <button :class="{galacticBtn:!player.space.studies.includes(60+a) && SpaceStudies.canBuy(60+a),studyBought:player.space.studies.includes(60+a),studyLocked:!player.space.studies.includes(60+a) && !SpaceStudies.canBuy(60+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(60+a)">
+                  {{SpaceStudies.upgrades[60+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[60+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[60+a].effectDisplay != null">Currently: {{SpaceStudies.upgrades[60+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="a in 1">
+                <button :class="{galacticBtn:!player.space.studies.includes(70+a) && SpaceStudies.canBuy(70+a),studyBought:player.space.studies.includes(70+a),studyLocked:!player.space.studies.includes(70+a) && !SpaceStudies.canBuy(70+a)}" style="height: 150px; width: 200px; font-size: 14px;" @click="SpaceStudies.buy(70+a)">
+                  {{SpaceStudies.upgrades[70+a].desc}}<br>
+                  Cost: {{format(SpaceStudies.upgrades[70+a].cost)}} ST<br>
+                  <span v-if="SpaceStudies.upgrades[70+a].effectDisplay != null">Currently: {{SpaceStudies.upgrades[70+a].effectDisplay()}}</span>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div v-if="player.currentTab=='options'">
+        <br><br>
+        <table class="autocenter"><tr>
+          <td>
+            <button class="option-button" @click="save()">
+              Save (S)
+            </button>
+          </td><td>
+            <button class="option-button" @click="exportSave()">
+              Export (E)
+            </button>
+          </td><td>
+            <button class="option-button" @click="exportAsFile()">
+              Download save file (D)
+            </button>
+          </td><td>
+            <button class="option-button" @click="importSave()">
+              Import
+            </button>
+          </td><td>
+            <button class="option-button" @click="hardReset()">
+              Reset the game (R)
+            </button>
+          </td>
+        </tr></table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Incremental Googology</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<meta charset="UTF-8">
+<meta name="author" content="hyp_cos">
+<meta name="keywords" content="big number, large number, googology, incremental, idle, clicker">
+</head>
+<body><div id="loading">
+   <br><br>GAME LOADING
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<br>
+original game by: hypcos
+<br>
+game link: https://hypcos.github.io/incremental-googology/Tetration/
+<br>
+tickspeed bonus: you gain +5% game speed for every log10(x) of your number (only below 1.8e308)
+<br>
+<div id="game">Your number is
+   <span style="font-size:50px">{{MainNumber|show}}</span><br>
+   Your number is gaining {{Growth|show}} per second
+   <div class="tab">
+      <button @mousedown="CurrentTab=0" :disabled="CurrentTab==0">Options</button>
+      <button @mousedown="CurrentTab=1" :disabled="CurrentTab==1">Achievements</button>
+      <button @mousedown="CurrentTab=2" :disabled="CurrentTab==2">Statistics</button>
+      <button @mousedown="CurrentTab=3" :disabled="CurrentTab==3"
+      style="position:relative">BMS<span class="tooltip">Bashicu matrix system</span></button>
+      <button v-if="FGHPrestige||Achievement.length>4" @mousedown="CurrentTab=4" :disabled="CurrentTab==4"
+      style="position:relative">FGH<span class="tooltip">fast-growing hierarchy</span></button>
+      <button v-if="FGHChal&15||Achievement.length>5" @mousedown="CurrentTab=5" :disabled="CurrentTab==5">Automatons</button>
+   </div>
+   <div v-if="CurrentTab==3">
+      <button v-if="Achievement.length>3" class="prestige" @mousedown="FGHPrestigeDo()"
+      :style="{visibility:FGHPrestigeCant?'hidden':'visible'}">
+         <b>FGH-prestige</b><br>
+         Get {{FGHNumberToGet|show}} FGH number<br>
+         Peak {{FGHGainPeak|show}}/s at your number {{FGHGainPeakAt|show}}
+      </button>
+      <div class="left">
+         <button v-show="BMSStage>=2" class="cell cell4" :disabled="BM0c1Cant" @mousedown="BM0c1Buy()">
+            <b class="big">(0)(1)[{{BM0c1|showInt}}]</b><br>
+            Reset to unlock a new base number<br>
+            Requirement: {{BM0c1Cost|showInt}}
+            <span class="tooltip">Reset your number, all zero-only BM and unlockers</span>
+         </button>
+      </div>
+      <button class="celldark itemrow2" style="font-size:24px" @mousedown="BM0etcMaxall()">
+         Buy max of all zero-only Bashicu matrices
+      </button>
+      <div class="left">
+         <div v-for="(amounts,n1) in BM0etc"
+         :class="{cellcolumn:BM0etc.length>4,column2:BM0etc.length==2,column3:BM0etc.length==3,column4:BM0etc.length==4}">
+            <button v-show="BMSStage>=1" class="cell cell2" :disabled="BM0etcCantUnlock[n1]" @mousedown="BM0etcUnlock(n1)">
+               <b>Unlock {{BM0etcUnlockText[n1]}}</b><br>
+               Reset to boost {{BM0etcLength[n1]+1-BM0etcLengthStart}} initial (0)...(0)[{{n1+2|showInt}}]
+               {{BM0etcUnlockText1[n1]}}by ×{{BM0etcUnlockerEff[n1]|show}}<br>
+               Requirement: {{BM0etcUnlockCost[n1]|showInt}} {{BM0etcUnlockText2[n1]}}
+               <span class="tooltip" v-html="BM0etcUnlockTooltip[n1]"></span>
+            </button><buy v-for="(am,n) in amounts" :info="BM0etcInfo[n1][n]" :amount="['BM0etc',n1,n]" :bought="['BM0etcBought',n1,n]"
+            :mult="['BM0etcMult',n1,n]" @buying="Challenge&30&&BM0etcBuying(n1,n,$event)"
+            :modifier="Challenge&252?BM0etcModifierHtml[n1][n]:''"><span v-if="Challenge&1&&n">
+               {{BM0etcInfo[n1][n-1].text()}}
+            </span></buy>
+         </div>
+      </div>
+   </div>
+   <div v-else-if="CurrentTab==4">
+      Your fast-growing hierarchy number is <span style="font-size:44px">{{FGHNumber|show}}</span>
+      <div class="tab2">
+         <button :disabled="FGHTab==0" @mousedown="FGHTab=0">Upgrades</button>
+         <button :disabled="FGHTab==1" @mousedown="FGHTab=1">Challenges</button>
+         <button v-if="Achievement.length>4" :disabled="FGHTab==2" @mousedown="FGHTab=2">Items</button>
+      </div>
+      <div v-if="FGHTab==0">
+         <button class="cell cell1" :class="{already:AlphaSeries&1}" :disabled="FGH00Cant" @mousedown="AlphaSeriesBuy(0)">
+            <b class="big">f<sub>0</sub>(0)</b><br>
+            Boost zero-only BM based on FGH-prestige count<br>
+            Current: ×{{FGH00Eff|show}}<br>
+            Cost: {{1|showInt}} FGHN
+         </button><button class="cell cell1" :class="{already:AlphaSeries&2}" :disabled="FGHbase1Cant" @mousedown="AlphaSeriesBuy(1)">
+            <b class="big">f<sub>α</sub>(1)</b><br>
+            Boost (0)...(0)[{{2|showInt}}] based on fastest FGH-prestige<br>
+            Current: ×{{FGHbase1Eff|show}}<br>
+            Cost: {{2|showInt}} FGHN
+         </button><br>
+         <button class="cell cell1" :class="{already:AlphaSeries&4}" :disabled="ZeralumCant" @mousedown="AlphaSeriesBuy(2)">
+            <b class="big">zeralum</b><br>
+            Boost (0)[{{2|showInt}}] based on unspent fast-growing hierarchy number<br>
+            Current: ×{{ZeralumEff|show}}<br>
+            Cost: {{11|showInt}} FGHN
+         </button><button class="cell cell1" :class="{already:AlphaSeries&8}" :disabled="UnalumCant" @mousedown="AlphaSeriesBuy(3)">
+            <b class="big">unalum</b><br>
+            Start with {{4|showInt}} BM available for every base number<br>
+            Cost: {{20|showInt}} FGHN<br v-show="AlphaSeries&8">
+            <span v-show="AlphaSeries&8" class="alter" @mousedown.stop="AlphaSeries&=~8">Discard</span>
+         </button><button class="cell cell1" :class="{already:AlphaSeries&16}" :disabled="BalumCant" @mousedown="AlphaSeriesBuy(4)">
+            <b class="big">balum</b><br>
+            FGHN grows passively by 1/{{10|showInt}} of your best FGHN/s<br>
+            Current: {{BalumEff|show}}/s<br>
+            Cost: {{10240|showInt}} FGHN
+         </button>
+      </div>
+      <div v-else-if="FGHTab==1">
+         BMS work differently in FGH challenges.<br>
+         Your number need to reach certain point, then FGH-prestige, to complete an FGH challenge.<br>
+         <button class="celldark itemrow3" style="font-size:24px" :disabled="!(Challenge&255)" @mousedown="FGHChalExit()">
+            Exit current challenge
+         </button><br>
+         <div style="display:inline-block;width:630px">
+            <button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(4)"
+            :class="{already:FGHChal&1&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==4?'#df5':''}">
+               <b class="big">FGH Challenge 1</b><br>
+               Mechanism: When buying any zero-only BM, those with greaterequal costs will be weaken by a half.
+               (penalties reset on unlock and (0)(1)[n])<br><br>
+               Reach {{1e100|show}} to get automatic buy-max of all zero-only BM
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(32)"
+            :class="{already:FGHChal&2&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==32?'#df5':''}">
+               <b class="big">FGH Challenge 2</b><br>
+               Mechanism: BM decay exponentially based on how fast your number grew in previous reset.<br><br>
+               Reach {{1e100|show}} to get automatic zero-only BM unlock
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(8)"
+            :class="{already:FGHChal&4&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==8?'#df5':''}">
+               <b class="big">FGH Challenge 3</b><br>
+               Mechanism: Buying any zero-only BM disables multipliers, exponentially coming back in one minute.<br><br>
+               Reach {{1e100|show}} to get (0)(1)[n] autobuyer
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(16)"
+            :class="{already:FGHChal&8&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==16?'#df5':''}">
+               <b class="big">FGH Challenge 4</b><br>
+               Mechanism: BM produce normally after purchase, but then decay exponentially
+               based on the interval of your previous two purchases.<br><br>
+               Reach {{1e100|show}} to get automatic FGH-prestige
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(2)"
+            :class="{already:FGHChal&16&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==2?'#df5':''}">
+               <b class="big">FGH Challenge 5</b><br>
+               Mechanism: Automatically and eagerly buy max of zero-only BM from lower to higher,
+               but buying any BM resets your number and lower BM.<br><br>
+               Reach {{1e100|show}}, then you start with only {{2|showInt}} BM available for every base number<br v-show="FGHChal&16">
+               <span v-show="FGHChal&16" class="alter" @mousedown.stop="FGHChal&=~16">Discard</span>
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(1)"
+            :class="{already:FGHChal&32&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==1?'#df5':''}">
+               <b class="big">FGH Challenge 6</b><br>
+               Mechanism: You spend Z[n] to buy Z(0)[n] (where Z is a string of (0)'s).<br><br>
+               Multiply your FGH number gain by the FGH number you get in this challenge. Current: ×{{FGHChal6Eff|show}}
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(128)"
+            :class="{already:FGHChal&64&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==128?'#df5':''}">
+               <b class="big">FGH Challenge 7</b><br>
+               Mechanism: The more Z[m] you have, the weaker Z[n] is (where Z is a string of (0)'s, m≠n).<br><br>
+               Reach {{ChallengeGoal[128]|show}} to unlock iterated FGH items
+            </button><button class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(64)"
+            :class="{already:FGHChal&128&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==64?'#df5':''}">
+               <b class="big">FGH Challenge 8</b><br>
+               Mechanism: The more Z(0)[n] you have, the weaker Z[n] is (where Z is a string of (0)'s).<br><br>
+               Reach {{ChallengeGoal[64]|show}} to unlock multiordinal FGH items
+            </button><button v-show="FGHChal&2" class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(40)"
+            :class="{already:FGHChal&256&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==40?'#df5':''}">
+               FGH Challenge 2 and 3 together.<br><br>
+               Reach {{1e100|show}} to enable threshold of automatic zero-only BM unlock
+            </button><button v-show="FGHChal&8" class="chal cell3" :disabled="!!(Challenge&255)" @mousedown="FGHChalEnter(24)"
+            :class="{already:FGHChal&512&&!(Challenge&255)}" :style="{'background-color':(Challenge&255)==24?'#df5':''}">
+               FGH Challenge 3 and 4 together.<br><br>
+               Reach {{1e100|show}} to enable threshold of automatic FGH-prestige
+            </button>
+         </div>
+      </div>
+      <div v-else-if="FGHTab==2">
+         FGH-prestige erases FGH items generated by higher-leveled ones.
+         <div class="left">
+            <div v-for="(amounts,n1) in FGH2f1"
+            :class="{cellcolumn:FGH2f1.length>4,column2:FGH2f1.length==2,column3:FGH2f1.length==3,column4:FGH2f1.length==4}">
+               <buy v-for="(x,n) in amounts" :info="FGH2f1Info[n1][n]" :amount="['FGH2f1',n1,n]" :bought="['FGH2f1Bought',n1,n]"
+               :mult="['FGH2f1Mult',n1,n]"></buy>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div v-else-if="CurrentTab==5">
+      <automaton-select></automaton-select>
+      <div class="column2">
+         <div v-show="FGHChal&256" class="bigrow">
+            Options for automatic unlock zero-only BM
+            <div v-for="(x,n) in BM0etcLengthEver">
+               Unlock (0)...(0)[{{n+2|showInt}}] at most
+               <input v-model="AutoBM0etcUnlockThresholdInput[n]" @keydown.stop @change="AutoBM0etcUnlockThresholdChange(n)">
+               times.
+            </div>
+         </div>
+      </div><div class="column2">
+         <div v-show="FGHChal&512" class="bigrow">
+            Options for automatic FGH-prestige<br>
+            FGH-prestige when your number is at least
+            <input v-model="AutoFGHPrestigeThresholdInput[0]" @keydown.stop @change="AutoFGHPrestigeThresholdChange()">
+         </div>
+      </div>
+   </div>
+   <div v-else-if="CurrentTab==0" id="setting">
+      <div class="itemrow">
+         <div class="itemrow4" v-for="n in 4"><button @mousedown="Save(n)">Save {{n}}</button></div>
+      </div>
+      <div class="itemrow">
+         <div class="itemrow4" v-for="n in 4"><button @mousedown="Load(n)">Load {{n}}</button></div>
+      </div>
+      <div class="itemrow">
+         <div class="itemrow4">
+            Automatic saving:<br><select v-model.number="AutoSave">
+               <option value="5000">5 s</option>
+               <option value="10000">10 s</option>
+               <option value="20000">20 s</option>
+               <option value="60000">1 min</option>
+               <option value="180000">3 min</option>
+               <option value="600000">10 min</option>
+               <option value="0">Off</option>
+            </select>
+         </div>
+         <div class="itemrow4"><button @mousedown="Save(0)">Save Now</button></div>
+         <div class="itemrow4"><button @mousedown="Export()">Im/Export</button></div>
+         <div class="itemrow4"><button @mousedown="Reset()">FULL RESET</button></div>
+      </div>
+      <div class="itemrow">
+         <div class="itemrow4">
+            Update interval: {{UpdateInterval}} ms <br>
+            <input type="range" v-model.number="UpdateInterval" min="16" max="333">
+         </div>
+         <div class="itemrow4">
+            Display numbers in base-{{NumberBase}}<br>
+            <input type="range" v-model.number="NumberBase" min="2" max="36">
+         </div>
+         <div class="itemrow4" style="position:relative">
+            Display {{Precision}} significant digits<br>
+            <input type="range" v-model.number="Precision" min="1" :max="Math.floor(29.9336062089226/Math.log(NumberBase))">
+            <span class="tooltip">
+               When a number is beyond Javascript Number, both mantissa and exponent count into significant digits
+            </span>
+         </div>
+         <div class="itemrow4"><button @mousedown="Hotkey^=1">Hotkey: {{Hotkey?'On':'Off'}}</button></div>
+      </div>
+      Hotkey:
+      <b>0</b> to buy max of all zero-only BM<span v-if="Achievement.length>1">,
+      <b>2</b> ~ <b>9</b> to unlock BM with corresponding base number,
+      <b>1</b> to buy (0)(1)[n]</span><span v-if="Achievement.length>3">,
+      <b>P</b> to FGH-prestige</span>.<br>
+      Double click on something to buy max of it.
+      <div v-if="ExportBox" id="export">
+         <textarea v-model="ExportContent"></textarea>
+         <button @mousedown="Import()">Import</button>
+         <button @mousedown="ExportBox=false">Cancel</button>
+      </div>
+   </div>
+   <div v-else-if="CurrentTab==1">
+      <div class="bigrow">
+         You achieved {{AchieveCellN|showInt}} cells(3×3), boosting zero-only BM by ×{{AchieveCellEff|show}}
+      </div>
+      <table>
+         <tr v-for="y in 4">
+            <td v-for="x in 9" :class="{ach1:AchieveCell[y-1][x-1],ach2:AchieveRow[y-1],ach3:AchieveColumn[x-1]}">
+               <div class="ach" :class="{achieved:AchieveSingle[y-1][x-1]}">
+                  {{Achievement.length>=y?AchievementName[y-1][x-1]:'LOCKED'}}
+                  <span v-if="Achievement.length>=y" class="tooltip" v-html="Achievement.length>=y?AchievementTooltip[y-1][x-1]:''"></span>
+               </div>
+            </td>
+         </tr>
+      </table>
+      <div class="bigrow">
+         Rows reward:<br>
+         <span :class="{rowreward:AchieveRowN>=1}">
+            1 row: every row multiplies number gain by ×{{1.2|show}}<br>
+         </span>
+         <span v-if="Achievement.length>=2" :class="{rowreward:AchieveRowN>=2}">
+            2 rows: every row multiplies zero-only BM by ×{{1.2|show}}<br>
+         </span>
+         <span v-if="Achievement.length>=3" :class="{rowreward:AchieveRowN>=3}">
+            3 rows: every row multiplies unlock effect on BM by ×{{1.2|show}}<br>
+         </span>
+         <span v-if="Achievement.length>=4" :class="{rowreward:AchieveRowN>=4}">
+            4 rows: every row multiplies FGH number gain by ×{{1.2|show}}<br>
+         </span>
+      </div>
+   </div>
+   <div v-else-if="CurrentTab==2" style="font-size:13px">
+      <br>
+      You have played the game for {{GamePlayed()}} seconds.<br><br>
+      Your number has ever reached {{MainNumberEver|show}}.
+      <div v-if="Achievement.length>1">
+         You have ever unlocked
+         <span v-for="text in BM0etcUnlockEverText">{{text}}, </span>
+         so far.<br>
+         You have ever unlocked zero-only BM {{BM0etcUnlockTotal|showInt}} times in total.
+      </div>
+      <div v-show="FGHPrestige">
+         <br>
+         You have spent {{SinceFGHPrestige|show}} seconds since previous FGH-prestige.<br>
+         You have FGH-prestiged {{FGHPrestige|showInt}} times.<br>
+         Your fastest FGH-prestige is {{FGHPrestigeFastest|show}} seconds.
+      </div>
+      <div v-if="Achievement.length>3">
+         <br>
+         Your best fast-growing hierarchy number gain is {{FGHNumberRate|show}}/s.
+      </div>
+   </div>
+</div>
+<script src="arithmetic.js"></script>
+<script src="display-number.js"></script>
+<script src="versions.js"></script>
+<script src="save-load.js"></script>
+<script src="achievement.js"></script>
+<script src="component.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

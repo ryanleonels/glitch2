@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>To Infinity And Beyond</title>
+    <script src="main.js" defer></script>
+  </head>  
+  <body>
+    <text id="screen">
+      <p id="ordinal">Ordinal: 0</p>
+      <p id="ordinal per second">Ordinal Per Second: 1</p>
+      <p id="tick interval">Tickspeed: 1000 ms </p>
+    
+      <p><button onclick="doubleProd()" id="Tick Upgrade">
+      Reduce Tick Interval by 10%, Cost 10
+      </button></p>
+      <p><button onclick="buyauto()" id="buy autobuyer">
+      Buy an autobuyer, buys once per 10 ticks, cost 1000
+      </button></p>
+
+      <!-- include the Glitch button to show what the webpage is about and
+            to make it easier for folks to view source and remix -->
+      <script src="https://button.glitch.me/button.js"></script>
+    </text>
+    <button onclick="inf()" id="prestige">Infinity</button>
+  </body>
+</html>

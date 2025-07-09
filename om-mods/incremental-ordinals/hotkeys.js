@@ -1,0 +1,1 @@
+"use strict";const keybinds=freeze({i:()=>infinity(!0),m:()=>maxInfStuff(!0),s:()=>factorShift(!0),b:()=>data.highestReset>=2?factorBoost(!0):void 0,r:()=>refundBups(!0),c:()=>data.highestReset>=3?collapse(!0):void 0}),setHotkeys=()=>onkeypress=(e=>{const t=e.key.toLowerCase();data.hotkeys&&"function"==typeof keybinds[t]&&keybinds[t]()});

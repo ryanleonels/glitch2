@@ -1,0 +1,1 @@
+"use strict";const updateOptions=()=>{$("#offlineProgToggle").text(onOff("offlineProg")),$("#currentTheme").text(themeName[data.theme]),$("#colorToggle").text(onOff("color")),$("#musicToggle").text(musicName[data.music]),$("#hotkeyToggle").text(onOff("hotkeys")),$("#thiccToggle").text(onOff("thicc")),[0,1,2].forEach(t=>$("#maxOrdLength"+t).text(data.maxOrdLength[t]))};

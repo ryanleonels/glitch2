@@ -1,0 +1,57 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 1em;
+}
+
+.tiny {
+  font-size: 10pt;
+}
+
+#display {
+  text-align: center;
+  padding: 8pt;
+  border: 3pt double black;
+}
+
+#digits {
+  text-align: right;
+  margin-top: 0px;
+  float: right;
+}
+
+button {
+  font-size: 13pt;
+}
+
+.invis {
+  visibility: hidden;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.limit-button {
+  padding: 8px;
+  
+  width: 120px;
+  
+  background-color: white;
+  text-align: center;
+  font-size: 20px;
+  border: 1pt solid black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  transition-duration: 0.4s;
+}
+
+.limit-button:hover {
+  background-color: black;
+  color: white;
+}

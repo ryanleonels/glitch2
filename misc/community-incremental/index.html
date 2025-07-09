@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>f to paypal</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" type="image/png" href="https://cdn.glitch.com/6c8870e4-4463-4126-9ceb-90a5c001682b%2FFayFal.png?v=1589092960529"/>
+    <audio src="https://cdn.glitch.com/6c8870e4-4463-4126-9ceb-90a5c001682b%2FCaramelldansen.wav?v=1588697986743" id="music" loop="true"></audio> <!-- Caramelldansen -->
+    <script src="/break_eternity.min.js" defer></script>
+    <script src="/bank.js" defer></script>
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+    <div id="game">
+      <div id="idk" style="margin: 25px;">
+        <button id="sectionTab1" onclick="tab('paypalTab')">paypal</button> <button id="sectionTabBank" style="display: none;" onclick="tab('bank')">the bank</button>  <button id="sectionTab2" onclick="tab('settings')">settings</button>
+        <p id="currencyDisplay">you have 0 paypal</p>
+        <br>
+        <div id="bank" class="tab">
+          <p>
+            you gain a <span id="creditBonusText">1</span>x multiplier to your paypal gain based on your credit.
+          </p>
+          <button id="bankGainText" onclick="bankPrestige()">
+            deposit your paypal in the bank
+          </button>
+          <br><br>
+          <button id="bankupg1" onclick="buyBankUpg(0)">automatically press f / click (with a bonus) every 5 seconds | cost: 1 credit</button>
+          <button id="bankupg2" onclick="buyBankUpg(1)">get a stronger multiplier upgrade | cost: 20 credits</button>
+          <button id="bankupg3" onclick="buyBankUpg(2)">you get a multiplier over time | cost: 60 credits</button>
+          <button id="bankupg4" onclick="buyBankUpg(3)">unlock (the real) coins | cost: 1000 credits</button>
+        </div>
+        <div id="paypalTab" class="tab">
+          <h1 id="instructions">
+            f to paypal
+          </h1>
+          
+          <button onclick="paypal();" style="width: 200px; height: 200px; background: url(https://cdn.glitch.com/6c8870e4-4463-4126-9ceb-90a5c001682b%2FFayFal.png?v=1589092960529); background-size: contain"></button>
+          <br><br>
+          <button id="paypalupg1" onclick="buyPaypalUpg(0)">get more paypal | cost: 15 paypal</button>
+          <button id="paypalupg2" onclick="buyPaypalUpg(1)">automatically make paypal | cost: 500 paypal</button>
+          <button id="paypalupg3" onclick="buyPaypalUpg(2)">multiply paypal | cost: 10000 paypal</button>
+        </div>
+        <div id="settings" class="tab">
+          <button onclick="save()">save</button>
+          <button onclick="load()">load</button>
+          <button onclick="exportSave()">export</button>
+          <button onclick="importSave()">import</button>
+          <button onclick="wipe()">wipe save</button>
+          <br>
+          <button onclick="game.settings.funmode = !game.settings.funmode">
+            click to toggle fun mode (flashing lights warning)
+          </button>
+        </div>
+      </div>
+    </div>
+    <textarea style="opacity: .01; height:0; position:absolute; z-index: -1; display:none;" id="exportArea">export text</textarea>
+  </body>
+</html>

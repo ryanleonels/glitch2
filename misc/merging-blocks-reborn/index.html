@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Merge Blocks v3.1</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="block.css">
+  </head>
+  <body onload="load()">
+    <button class="tab" onclick="tab1()">Merging</button>
+    <button class="tab" onclick="tab2()">Blocks</button>
+    <button class="tab" onclick="tab3()">Stats</button>
+    <button class="tab" onclick="tab4()">Tutorial</button>
+    <div id="mergeGame">
+      <p id="demo9" style="background-color: #4dcb4d; padding: 8px; font-size: 30px;"></p>
+        <div class="row1">
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+        </div>
+
+        <div class="row2">
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+        </div>
+
+        <div class="row3">
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+          <div class="round1" style="display: block;"></div>
+        </div>
+      
+      <button id="merge" onclick="mergeBlock()">Merge</button>
+      <br /><br />
+      <div class="upgRow">
+        <img class="upg" id="costs" onclick="faster()" alt="Upg1" src="https://cdn.glitch.global/ea0ef867-9376-4e9b-9707-2001f9871ef7/upg-11.png?1694125770777">
+        <p id="1upg" style="font-size: 17px; padding: 8px;">Faster Blocks 0/10 (💰90)<br>Blocks spawn 100ms faster</p>
+        <img class="upg" id="costs2" onclick="betterBlock()" alt="Upg2" src="https://cdn.glitch.global/ea0ef867-9376-4e9b-9707-2001f9871ef7/upg-22.png?1694125778271">
+        <p id="2upg" style="font-size: 17px; padding: 8px;">Better Blocks 0/205 (💰220)<br>Blocks spawn 1 tier higher</p>
+        <img class="upg" id="costs3" onclick="doubleMoney()" alt="Upg3" src="https://cdn.glitch.global/ea0ef867-9376-4e9b-9707-2001f9871ef7/upg-33.png?1694125785094">
+        <p id="3upg" style="font-size: 17px; padding: 8px;">2x Money 0/10 (💰2.0k)<br>Blocks spawn with 2x more money<br>Currently: 0%</p>
+      </div>
+    </div>
+    <div id="barrels" style="display: none;">
+      <p id="demo999" style="background-color: #4dcb4d; padding: 8px; font-size: 17px;">All Blocks</p>
+        <div id="allTheBlocks">
+        <div class="blocks1">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks2">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks3">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks4">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks5">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks6">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks7">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks8">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks9">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks10">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks11">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks12">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks13">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks14">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks15">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks16">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks17">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks18">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks19">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks20">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks21">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div>
+        <div class="blocks22">
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+          <div class="a1" style="display: block;"></div>
+        </div></div>
+    </div>
+    <div id="stats" style="display: none;">
+      <p id="demo10" style="background-color: #4dcb4d; padding: 8px; font-size: 17px;"></p>
+      <p id="statt"></p>
+      <p>Blocks 45-216 do not exist at the moment as Glitch suspended my project for using foreign image links.<br>Hopefully this issue will be fixed very soon.</p>
+      <button class="otherUpg" id="prestige" onclick="restartGame()">
+        Prestige for 💎0 and 1x more boost
+      </button>
+      <br>
+      <p style="background-color: #4dcb4d; padding: 8px; font-size: 17px;">Diamond Upgrades (Upgrading will not lose any of your boost)</p>
+      <button class="specialUpg" id="costs4" onclick="moreFasterUpgs()">
+        8 more upgrades for Faster Blocks<br>Cost: 💎7
+      </button>
+      <button class="specialUpg" id="costs5" onclick="moreDoubleUpgs()">
+        20 more upgrades for Double Money<br>Cost: 💎35
+      </button>
+      <p style="background-color: #4dcb4d; padding: 8px; font-size: 17px;">Options and Saving</p>
+      <button class="otherUpg" onclick="save()">Save Game</button>
+      <button class="otherUpg" onclick="document.getElementById('exportedSave').value = exportSave()">Export Save</button>
+      <button class="otherUpg" onclick="importSave(prompt('Insert save code. You will lose your current save!'))">Import Save</button>
+      <button class="hardReset" onclick="resetGame()">HARD RESET</button>
+      <br>
+      <textarea style="resize: none; width: 250px; height: 150px;" id="exportedSave" onfocus="this.select()" placeholder="Save code will go here"></textarea>
+    </div>
+    <div id="tutorial" style="display: none;">
+      <h1>
+        THE OLD SITE <a href="https://merging-blocks.glitch.me">merging-blocks</a> IS SUSPENDED FOR GOOD.
+      </h1>
+      <h2>
+        HOPEFULLY THIS SITE WILL DO GOOD THIS TIME.
+      </h2>
+      <p>How to play Merge Blocks v3.1</p>
+      <p>When you first start playing, the first thing you wanna do is press the "Merge" button.</p>
+      <p>When you do press the "Merge" button, there is a cooldown on how long before you can merge again.</p>
+      <p>When you do press the "Merge" button, you can increase the tier of your blocks to get more money.</p>
+      <p>Once you get 100 money you can buy Faster Blocks to further decrease the cooldown before you need to merge again.</p>
+      <p>Once you get 400 money you can buy Better Blocks to increase the spawning block's tier.</p>
+      <p>Once you get 2800 money you can buy Doubled Money to increase the chance when a block spawns, you get 2x more money.</p>
+      <p>The game might get a bit boring after that, so you always got a merge counter with you.</p>
+      <p>But once you get over 200,000 money you have the ability to prestige for Super Money and higher boost.</p>
+      <p>Once you get enough Super Money you can buy 2 upgrades.</p>
+      <p>Starting at 7 Super Money is more Faster Blocks upgrades.</p>
+      <p>This will be even more helpful for speeding up your progression.</p>
+      <p>Starting at 35 Super Money is more Doubled Money upgrades.</p>
+      <p>This will also be even more helpful for speeding up your progression.</p>
+      <p>There might be much more than this after that. The game is only in construction. In the future you might see more mechanics.</p>
+      <p>This game currently has a lot of blocks/barrels so have a good journey reaching the last one.</p>
+      <p>Make sure to export your save once in a little while just in case you lose your progress.</p>
+      <p>This game has some bugs, like no moving your fingers to merge at all, and blocks unlocked bug, not showing latest tier.</p>
+      <p>Hopefully some of the bugs will get fixed very soon.</p>
+      <p>Enjoy your gameplay!</p>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      function tab1() {
+        document.getElementById("mergeGame").style.display = "block";
+        document.getElementById("barrels").style.display = "none";
+        document.getElementById("stats").style.display = "none";
+        document.getElementById("tutorial").style.display = "none";
+      }
+      function tab2() {
+        document.getElementById("mergeGame").style.display = "none";
+        document.getElementById("barrels").style.display = "block";
+        document.getElementById("stats").style.display = "none";
+        document.getElementById("tutorial").style.display = "none";
+      }
+      function tab3() {
+        document.getElementById("mergeGame").style.display = "none";
+        document.getElementById("barrels").style.display = "none";
+        document.getElementById("stats").style.display = "block";
+        document.getElementById("tutorial").style.display = "none";
+      }
+      function tab4() {
+        document.getElementById("mergeGame").style.display = "none";
+        document.getElementById("barrels").style.display = "none";
+        document.getElementById("stats").style.display = "none";
+        document.getElementById("tutorial").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

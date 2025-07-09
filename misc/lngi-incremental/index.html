@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LNGI incremental</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/style.css">
+    
+    <script src="/game.js" defer></script>
+    <script src="OmegaNum.js"></script>
+    <script src="saves.js"></script>
+  </head>
+  <body>
+    <button onclick="switchTabs('lngi')" class="tabBtn">
+      LNGI
+    </button> <button onclick="switchTabs('auto')" class="tabBtn">
+      Autobuyers
+    </button> <button id="tetbtn" onclick="switchTabs('tet')" class="tabBtn" style="display: none">
+      Tetrate
+    </button> <button id="pntbtn" onclick="switchTabs('pnt')" class="tabBtn" style="display: none">
+      Pentate
+    </button>
+    <div id="lngi">
+    The number is <span id="num" class="num">0</span>.<br><br>
+    <button onclick="maxall()">
+      Max all
+    </button><br>
+    <button onclick="buybtn1(1)">
+      Upgrade 1st button.<br>
+      Cost: <span id="bc1">100</span><br>
+      Level: <span id="btn1">1</span>
+    </button>
+    </div>
+    <div id="auto" style="display: none">
+      You have <span id="al1" class="num">0</span> autobuyer levels.<br>
+      Autobuyer interval is <span id="at1" class="num">1000</span>ms.<br>
+      <button onclick="auto1()">
+        Upgrade autobuyer 1 for <span id="ac1">10000</span>.
+      </button>
+    </div>
+    <div id="tet" style="display: none">
+      <button style="display: none" id="tetrate" onclick="tetrate()">
+        Gain <span id="tpdpt">0</span> tetration points, but<br>
+        reset button levels and number, as well as increasing cost.
+      </button><br>
+      You have <span id="tp" class="num">0</span> tetration points, tetrating income by <span id="tb" class="num">1</span>.<br><br><span class="num">Upgrades</span><br>
+      <button onclick="tu(0)">
+        Multiplier to production based on TP<br>
+        Cost: 7 TP<br>
+        <span id="tu1">Not bought!</span><br>
+      </button> <button onclick="tu(1)">
+        Gain 1% of TP each second plus a small starting boost,<br>
+        but remove the option to Tetrate.<br>
+        WARNING: Resets TP when bought<br>
+        Currently: <span id="tps">1</span>/sec.<br>
+        Cost: 100 TP<br>
+        <span id="tu2">Not bought!</span>
+      </button>
+    </div>
+    <div id="pnt" style="display: none">
+      <button style="display: none" id="pentate" onclick="pentate()">
+        Gain <span id="ppdpt">0</span> pentation points, but<br>
+        reset everything below Pentation.
+      </button><br>
+      You have <span id="pp" class="num">0</span> pentation points, pentating TP effect by <span id="pb" class="num">1</span>.<br><br><span class="num">Upgrades</span><br>
+      <button onclick="pu(0)">
+        Multiplier to TP based on PP<br>
+        Cost: 7 PP<br>
+        <span id="pu1">Not bought!</span><br>
+      </button> <button onclick="pu(1)">
+        When Pentating, you keep Tetration upgrades.<br>
+        Cost: 20 PP<br>
+        <span id="pu2">Not bought!</span>
+      </button> <button onclick="pu(2)">
+        Gain 1% of PP each second,<br>
+        but remove the option to Pentate.<br>
+        WARNING: Resets PP when bought<br>
+        Cost: 50 PP<br>
+        <span id="pu3">Not bought!</span>
+      </button>
+    </div>
+  </body>
+</html>

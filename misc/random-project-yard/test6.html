@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="900" height="600"
+style="border:1px solid #c3c3c3;">
+</canvas>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#89a54c";
+ctx.fillRect(0,0,900,600);
+
+var X = 0;
+var Y = 0;
+var rand = 1;
+var cordX = Math.floor(Math.random() * 901);
+var cordY = Math.floor(Math.random() * 600);
+
+X = Math.floor(Math.random() * 901);
+Y = Math.floor(Math.random() * 601);
+
+function move(a, b, c, d) {
+  var x = 0.2;
+  var y = 0;
+  ctx.fillStyle = "#ff99cc";
+  ctx.fillRect(a, b, c, d);
+  a += x;
+  b += y;
+}
+
+drawTree();
+var drawn = 0;
+
+function drawTree(a, b) {
+  ctx.beginPath();
+  ctx.strokeStyle = "#576930";
+  ctx.arc(a,b,82,0,2*Math.PI);
+  ctx.fillStyle = "#748c40";
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = "#b6db66";
+  ctx.arc(a,b,62,0,2*Math.PI);
+  ctx.fillStyle = "#89a54c";
+  ctx.fill();
+  ctx.stroke();
+}
+
+function drawRock(a, b) {
+  ctx.beginPath();
+  ctx.strokeStyle = "#878787";
+  ctx.arc(a,b,52,0,2*Math.PI);
+  ctx.fillStyle = "#acacac";
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = "#acacac";
+  ctx.arc(a,b,35,0,2*Math.PI);
+  ctx.fillStyle = "#cccccc";
+  ctx.fill();
+  ctx.stroke();
+}
+
+function update() {
+  ctx.clearRect(0, 0, 900, 900);
+  ctx.fillStyle = "#89a54c";
+  ctx.fillRect(0,0,900,900);
+  //ctx.fillStyle = "#fff";
+  //ctx.fillRect(X, Y, 30, 30);
+  ctx.beginPath();
+  ctx.strokeStyle = "#000";
+  ctx.arc(X,Y,16,0,2*Math.PI);
+  ctx.fillStyle = "#fff";
+  ctx.fill();
+  ctx.stroke();
+  drawTree(399, 233);
+  drawTree(94, 53);
+  drawRock(349, 574);
+  drawRock(846, 323);
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 87) {
+        Y -= 5.3;
+        move(X, Y, 30, 30);
+        update();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 83) {
+        Y += 5.3;
+        move(X, Y, 30, 30);
+        update();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 65) {
+        X -= 5.3;
+        move(X, Y, 30, 30);
+        update();
+    }
+});
+
+document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 68) {
+        X += 5.3;
+        move(X, Y, 30, 30);
+        update();
+    }
+});
+
+</script>
+
+</body>
+</html>
+

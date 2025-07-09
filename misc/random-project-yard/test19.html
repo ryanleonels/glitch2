@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Radial Gradient zoom</title>
+    <style>
+      *,
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+        text-align: center;
+      }
+      #controls {
+        width: 9.75em;
+        height: 3%;
+        background: rgba(0,0,0,0.5);
+        position: absolute;
+      }
+      p {
+        font-size: 1.5em;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="controls">
+      <p id="zoomin" style="position: absolute; left: 0em">
+        0.000100%
+      </p>
+    </div>
+    <div id="gradientone" style="background: repeating-radial-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00 0.0001%)"></div>
+    <script>
+    var currentZoom = 0.0001;
+    document.getElementById("zoomin").onclick = function() {
+      currentZoom *= 1.01;
+      document.getElementById("zoomin").innerHTML = "Zoom in 1.01x (" + currentZoom.toFixed(6) + "%)";
+      document.getElementById("gradientone").style = "background: repeating-radial-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00 " + currentZoom + "%)";
+    }
+    setInterval(() => {
+      currentZoom *= 1.0001;
+      document.getElementById("zoomin").innerHTML = currentZoom.toFixed(9) + "%";
+      document.getElementById("gradientone").style = "background: repeating-radial-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00 " + currentZoom + "%)";
+    })
+    </script>
+  </body>
+</html>

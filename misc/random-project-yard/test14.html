@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .flexcontainer {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #000;
+      }
+    </style>
+    <title>Automatic Triple CSS Gradient Wallpaper Generator using JavaScript</title>
+  </head>
+  <body style="background-color: #000">
+    <div class="flexcontainer">
+      <div id="linear" style="width: 960px; height: 540px">
+        <div id="radial" style="width: 960px; height: 540px">
+          <div id="conic" style="width: 960px; height: 540px">
+          
+          </div>
+        </div>
+      </div>
+      <div id="linear1" style="width: 960px; height: 540px">
+        <div id="radial1" style="width: 960px; height: 540px">
+          <div id="conic1" style="width: 960px; height: 540px">
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      if(navigator.userAgent.indexOf("Windows NT 5.1") > -1) {
+        alert("Conic Gradients are not supported on your browser and operating system! You can continue to this page, but there will be no secondary gradient wallpaper to be shown.");
+      } else if(navigator.userAgent.indexOf("Windows NT 5.0") > -1) {
+        alert("Conic Gradients are not supported on your browser and operating system! You can continue to this page, but there will be no secondary gradient wallpaper to be shown.");
+      }
+      
+      var randomColor = Math.floor(Math.random() * 256);
+      var randomColor2 = Math.floor(Math.random() * 256);
+      var randomColor3 = Math.floor(Math.random() * 256);
+      var randomOpacity = Math.random();
+      var randomOpacity2 = Math.random();
+      var randomOpacity3 = Math.random();
+      var randomDegrees = 0;
+
+      var random1Color = Math.floor(Math.random() * 256);
+      var random1Color2 = Math.floor(Math.random() * 256);
+      var random1Color3 = Math.floor(Math.random() * 256);
+      var random1Opacity = Math.random();
+      var random1Opacity2 = Math.random();
+      var random1Opacity3 = Math.random();
+      var random1Degrees = 0;
+      
+      var random2Color = Math.floor(Math.random() * 256);
+      var random2Color2 = Math.floor(Math.random() * 256);
+      var random2Color3 = Math.floor(Math.random() * 256);
+      var random2Opacity = Math.random();
+      var random2Opacity2 = Math.random();
+      var random2Opacity3 = Math.random();
+      var random2Degrees = 0;
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        randomDegrees = Math.random() * 360;
+        document.getElementById("linear").style.background =
+          "linear-gradient(" + randomDegrees + "deg, rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + "), rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + "), rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + ")";
+      }, 750);
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        document.getElementById("radial").style.background =
+          "radial-gradient(rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + "), rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + "), rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + ")";
+      }, 751);
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        document.getElementById("conic").style.background =
+          "conic-gradient(rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + "), rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + "), rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + "), rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + "), rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + ")";
+      }, 752);
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        randomDegrees = Math.random() * 360;
+        document.getElementById("linear1").style.background =
+          "linear-gradient(" + randomDegrees + "deg, rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + ") 33%, rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + ") 33% 66%, rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + ") 66% 100%";
+      }, 753);
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        document.getElementById("radial1").style.background =
+          "radial-gradient(rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + "), rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + ") 33%, rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + ") 33% 66%, rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + ") 66% 100%)"
+      }, 754);
+      
+      var turn01 = 0;
+      var turn02 = 0;
+      var turn03 = 0;
+      
+      setInterval(() => {
+        randomColor = Math.floor(Math.random() * 256);
+        randomColor2 = Math.floor(Math.random() * 256);
+        randomColor3 = Math.floor(Math.random() * 256);
+        random1Color = Math.floor(Math.random() * 256);
+        random1Color2 = Math.floor(Math.random() * 256);
+        random1Color3 = Math.floor(Math.random() * 256);
+        random2Color = Math.floor(Math.random() * 256);
+        random2Color2 = Math.floor(Math.random() * 256);
+        random2Color3 = Math.floor(Math.random() * 256);
+        randomOpacity = Math.random();
+        randomOpacity2 = Math.random();
+        randomOpacity3 = Math.random();
+        turn01 = randomInt(0, 0.33);
+        turn02 = randomInt(0.33, 0.66);
+        turn03 = randomInt(0.66, 1);
+        document.getElementById("conic1").style.background =
+          "conic-gradient(rgba(" + randomColor + ", " + randomColor2 + ", " + randomColor3 + ", " + randomOpacity + ") " + turn01 + "turn, rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + ") " + turn01 + "turn " + turn02 + "turn, rgba(" + random2Color + ", " + random2Color2 + ", " + random2Color3 + ", " + randomOpacity3 + ") " + turn02 + "turn " + turn03 + "turn, rgba(" + random1Color + ", " + random1Color2 + ", " + random1Color3 + ", " + randomOpacity2 + ") " + turn03 + "turn";
+      }, 755);
+      
+      function randomInt(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+    </script>
+  </body>
+</html>

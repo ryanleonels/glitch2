@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Work Sans" rel="stylesheet">
+<link rel="icon" href="https://cdn.glitch.global/0882d363-db14-44b6-b505-b869b28dacb1/161514446871313063.png?1692742689576" type="image/png" sizes="96x96">
+<link rel="stylesheet" href="/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="The official Magnet Revival game inspired from Scrap Clicker 2 and a few other incrementals. See how many magnets you can possess today! UPDATED WITH ANTICHEAT">
+</head>
+<body>
+
+
+<!-- Stuff -->
+<noscript>
+  <h1>Failed to load game. JavaScript is not enabled.</h1>
+  <h2>In order to play, please go to Settings =) Site Settings =) JavaScript =) Turn switch to allowed. After that, reload page.</h2>
+  <h2>Don't worry, your save will not be lost! It just couldn't load.</h2>
+</noscript>
+
+<span id="ticker">
+  <div id="news"></div>
+</span>
+
+<div id="loadScreen"></div>
+
+<span id="display">You have <span id="mags" style=""></span> 🧲, <span id="gold" style=""></span> Gold 🧲, and <span id="plat" style=""></span> Platinum 🧲.</span>
+
+<span id="stats"><br><br>Your Magnet Multiplier = <span id="mult" style="color:red"></span>You gain <span id="auto" style="color:red;"></span> mags/sec.<br>You gain <span id="goldGain" style="color:#ffc801"></span> gold mags/sec.<br><br></span>
+
+<div id="tutorial" class="modal">
+
+<div class="modal-content">
+  <span class="close">&times;</span>
+  <h2 id="bigText">Tutorial</h2>
+  <p>Welcome to the game! This is your first time playing.<br>So how to play the game is just simple.<br>Just simply click those buttons that are above you right now.<br>They will give you multipliers and magnets.<br>There is more content, but you will see that later on!<br><br>Have fun playing, and stay safe!</p>
+</div>
+
+</div>
+
+
+<!-- Buttons -->
+<button class="button button1" onclick="earnMoney()">Gain Magnets</button>
+<button class="button button2" onclick="earnMultiplier()">Gain 1st Multiplier</button>
+<button class="button button3" onclick="earnSecondMultiplier()">Gain 2nd Multiplier</button>
+<button class="button button4" onclick="earnThirdMultiplier()">Gain 3rd Multiplier</button>
+<button class="button button5" onclick="earnFourthMultiplier()">Gain 4th Multiplier</button>
+<button class="button button6" onclick="earnFifthMultiplier()">Gain 5th Multiplier</button>
+<button class="button button8" onclick="goldMagnets()">Earn Gold Magnets</button>
+<button class="button button10" onclick="autoCollect()">Auto-Earn Magnets</button>
+
+<div id="snackbar">Not enough magnets!</div>
+<div id="snackbar2">Unlocked Auto Magnet Collect</div>
+<audio src="" id="playMusic" loop></audio>
+
+<!-- Tab System -->
+<div class="tab">
+  <button class="tablinks" onclick="tab(event, 'Stats')">Stats</button>
+  <button class="tablinks" onclick="tab(event, 'MoreStats')">More Stats</button>
+  <button class="tablinks" onclick="tab(event, 'About')">About</button>
+  <button class="tablinks" onclick="tab(event, 'Update')">Update Log</button>
+  <button class="tablinks" onclick="tab(event, 'Help')">Help</button>
+  <button class="tablinks" onclick="tab(event, 'Options')">Options</button>
+  <button class="tablinks" onclick="tab(event, 'Gold')">Upgrades/Stuff</button>
+  <button class="tablinks" onclick="hideTabs()">Hide</button>
+</div>
+
+<!-- Tab -->
+
+<div id="Gold" class="tabcontent">
+  <div class="upgTabs">
+    <button class="upgLinks" onclick="tabb(event, 'GoldM')">Gold Mags Upgrades</button>
+    <button class="upgLinks" onclick="tabb(event, 'DiamondM')">Diamond Upgrades</button>
+    <button class="upgLinks" onclick="tabb(event, 'autoB')">Automators</button>
+  </div>
+  <div id="autoB" class="upgTab">
+    <h2 id="seventeen">Need to have unlocked the auto-buy first.</h2>
+    <button class="autoMultButton" onclick="autoFirstMul()">1st Multiplier<br>Current Speed = 1 every 60000 ms.<br>Cost: 1e21 Magnets.</button>
+    <button class="autoMultButton" onclick="autoSecondMul()">2nd Multiplier<br>Current Speed = 1 every 80000 ms.<br>Cost: 1e25 Magnets.</button>
+    <button class="autoMultButton" onclick="autoThirdMul()">3rd Multiplier<br>Current Speed = 1 every 100000 ms.<br>Cost: 1e29 Magnets.</button>
+    <button class="autoMultButton" onclick="autoFourthMul()">4th Multiplier<br>Current Speed = 1 every 120000 ms.<br>Cost: 1e33 Magnets.</button>
+    <button class="autoMultButton" onclick="autoFifthMul()">5th Multiplier<br>Current Speed = 1 every 140000 ms.<br>Cost: 1e41 Magnets.</button>
+    <h3 class="warning">Automators under construction. Nothing works at the moment.</h3>
+  </div>
+  <div id="DiamondM" class="upgTab">
+    <h2 id="fifteen">.</h2>
+    <h2 id="fourteen">Need 150,000 Gold Magnets to unlock this!</h2>
+    <button class="diamondUpgrades" onclick="moreMagsUpgOne()">Auto magnets is faster<br>Cost: 3 Diamond Magnets.</button>
+    <button class="diamondUpgrades" onclick="moreMagsUpgOne()">You gain gold magnets upon prestige<br>Cost: 8 Diamond Magnets.</button>
+    <button class="diamondUpgrades" onclick="moreMagsUpgOne()">Unlock auto magnet button clicker<br>Cost: 20 Diamond Magnets.</button>
+    <h2 id="sixteen">More Diamond Magnet upgrades in v3.3.</h2>
+  </div>
+  <div id="GoldM" class="upgTab">
+    <h2 id="twelve">You have 0 Diamond Magnets.</h2>
+    <h2 id="eight">Need 5 Platinum Magnets to unlock this!</h2>
+    <button class="goldUpgrades" onclick="moreMagsUpgOne()">You gain 2x more magnets<br>Cost: 60 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="moreMultUpgOne()">You gain more multiplier on prestige.<br>Cost: 150 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="autoBuyMag()">Unlock auto-buy.<br>Cost: 400 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="moreMagsUpgTwo()">You gain 3x more auto-multi.<br>Cost: 1,200 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="autoBuyMagTwo()">Unlock auto-gold magnets.<br>Cost: 4,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="moreMagsUpgThree()">You gain 4x more magnets<br>Cost: 7,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="moreGoldMagsUpgOne()">You gain 2x more gold magnets<br>Cost: 24,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="morePlatMagsUpgOne()">You gain 2x more platinum magnets<br>Cost: 72,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="diamondMags()">Unlock Diamond Magnets.<br>Cost: 150,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="autoBuyMagThree()">Unlock Auto Multiplier gain<br>Cost: 420,000 Gold Magnets.</button>
+    <button class="goldUpgrades" onclick="goldPrestige()">Unlock Gold Magnet Prestige<br>Cost: 800,000 Gold Magnets.</button>
+  </div>
+</div>
+<!-- Tab -->
+
+<div id="Stats" class="tabcontent">
+  <h3 id="one">All Player Stats (Reset on prestige)</h3>
+  <p id="yourStats">Loading...</p>
+  <h3 id="ten">All Player Stats (Permanent)</h3>
+  <p id="totalStats">Loading...</p>
+  <button class="button button13" onclick="buyAuto()">Buy Auto Magnets (3000 mags)</button>
+  <button class="button button9" onclick="prestige()">Restart Game</button>
+</div>
+
+<div id="MoreStats" class="tabcontent">
+  <h3 id="two">All Multiply Stats</h3>
+  <p id="moreStats">Loading...</p>
+  <h3 id="nine">Prestige Stats</h3>
+  <p id="prestigeStats">Loading...</p>
+  <p id="info">Right now you cannot prestige. You need 1 billion magnets.</p>
+</div>
+
+<div id="About" class="tabcontent">
+  <h3 id="three">About</h3>
+  <p id="about">Revival of the old The Magnet Game.<br>Lots of stuff was broken in the old one so I decided to remake it.<br>Now has a saving system! No more worrying!<br><br>Collect Magnets by clicking buttons.<br>Auto Collect to get in further progression.<br>Gold Magnets for extra boost.<br>Prestige to get platinum magnets and more boosts.<br>More in the "Help" tab!<br><br>v3.14-revival (Number of PI)<br>(Check Update Log for more)</p> 
+</div>
+
+<div id="Update" class="tabcontent">
+  <h3 id="four">Update Logs:</h3>
+  <p id="log">v2.0-revival (02-11-2021):<br>Started work on a new game.<br>Ended up making a revival version of "The Magnet" game as stuff in the previous one had broken stuff.<br><br>v2.1-revival (02-28-2021):<br>Added this update log that you are seeing right now.<br>Added auto magnet collect and a few stuff.<br><br>v2.11-revival (03-01-2021):<br>Added size-changing elements upon resize to a smaller window, making stuff not so far to get to.<br>Added 1 more image to the Auto-Earn Magnets Button.<br><br>v2.12-revival (03-01-2021):<br>Updated About Tab.<br>Changed functions for Auto Collect.<br>Tiny button picture update.<br>Changed down the 1st Multiplier.<br><br>v2.13-revival (03-02-2021):<br>Tweaked Gold Magnet Cost.<br>Updated Prestige.<br>Changed a few stuff.<br><br>v2.2-revival (03-03-2021):<br>Added gold magnet upgrades.<br>(Can be unlocked at 2 platinum magnets)<br>Currently only one.<br>Will be more in next updates.<br>Updated the "stats" tab.<br><br>v2.21.change-revival (03-05-2021):<br>Added News (Currently does not move right, just stays permanently still.)<br>Added Export, currently not working.<br><br>v2.22-revival (03-06-2021):<br>Added only one music.<br>Updated news.<br><br>v2.23-revival (03-06-2021):<br>Updated prestige functions, made better boosts.<br>Added Prestige Stats.<br>Added a few extra news.<br>Changed quite some stuff.<br><br>v3.0.change-revival (03-07-2021):<br>Added loading screen. Is buggy at the moment.<br>Added colors to magnet numbers.<br>Disabled all selecting text.<br>News text now scrolls from right to left.<br>Changed more visuals.<br>Added a saving system, no more data loss! Saves every 10 seconds.<br>Also added export/import save code.<br><br>v3.01-revival (03-08-2021):<br>Removed scrolling news as there was zoom issues on mobile.<br>Buffed prestige boost multiplier, was too powerful.<br>Added "Save" button in the Options tab.<br>Buffed Auto Collect Multi.<br><br>v3.02-revival (03-10-2021):<br>Added number format. (Will change a bit later on)<br>Fixed prestige (Should be the last time)<br><br>v3.1-revival (03-11-2021):<br>Added timewalls to make for slower progression.<br>Changed a few visuals.<br><br>v3.11-revival (03-12-2021):<br>Added tutorial for players who first started playing this game.<br>Adding modal display for prestige later on.<br>Added message to upcoming keycodes to Android devices.<br><br>v3.12-revival (03-13-2021):<br>Updated news again.<br>Changed prestige once again.<br>Added 3 more music. (Might not add more due to copyright issues)<br><br>v3.13-revival (03-14-2021):<br>Added In-game time.<br>Changed auto collect multiplier.<br><br>v3.14-revival (03-15-2021):<br>Updated number format.<br>Added secret.<br><br>Upcoming in v3.2:<br>Adding more gold magnet upgrades.<br>Upcoming in v3.3:<br>Adding keycodes.<br><br>These updates won't come just yet until the upcoming few days or weeks, if the dev is inactive.</p> 
+</div>
+
+<div id="Help" class="tabcontent">
+  <h2 id="five">Help Tab</h2>
+  <h3 id="six">How to play this game? You have come to the right place.<br><br>In this game, magnets are the main currency of the game.<br>Each button click gives you a certain number of magnets.<br>There is 8 different buttons for continuously increasing your magnet multiplier, if you cannot afford the larger ones.<br>The 5th one gives off big boost.<br>At 1250 magnets, you can get Gold Magnets and increase your magnet multiplier by 1.15x.<br>Buying Gold Magnets means all other magnets are removed.<br>You will unlock Gold Magnet upgrades after you get 5 platinum magnets.<br>At 3000 magnets, you can unlock Auto-Magnets.<br>The magnets will only go up by 6/sec, but you can buy an upgrade to increase the gain.<br>At 5000 magnets, you can buy the upgrade for the Auto-Magnets.<br><br>After around 100000 magnets is when timewalls start coming in.<br>It slows down gameplay.<br><br>After 1 billion magnets, you can prestige, get a good Gold Magnet gain (instead of just one every time).<br>Also you can get platinum magnets.<br><br>If you report too much boost let the dev know! It will be fixed ASAP.<br><br>There is currently only one upgrade for this, but there will be more very soon!<br><br>Enjoy your journey to the game that is still "under construction".<br>The dev haven't gone any farther than 5 platinum magnets yet so you will reach the end of game easily, or you might get infinity.<br>Game autosaves every 10 seconds to prevent data loss.</h3>
+</div>
+
+<div id="Options" class="tabcontent">
+  <h2 id="seven">Options</h2>
+  <h3 class="warning" style="display: none">Your browser is outdated, please update for optimal experience.</h3>
+  <label class="container">Set Multiply Number Fixed to 3?<input type="checkbox" id="fix"><span class="checkmark"></span></label>
+  <br>
+  <label class="container">Hide News Ticker<input type="checkbox" id="hide"><span class="checkmark"></span></label>
+  <br>
+  <button class="button button11" onclick="WorkSansFont()">Work Sans Font</button>
+  <button class="button button12" onclick="InconsolataFont()">Inconsolata Font</button>
+  <button class="button button16" onclick="music()">Play Music</button>
+  <button class="button button17" onclick="document.getElementById('saveText').innerHTML = exportSave()">Export</button>
+  <button class="button button18" onclick="importSave(prompt('Import save? Your current save will be lost!'))">Import</button>
+  <button class="button button19" onclick="saveGame()">Save Game</button>
+  <button class="button button7" onclick="hardReset()">HARD RESET GAME</button>
+  <br>
+  <textarea style="resize: none; width: 30%; height: 200px;" id="saveText" placeholder="Exported save will be here"></textarea>
+  <br>
+  <br>
+  <a style="color:#000" href="https://patcailmemer.github.io/Ordinal-Markup/">Music function taken from Ordinal Markup</a>
+  <br>
+  <a style="color:#000" href="https://www.youtube.com/channel/UCrpbLYZYpwpkrW9j9x8Ci2A">Game saving from SuperSpruce</a>
+  <h3 id="eleven">Keycodes getting added in v3.3. Will not work on mobile devices.</h3>
+  <h3 id="thirteen">You have not played yet!</h3>
+</div>
+
+<!-- Scripts -->
+<script src="/game.js"></script>
+<script src="/extras.js"></script>
+<script src="/news.js"></script>
+<!--<script src="/load.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+  <script>
+    DisableDevtool({
+    ondevtoolopen(type, next){
+        alert("Console detected! You are not allowed to cheat this game! Get out!");
+        next();
+    }
+});
+  </script>--> <!-- anticheat -->
+</body>
+</html>

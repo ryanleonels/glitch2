@@ -1,0 +1,14 @@
+{
+  "restart": {
+    "exclude": [
+      "^public/",
+      "^dist/"
+    ],
+    "include": [
+      "\\.js$",
+      "\\.coffee$",
+      "\\.json"
+    ],
+    "throttle": 1000
+  }
+}

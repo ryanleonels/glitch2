@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      div {
+        padding: 10px;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 307px; height: 250px; background-color: #343434">
+      <div
+        style="
+          width: 300px;
+          height: 200px;
+          background-color: #8ba970;
+          color: #26301d;
+          font-size: 25px;
+          padding: 5px 3px;
+          font-family: LCD Solid;
+          word-break: break-all;
+          overflow-y: scroll;
+        "
+        id="display"
+      ></div>
+    </div>
+
+    <script>
+      var text = "";
+      var caps = false;
+
+      document.onkeydown = function (e) {
+        if (e.keyCode == 20) {
+          if (!caps) {
+            caps = true;
+          } else {
+            caps = false;
+          }
+        }
+        if (e.keyCode == 65) {
+          if (!caps) {
+            text += "a";
+          } else {
+            text += "A";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 66) {
+          if (!caps) {
+            text += "b";
+          } else {
+            text += "B";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 67) {
+          if (!caps) {
+            text += "c";
+          } else {
+            text += "C";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 68) {
+          if (!caps) {
+            text += "d";
+          } else {
+            text += "D";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 69) {
+          if (!caps) {
+            text += "e";
+          } else {
+            text += "E";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 70) {
+          if (!caps) {
+            text += "f";
+          } else {
+            text += "F";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 71) {
+          if (!caps) {
+            text += "g";
+          } else {
+            text += "G";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 72) {
+          if (!caps) {
+            text += "h";
+          } else {
+            text += "H";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 73) {
+          if (!caps) {
+            text += "i";
+          } else {
+            text += "I";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 74) {
+          if (!caps) {
+            text += "j";
+          } else {
+            text += "J";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 75) {
+          if (!caps) {
+            text += "k";
+          } else {
+            text += "K";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 76) {
+          if (!caps) {
+            text += "l";
+          } else {
+            text += "L";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 77) {
+          if (!caps) {
+            text += "m";
+          } else {
+            text += "M";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 78) {
+          if (!caps) {
+            text += "n";
+          } else {
+            text += "N";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 79) {
+          if (!caps) {
+            text += "o";
+          } else {
+            text += "O";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 80) {
+          if (!caps) {
+            text += "p";
+          } else {
+            text += "P";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 81) {
+          if (!caps) {
+            text += "q";
+          } else {
+            text += "Q";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 82) {
+          if (!caps) {
+            text += "r";
+          } else {
+            text += "R";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 83) {
+          if (!caps) {
+            text += "s";
+          } else {
+            text += "S";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 84) {
+          if (!caps) {
+            text += "t";
+          } else {
+            text += "T";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 85) {
+          if (!caps) {
+            text += "u";
+          } else {
+            text += "U";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 86) {
+          if (!caps) {
+            text += "v";
+          } else {
+            text += "V";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 87) {
+          if (!caps) {
+            text += "w";
+          } else {
+            text += "W";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 88) {
+          if (!caps) {
+            text += "x";
+          } else {
+            text += "X";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 89) {
+          if (!caps) {
+            text += "y";
+          } else {
+            text += "Y";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 90) {
+          if (!caps) {
+            text += "z";
+          } else {
+            text += "Z";
+          }
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 46) {
+          e.preventDefault();
+          text = "";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 48) {
+          text += "0";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 49) {
+          text += "1";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 50) {
+          text += "2";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 51) {
+          text += "3";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 52) {
+          text += "4";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 53) {
+          text += "5";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 54) {
+          text += "6";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 55) {
+          text += "7";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 56) {
+          text += "8";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 57) {
+          text += "9";
+          document.getElementById("display").innerHTML = text;
+        }
+        if (e.keyCode == 32) {
+          text += " ";
+          document.getElementById("display").innerHTML = text;
+        }
+      };
+    </script>
+  </body>
+</html>

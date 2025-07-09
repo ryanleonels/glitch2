@@ -1,0 +1,146 @@
+* {
+  font-family: 'Dosis', monospace;
+}
+
+body {
+  background: #000044;
+  text-align: center;
+  font-family: "DosisLight", monospace;
+}
+
+div {
+  color: white;
+  white-space: pre-wrap;
+}
+
+h1 {
+	width: 400px;
+  background-color: lightgray;
+  color: gray;
+}
+
+h2 {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  font-size: 18px;
+}
+
+.bar {
+  margin-left: auto;
+  margin-right: auto;
+	width: 360px;
+  border: 5px solid;
+  border-color: black;
+  text-shadow: black 0px 0px 5px;
+	border-radius: 30px 30px 30px 30px;
+}
+
+
+h3 {
+  text-shadow: black 5px 5px 5px;
+}
+
+button {
+  background-color: lightgray;
+  font-size: 20px;
+  padding: 5px 5px;
+  border: 2px solid;
+	border-radius: 10px 10px 10px 10px;
+  font-family: 'Dosis', monospace;
+  vertical-align: top;
+}
+
+.option-button {
+  background-color: lightgray;
+  font-size: 15px;
+  width: 120px;
+  height: 80px;
+  padding: 5px 5px;
+}
+
+.achievement {
+  background: linear-gradient(to right, gray,lightgray,gray);
+  width: 120px;
+  transition-duration: 0.5s;
+  height: 120px;
+	border-radius: 10px 10px 10px 10px;
+  font-size: 15px;
+}
+
+.achievementObtained {
+  background: linear-gradient(to right, green,lightgreen,green);
+}
+
+.achievementDisplayed {
+  box-shadow: 0px 0px 5px black;
+  transform: scale(1.1, 1.1);
+}
+
+.achievementWrapper {
+  border: 10px solid;
+  box-shadow: inset 0px 0px 10px black;
+  padding: 20px 20px;
+  border-color: rgb(25,25,25);
+  background: repeating-linear-gradient(55deg, rgb(63,96,96),rgb(127,159,159),rgb(63,96,96) 152px);
+}
+
+.milestoneLocked {
+  background: linear-gradient(to right, gray,lightgray,gray);
+  color: black;
+  font-size: 15px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+}
+
+.milestoneBought {
+  background: linear-gradient(to right, green,lightgreen,green);
+  color: black;
+  font-size: 15px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+}
+
+.upgradeLocked {
+  background: linear-gradient(to right, #FF6666,#FFBBBB,#FF6666);
+  color: black;
+  font-size: 15px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+}
+
+.studyLocked {
+  background: linear-gradient(to right, #333333,#000000,#333333);
+  color: white;
+  font-size: 15px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+}
+
+.studyBought {
+  background: linear-gradient(to right, #AA00DD,purple,#AA00DD);
+  color: white;
+  font-size: 15px;
+  width: 120px;
+  height: 120px;
+  padding: 5px 5px;
+}
+
+.center {
+  text-align: center
+}
+
+.autocenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.galacticBtn {
+  background-color: #2b004f;
+  color: white;
+  border-color: #8b00ff;
+  text-shadow: 3px 0px 3px white;
+}

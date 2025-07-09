@@ -1,0 +1,505 @@
+body {
+  font-family: 'Inconsolata';
+  font-size: 22px;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+/* Stuff */
+
+.goldUpgrades {
+  top: 0px;
+  width: 202px;
+  height: 150px;
+  color:  #000;
+  font-size: 15px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #ffcc00;
+  background-color: #a06b08;
+  font-family: 'Inconsolata';
+  display: none;
+}
+
+.diamondUpgrades {
+  bottom: 0px;
+  width: 202px;
+  height: 150px;
+  color:  #000;
+  font-size: 15px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #6ecddf;
+  background-color: #29aace;
+  font-family: 'Inconsolata';
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ff7777; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff1111; 
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.2);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+video { /* Probably don't need this, idk */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+* {
+  user-select: none;
+}
+
+#news {
+  background-color: #ff4444;
+  border-style: solid;
+  top: 0%;
+}
+
+#display {
+  font-size: 30px;
+}
+.button {
+  border: none;
+  color: #000;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Inconsolata';font-size: 17px;
+  box-shadow: 0 5px #999;
+}
+
+/* Button stuff */
+
+.button2 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button3 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button4 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button5 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button6 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button7 {
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button11 {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button12 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button13 {
+  background-color: #0f1943;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button14 {
+  background-color: black;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button15 {
+  background-color: black;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button16 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button17 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button18 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button19 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.button10 {
+  background-color: black;
+  color: #fff;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+/* Button Actions */
+
+.button:hover {background-color: #660000}
+
+.button:active {
+  background-color: #660000;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button9:hover {background-color: #0f1943}
+
+.button:active {
+  background-color: #0f1943;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* Tabs */
+
+.tablinks {
+  border: none;
+  color: red;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.upgLinks {
+  border: none;
+  background-color: blue;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.upgTab {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.autoMultButton {
+  display: none;
+  border: none;
+  color: #ff7802;
+  background-color: #9f3f1a;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Inconsolata';font-size: 17px;
+}
+
+/* Make elements smaller when window resolution is lower */
+
+@media screen and (max-width: 1000px) {
+  .button {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+  .tablinks {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+  #display {
+    font-size: 23px;
+  }
+  #stats {
+    font-size: 20px;
+  }
+  #yourStats {
+    font-size: 18px;
+  }
+  #one {
+    font-size: 18px;
+  }
+  #two {
+    font-size: 22px;
+  }
+  #three {
+    font-size: 18px;
+  }
+  #four {
+    font-size: 18px;
+  }
+  #five {
+    font-size: 18px;
+  }
+  #six {
+    font-size: 15px;
+  }
+  #seven {
+    font-size: 18px;
+  }
+  .warning {
+    font-size: 19.3px;
+  }
+  #eight {
+    font-size: 18px;
+  }
+  #nine {
+    font-size: 22px;
+  }
+  #moreStats {
+    font-size: 17px;
+  }
+  #about {
+    font-size: 16px;
+  }
+  #log {
+    font-size: 17.5px;
+  }
+  #news {
+    font-size: 17px;
+  }
+  #prestigeStats {
+    font-size: 17px;
+  }
+  #info {
+    font-size: 18px;
+  }
+  #ten {
+    font-size: 18px;
+  }
+  #eleven {
+    font-size: 18px;
+  }
+  #twelve {
+    font-size: 18px;
+  }
+  #thirteen {
+    font-size: 18px;
+  }
+  #totalStats {
+    font-size: 18px;
+  }
+}
+
+/* Snackbars (Used for displaying tiny alerts for the game) */
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 47%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#snackbar2 {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 47%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar2.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Keyframes */
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/* Colors on magnet displays */
+
+#mags {
+  background: -webkit-linear-gradient(90deg, rgb(252, 103, 103) 50%, rgb(106, 106, 255) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#twelve {
+  display: none;
+}
+
+#fifteen {
+  display: none;
+}
+
+#gold {
+  background: -webkit-linear-gradient(90deg, #ffc801 50%, #ffe829 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#plat {
+  background: -webkit-linear-gradient(90deg, #9fdbe9 50%, #6cbade 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Warning Text (Rare) */
+
+.warning {
+    animation: warning 1.5s linear infinite
+}
+
+@keyframes warning{
+    50% {
+        color: rgb(255, 0, 0);
+        text-shadow: 0px 0px 5px rgba(255, 100, 0, 1)
+    }
+
+    0%, 25%, 100% {
+        color: rgb(0, 0, 0);
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0)
+    }
+
+}
+
+/* Give some of the buttons a background */
+
+.button1 {background: -webkit-linear-gradient(180deg, rgb(252, 103, 103) 50%, rgb(106, 106, 255) 50%);}
+.button2 {background-color: #000;}
+.button3 {background-color: #000;}
+.button4 {background-color: #000;}
+.button5 {background-color: #000;}
+.button6 {background-color: #000;}
+.button7 {background-color: red;}
+.button8 {background: -webkit-linear-gradient(180deg, #e8e601 50%, #ffff2b 50%);}
+.button9 {background: -webkit-linear-gradient(180deg, #6cbade 50%, #9fdbe9 50%);}
+.button10 {background-color: #000;}
+.button13 {background-image: url("https://i.ibb.co/PDFQBrW/magnet-3.png");}
+.tablinks {background-color: #880000;}

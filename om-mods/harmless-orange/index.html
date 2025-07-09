@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ordinal Markup</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>  
+  <body>
+    <h1 id="hardy">H<sub>0</sub> (10)=10</h1>
+    <button onclick="Tab(1)">Ordinal</button>
+    <button onclick="Tab(2)">Options</button>
+    <button onclick="Tab(4)">Milestones</button>
+    <button onclick="Tab(5)" id="infinityTabButton">Infinity</button>
+    <p></p>
+    <div id="Tab1">
+      <button onclick="increment()">Increase Ordinal by 1</button>
+      <button onclick="maximize()">Maximize ordinal, but number does not increase</button>
+      <p><button onclick="infinity()" id="infinityButton">Reach 10240 to Infinity</button></p>
+    </div>
+    <div id="Tab2">
+      <button onclick="save()" style="border:2px solid #00FF00">Save your game</button>
+      <button onclick="export()">Export your game file [WIP]</button>
+      <button onclick="import()">Import your game file [WIP]</button>
+      <button onclick="resetConf()" style="color:#FF0000;border:2px solid #FF0000">RESET YOUR GAME</button>
+      <p>Game autosaves every ten seconds [WIP]</p>
+      <button onclick="notation()">Change Number Notation [WIP]</button>
+      <button onclick="notationOrd()">Change Ordinal Notation [WIP]</button>
+    </div>
+    <div id="Tab3">
+      <p>Your highest Ordinal was w [WIP]</p>
+      <p>You have Infinitied 100 times [WIP]</p>
+      <p>Your last Infinity was 1 second ago [WIP]</p>
+      <p>You have done 1 Factor Shift [WIP]</p>
+      <p>Your last Factor Shift was 1 second ago [WIP]</p>
+      <p>You have played for 3 days and 5 hours [WIP]</p>
+    </div>
+    <div id="Tab4">
+      <ol>
+        <li>None</li>
+      </ol>
+    </div>
+    <div id="Tab5">
+      <text id="ordinalPointsDisplay">You have 100 Ordinal Points</text>
+      <p></p>
+      <button onclick="subTab(1)">Autoclickers</button>
+      <button onclick="subTab(2)">Factors</button>
+      <p></p>
+      <div id="subTab1">
+        <text id="succAutoAmount">You have 0 successor autobuyers</text>
+        <p id="limAutoAmount">You have 0 maximize autobuyers</p>
+        <p></p>
+        <button onclick="buysucc()" id="buysucc">Buy Successor Autobuyer for 100 OP</button>
+        <button onclick="buylim()" id="buylim">Buy Maximize Autobuyer for 100 OP</button>
+        <button onclick="maxall()">Max All</button>
+      </div>
+      <div id="subTab2">
+        <div id="factorList">Factors:
+          <ul id="factorListMain">
+            <li>Factor 1: x2 <button onclick="buyFactor(0)">Increase Factor 1 for 10 OP</button></li>
+            <li>Factor 2: x2 <button onclick="buyFactor(1)">Increase Factor 2 for 100 OP</button></li>
+            <li>Factor 3: x2 <button onclick="buyFactor(2)">Increase Factor 3 for 1000 OP</button></li>
+            <li>Factor 4: x2 <button onclick="buyFactor(3)">Increase Factor 4 for 10000 OP</button></li>
+            <li>Factor 5: x2 <button onclick="buyFactor(4)">Increase Factor 5 for 100000 OP</button></li>
+            <li>Factor 6: x2 <button onclick="buyFactor(5)">Increase Factor 6 for 1.000e6 OP</button></li>
+            <li>Factor 7: x2 <button onclick="buyFactor(6)">Increase Factor 7 for 1.000e7 OP</button></li>
+            <li>Factor 8: x2 <button onclick="buyFactor(7)">Increase Factor 8 for 1.000e8 OP</button></li>
+          </ul>
+          <text id="factorMult">Your factors are multiplying your autoclickers by 1</text>
+       </div>
+        <p id="noFactors">You have no factors. Perform a Factor Shift to get one!</p>
+        <p style="color:#FFFFFF">.</p>
+        <text id="factorShift">Factor Shift (0): Requires 200 OP</text> <button onclick="factorShift()">Do a Factor Shift</button>
+        <p>When you Factor Shift, you gain a new factor and the base decreases by 1</p>
+      </div>
+    </div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>

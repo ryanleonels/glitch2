@@ -1,0 +1,210 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+      <meta property="og:site_name" content="Wall Murder">
+    <meta property="og:title" content="CMOWRe">
+    <meta property="og:description" content="again? really?">
+  <title>Commit Murder On Walls: Remeowed</title>
+  <link href="cmowre/dark.css" rel="stylesheet" type="text/css" />
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/cmowremeowed.png?v=1687389813684"
+  />
+   <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+ <script src="https://cdn.jsdelivr.net/npm/notifyjs-browser"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/break_infinity.js"></script>
+  <script src="cmowre/tslib.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@antimatter-dimensions/notations"></script>
+</head>
+
+<body>
+  <span id="newsticker"> </span>
+  <span class="hp"><h1>
+    <span class="blue">You are at <span id="wallname">If you see this, you have found a secret,DM me on discord at teste catss#4175 if you see this</span>Wall</span><br>
+    <button onclick="MoveWall(-1)" class="Wmove">
+        &lt;- Last
+    </button>
+    <span class="blue"><span id="wallnum">0</span>/<span id="wallmax">0</span></span>
+    <button onclick="MoveWall(1)" class="Wmove">
+      Next -&gt;
+    </button>
+    <br>
+    <span class="noimport">You have</span> <span id="money">x</span> $ <br />
+    <span class="noimport">Wall has </span><span id="wallhp">x</span><span class="noimport"> out of <span id="maxwallhp">y</span> </span>HP <br>
+    <span class="noimport" id="wallneed">You need to break this wall <span id="require">n</span> times</span>
+    </h1></span>
+  <span class="atk"><h2>
+    <span class="noimport">You deal </span><span id="dps">x</span> damage<span class="noimport"> per second</span><br />
+    <span class="noimport">and </span><span id="dpc">x</span> damage<span class="noimport"> per click</span>
+    <button id="clickattack" onclick="Attack(1)">Attack!</button>
+    </h2></span>
+  
+  <h2>
+    <button class="button" onclick="currenttab='main'">Main</button>
+    <span id="prestigetab"><button class="prestigebutton" onclick="currenttab='prestige'">Prestige</button></span>
+    <span id="infinitytab"><button class="infinitybutton" onclick="currenttab='infinity'">Bricks</button></span>
+    <button class="button" onclick="currenttab='ach'">Achievements</button>
+    <button class="button" onclick="currenttab='options'">Options</button>
+  </h2>
+  
+  <span id="main">
+  <p>
+    <table align="center">
+    <tr>
+      <td><button class="button" onclick="Cost(2)">Buy Damage Multiplier</button></td>
+      <td>Cost: <span id="bmul">c</span> $ </td>
+      <td><span id="multi">c</span>x multiplier</td>
+      </tr><tr>
+      <td><button class="button" onclick="Cost(1)">Buy Base Damage</button></td>
+      <td>Cost: <span id="bbase">c</span> $  </td>
+      <td><span id="base">X</span> base damage </td>
+      </tr><tr>
+      <td><button class="button" onclick="Cost(3)">Buy Damage Per Second</button></td>
+      <td>Cost: <span id="bper">c</span> $  </td>
+      <td><span id="percen">X</span>% damage for dps</td>
+      </tr></table></p></span>
+
+  <span class="prestige" id="prestige"><h2>You have <span id="pkitten">X</span> Prestige Kittens (<span id="pkboost">1.00</span>x Multiplier)</h2>
+  <p>
+    <button class="prestigebutton" onclick="Prestige()">Gain <span id="pkittengain">Y</span> Prestige Kittens</button> Cost: All your progress before this point. <br>
+    <table align="center">
+    <tr>
+      <td><button class="prestigebutton" onclick="Cost(4)">Buy Prestige Multiplier</button> </td>
+      <td>Cost: <span id="pmulc">c</span> PKs</td>
+      <td><span id="pmul">B</span>x times more PKs <br></td>
+    </tr><tr>
+      <td><button class="prestigebutton" onclick="Cost(5)">Buy Extra Percent</button></td>
+      <td>Cost: <span id="pperc">c</span> PKs</td>
+      <td>+<span id="pper">A</span>% dmg for dps</td>
+    </tr></table>
+    <h3>Challenges</h3><span id="prestigechallanges"><button class="prestigebutton" onclick="d.curpchallange=0; $.notify('Bye Bye Challange!','error')">Exit Challange</button><table align="center">
+    <tr>
+      <td><b>Simple Challenge (PC1)</b></td>
+      <td><b>Prestige<sup>1/2</sup> Challenge (PC2)</b></td>
+    </tr>
+    <tr>
+      <td>Reach Wall <span id="pcha1g">X</span> while <br>your attack is divided by <span id="pcha1w">(5+(conpletions/3))</span></td>
+      <td>Reach <span id="pcha2g">N</span> $ while<br>your prestige multiplier is <span id="pcha2w">X</span>-rooted</td>
+      </tr>
+    <tr>
+      <td><i><span id="pcha1r">Y</span>x more Attack (<span id="pcha1c">N</span> completions)</i></td>
+      <td><i><span id="pcha2r">Y</span>x more $ (<span id="pcha2c">N</span> Completions)</i></td>
+    </tr>
+    <tr>
+      <td><button class="prestigebutton" onclick="PChallange(1)">Start Challange</button></td>
+      <td><button class="prestigebutton" onclick="PChallange(2)">Start Challange</button></td>
+    </tr>
+    </table></span></p></span>
+
+  <span id="infinity" class="infinity"><p>
+    <h2>You have X Brick Cats</h2>
+    <button class="infinitybutton" onclick="InfPrestige()">Gain Brick Cats</button> Cost: <s>Your Soul</s> All your progress before this point <br>
+    <table align="center">
+    <tr>
+      <td><button class="infinitybutton">Buy BC Multiplier</button></td>
+      <td>Cost: c BC</td>
+      <td>dx More BC </td>
+      </tr><tr>
+      <td><button class="infinitybutton">Buy Upg1 Autobuyer</button> </td>
+      <td>Cost: 1000 BC</td>
+      </tr><tr>
+      <td><button class="infinitybutton">Buy Upg2 Autobuyer</button> </td>
+      <td>Cost: 575 BC </td>
+      </tr><tr>
+      <td><button class="infinitybutton">Buy Upg3 Autobuyer</button></td>
+      <td>Cost: 325 BC </td>
+      </tr><tr>
+      <td><button class="infinitybutton">Buy Auto-PK Generator</button> </td>
+      <td>Cost: a BC </td>
+      <td>+b% PK at prestige/s</td>
+      </tr>
+    </table></p></span>
+
+  <span id="ach">
+    <h2 style="color:#ffff00">
+       You Have <span id="achcounter">A</span>/18 Achievements
+    </h2>
+<p>
+<span><table align="center">
+    <tr>
+      <td>Row 1</td>
+      <td class="achieve"><button class="achbu" id="a1" disabled tooltip="First Attack
+Reach Wall 2">01</button></td>
+      <td class="achieve"><button class="achbu" id="a2" disabled tooltip="Upgrade Time!
+Get 10 $">02</button></td>
+      <td class="achieve"><button class="achbu" id="a3" disabled tooltip="Going Idle
+Get Damage Per Second">03</button></td>
+      <td class="achieve"><button class="achbu" id="a4" disabled tooltip="Billionare
+Reach 1.0e9 $">04</button></td>
+      <td class="achieve"><button class="achbu" id="a5" disabled tooltip="NOW THATS A LOT OF DAMAGE
+Reach 1.0e15 Damage">05</button></td>
+      <td class="achieve"><button class="achbu" id="a6" disabled tooltip="Almost...
+Reach Wall 18">06</button></td>
+    </tr>
+  <tr>
+    <td>Row 2</td>
+      <td class="achieve"><button class="achbu" id="a7" disabled tooltip="Reset For Stuff? Okay...?
+Unlock Prestige">07</button></td>
+      <td class="achieve"><button class="achbu" id="a8" disabled tooltip="What Are These?
+Reach 1 Prestige Kitten">08</button></td>
+      <td class="achieve"><button class="achbu" id="a9" disabled tooltip="Multiplier?
+Reach 25 Prestige Kittens">09</button></td>
+      <td class="achieve"><button class="achbu" id="a10" disabled tooltip="This is better... I Guess?
+Upgrade Prestige Multiplier">10</button></td>
+      <td class="achieve"><button class="achbu" id="a11" disabled tooltip="Clickless
+Reach 1% Prestige dps">11</button></td>
+      <td class="achieve"><button class="achbu" id="a12" disabled tooltip="NOW THATS A LOT OF DAMAGE/s
+Reach 1.0e14 Damage per second">12</button></td>
+  </tr><tr>
+  <td>Row 3</td>
+      <td class="achieve"><button class="achbu" id="a13" disabled tooltip="A Challange?
+Start a challenge">13</button></td>
+      <td class="achieve"><button class="achbu" id="a14" disabled tooltip="Okay?
+Complete Challenge 1 once">14</button></td>
+      <td class="achieve"><button class="achbu" id="a15" disabled tooltip="That Was Hard...
+Complete Challenge 1 five times">15</button></td>
+      <td class="achieve"><button class="achbu" id="a16" disabled tooltip="Ah cat, here we go again
+Complete Challenge 2 once">16</button></td>
+      <td class="achieve"><button class="achbu" id="a17" disabled tooltip="Still hard.
+Complete Challenge 2 thrice">17</button></td>
+      <td class="achieve"><button class="achbu" id="a18" disabled tooltip="Why?
+Complete Challenge 2 five times">18</button></td>
+  </tr>
+    </table></span>
+    </p>
+</span>
+
+  <span id="options"> 
+  <p>
+    You started playing <span id="timesincestart">s</span> seconds ago. <br>
+    <a href="https://discord.gg/kx6cRGC6ze"><button class="button">TIG Server</button></a><br>
+    <button class="button" onclick="o.notation+=1">Notation: <span id="notation">n</span> (Click to change)</button>
+    <button class="button" onclick="o.wallnametype+=1">Wall Names: <span id="walltype">w</span></button><br>
+    <button class="button" onclick="Save()">Save Progress</button>
+    <button class="button" onclick="Export()">Export</button>
+    <button class="button" onclick="Import()">Import</button>
+    <button class="button" onclick="HardReset()">HARD RESET!</button><br>
+    <textarea spellcheck="false" rows="13" cols="70" id="savedata">Input Save Data Here</textarea><br>
+    <button class="button" onclick="o.savetime-=100">Faster Autosave</button> Autosave time:<span id="tps">sqrt(-1)</span> <button class="button" onclick="o.savetime+=100">Slower Autosave</button><br>
+    <button class="button" onclick="if(o.alertwb==1){o.alertwb=0}else{o.alertwb=1}">Turn ON/OFF the "you breaked a wall" alert</button>
+  </p>
+    <p>
+      This Game uses <a href="https://notifyjs.jpillora.com/">Notify.js</a>, That i dont take credit for.
+    </p>
+    <h2>Changelog</h2>
+    <h3>v1.4</h3>
+    loading...
+    <h3>v1.3</h3>
+    some new stuff idk just check galaxy
+    </span>
+
+<span id="secret"> 
+ <h2>You found a secret!</h2>
+  <h3>Right now you dont get anything</h3>
+  <button class="gwabutton" onclick="$.notify('gwa','success')"><img src="https://cdn.discordapp.com/emojis/853002327362895882.png"></button><br>
+  <span class="noimport">gwa image provided by Flame</span>
+    </span>
+
+  <script src="cmowre/script.js"></script>
+</body>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Polyncrement</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+    
+    <!-- import the webpage's javascript file -->
+    <script src="OmegaNum.js"></script>
+    <script src="script.js" defer></script>
+    <script src="save.js"></script>
+  </head>
+  <body>
+    <div id="game">
+      <h1 id="display">f(x) = 1<br />f(1) = 1</h1>
+
+      <p id="digits" class="tiny">
+        (100 digits)
+      </p>
+
+      <p id="money_display">
+        $10
+      </p>
+
+      <p id="cashb_text" class="tiny">
+        Cash out your terms. Automation costs $10<sup>7</sup>. Lower digit to
+        permanently increase input.
+      </p>
+      <button id="cashb" onclick="cashout()">
+        + f(1)
+      </button>
+      <button id="cashb_auto">
+        1 click/s
+      </button>
+
+      <p id="input_inc_txt" class="tiny">
+        Increase the input on cash out by trading in 10 linear terms,
+        sacrificing the rest and losing your money.
+      </p>
+      <button id="input_inc" onclick="input_inc()">
+        + 1
+      </button>
+      <button id="auto">
+        auto
+      </button>
+
+      <p id="shop1">
+        Buy a linear term for $10.
+      </p>
+      <button id="linear" onclick="buy(1)">
+        + x
+      </button>
+      <button id="linear_auto" class="invis" onclick="auto_activate(1)">
+        auto past cap
+      </button>
+
+      <p id="shop2" class="invis">
+        Buy a quadratic term for $10,000.
+      </p>
+      <button id="quad" class="invis" onclick="buy(2)">+ x<sup>2</sup></button>
+      <button id="quad_auto" class="invis" onclick="auto_activate(2)">
+        auto past cap
+      </button>
+
+      <p id="shop3" class="invis">
+        Buy a cubic term for $10<sup>7</sup>.
+      </p>
+      <button id="cubic" class="invis" onclick="buy(3)">+ x<sup>3</sup></button>
+      <button id="cubic_auto" class="invis" onclick="auto_activate(3)">
+        auto past cap
+      </button>
+
+      <p id="shop4" class="invis">
+        Buy a quartic term for $10<sup>10</sup>.
+      </p>
+      <button id="quart" class="invis" onclick="buy(4)">+ x<sup>4</sup></button>
+      <button id="quart_auto" class="invis" onclick="auto_activate(4)">
+        auto past cap
+      </button>
+
+      <p id="shop5" class="invis">
+        Buy a quintic term for $10<sup>13</sup>.
+      </p>
+      <button id="quint" class="invis" onclick="buy(5)">+ x<sup>5</sup></button>
+      <button id="quint_auto" class="invis" onclick="auto_activate(5)">
+        auto past cap
+      </button>
+
+      <p id="shop6" class="invis">
+        Buy a hexic term for $10<sup>16</sup>.
+      </p>
+      <button id="hex" class="invis" onclick="buy(6)">+ x<sup>6</sup></button>
+      <button id="hex_auto" class="invis" onclick="auto_activate(6)">
+        auto past cap
+      </button>
+
+      <p id="dig_dec_txt" class="invis">
+        Decrease the number of digits for $10<sup>20</sup> and reseting
+        everything.
+      </p>
+      <button id="dig_dec" class="invis">
+        Decrease
+      </button>
+
+      
+    </div>
+    
+    <div id="options">
+      
+    </div>
+    
+    
+  </body>
+</html>

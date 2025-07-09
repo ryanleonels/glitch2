@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Want to join? Check rules.md first! -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Trollcremental</title>
+
+    <link rel="stylesheet" href="/style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="break_eternity.js"></script>
+    <script src="format.js"></script>
+    <script src="save.js"></script>
+    <script src="ascension.js"></script>
+    <script src="challenges.js"></script>
+    <script src="script.js"></script>
+    <script src="components.js" defer></script>
+    
+  </head>
+  <body onload="load()">
+    <div id="app">
+    <div class="numbertext" id="points">
+      You have {{format(player.points)}} trolling (+{{format(getPointGain())}}/s)
+    </div>
+      <div id="antitrolling">
+        {{(getClickGain().gte(1e24)||getPointGain().gte(1e24))&&!hasUpgrade(313)?("Unfunny#0367, the leader of the anti-troll nation, is attacking! Trolling gain is square rooted above 1e24"):""}}<br>
+        {{(getClickGain().gte(hasUpgrade(105)?"e16000":"e15000")||getPointGain().gte(hasUpgrade(105)?"e16000":"e15000"))&&!hasUpgrade(314)?("NEF2021, the leader of the other anti-troll nation, is attacking! Trolling gain is cube rooted above 1e1"+(hasUpgrade(105)?"6":"5")+"000"):""}}
+<br>{{(getClickGain().gte("e80000")||getPointGain().gte("e80000"))&&!hasUpgrade(314)?("Jacorb, the high god of trolling, is trolling the trolling and making point gain softcapped above e80000 :troll:"):""}}
+        <br><span v-html="getClickGain().gte('ee10')||getPointGain().gte(TEMP_VOIDSTART)?('Voidia, the secret 13th god, is halting your trolling beyond '+format(TEMP_VOIDSTART)+'!'):''">  </span>
+      </div>
+      <div id="challengenumber">
+        {{player.activeChallenge?"You are in "+(player.activeChallenge==5?"The Troll":"challenge "+player.activeChallenge):""}}
+      </div>
+    <div class="trollButton" onclick="doTrolling()">
+      do a little trolling
+    </div>
+    
+    <br>
+    <div id="tabs">
+      <button @click="tab = 'upgrades'">Upgrades</button>
+      <button @click="tab = 'changelog'">Changelog</button>
+      <button @click="tab = 'prestige'" v-if="player.points.gte(100) || player.prestige.gte(1) || player.superprestige.gte(1) || player.ascensionpoints.gte(1)">Prestige</button>
+      <button @click="tab = 'sprestige'" v-if="player.prestige.gte(1e6) || player.superprestige.gte(1) || player.ascensionpoints.gte(1)">Super Prestige</button>
+      <button @click="tab = 'challenges'" v-if="hasUpgrade(211) || player.ascensionpoints.gte(1)">Challenges</button>
+      <button @click="tab = 'ascension'" class="ascensiontab" v-if="player.points.gte('1e40000') || player.ascensionpoints.gte(1) || hasUpgrade(300)">Ascension</button>
+    </div>
+    <br>
+    <div v-if="tab == 'upgrades'">
+    <button class="automation upgrade" onclick="buyAutomation()">
+      Automate your trolling<br>
+      Currently: {{format(getPointGain())}}/s<br>
+      Cost: {{format(getAutomationCost())}}
+    </button>
+    <upgrade type="upgrade" :upgid="0"></upgrade>
+    <upgrade type="upgrade" :upgid="1"></upgrade>
+    <upgrade type="upgrade" :upgid="2"></upgrade>
+    <upgrade type="upgrade" :upgid="3"></upgrade>
+    </div>
+    <div v-if="tab == 'prestige'">
+    <button class="prestige" onclick="prestige()">
+      Sacrifice all of your trolling for {{format(getPrestigeGain())}} prestige points.
+    </button>
+    <div class="prestigepoints">
+      You have {{format(player.prestige)}} prestige points, multiplying trolling gain by {{format(inChallenge(2)?1:player.prestige.add(1).pow(hasChallenge(2)?1.25:1).pow(inChallenge(5)?0.1:1))}}
+      </div>
+      <div id="antiprestige">
+        {{getPrestigeGain().gte(1e50)&&!hasUpgrade(314)?("You have too many prestige points, their gain will now be reduced"):""}}<br>
+        {{getPrestigeGain().gte("ee7")?("You have way too many prestige points, their gain will be reduced again"):""}}
+      </div>
+    <upgrade type="prestigeUpgrade" :upgid="100"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="101"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="102"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="103"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="104" v-if="hasChallenge(1)"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="105" v-if="hasChallenge(2)"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="106" v-if="hasChallenge(3)"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="107" v-if="hasChallenge(4)"></upgrade>
+    <upgrade type="prestigeUpgrade" :upgid="108" v-if="hasUpgrade(107)&&!hasUpgrade(302)"></upgrade>
+    </div>
+    <div v-if="tab == 'sprestige'">
+      <button class="superprestige" onclick="superPrestige()">
+      Sacrifice all of your trolling, upgrades, automation and prestige for {{format(getSPGain())}} super prestige points.
+    </button>
+      <div class="superprestigepoints">
+        You have {{format(player.superprestige)}} super prestige points, multiplying trolling and prestige gain by {{format(player.superprestige.add(1).pow(inChallenge(5)?0.1:1).pow(hasChallenge(101)?2:1))}}
+      </div>
+      <div id="antisprestige">
+        {{getSPGain().gte(1e200)&&!hasUpgrade(314)?("You have produced so many super prestige points that Jacorb, the high god of softcaps, had to stop you!"):""}}
+      </div>
+      <upgrade type="superprestigeUpgrade" :upgid="200"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="201"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="202"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="203"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="204"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="205"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="206"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="207"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="208"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="209"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="210"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="211"></upgrade>
+      <upgrade type="superprestigeUpgrade" :upgid="212"></upgrade>
+      <br>
+      <buyable type="sprestigebuyable" :buyableid="1"></buyable><br><br>
+      <buyable type="sprestigebuyable" :buyableid="2"></buyable><br><br>
+      <buyable type="sprestigebuyable" :buyableid="3"></buyable><br><br>
+      <buyable type="sprestigebuyable" :buyableid="4"></buyable><br><br>
+    </div>
+      <div v-if="tab == 'challenges'">
+         Complete harder super-prestiges for rewards!<br>Each challenge can only be completed once, each of them have their own reward when completed (plus unlocking a new prestige upgrade!).<br><b>Click on a challenge to enter it.</b>
+        <br><br><button onclick="exitChallenge()" id="exitchallenge">Exit or Finish Challenge</button>
+        <br><br><button class="challenge" v-bind:class="{ challengecomplete: hasChallenge(1), 'challengeincomplete': inChallenge(1) }" id="challenge1" onclick="enterChallenge(1)">{{getChallengeDisplay(1)[0]}}<br>{{getChallengeDisplay(1)[1]}}<br>{{getChallengeDisplay(1)[2]}}</button>
+        <button class="challenge" v-bind:class="{ challengecomplete: hasChallenge(2), 'challengeincomplete': inChallenge(2) }" id="challenge2" onclick="enterChallenge(2)">{{getChallengeDisplay(2)[0]}}<br>{{getChallengeDisplay(2)[1]}}<br>{{getChallengeDisplay(2)[2]}}</button>
+        <button class="challenge" v-bind:class="{ challengecomplete: hasChallenge(3), 'challengeincomplete': inChallenge(3) }" id="challenge3" onclick="enterChallenge(3)">{{getChallengeDisplay(3)[0]}}<br>{{getChallengeDisplay(3)[1]}}<br>{{getChallengeDisplay(3)[2]}}</button>
+        <button class="challenge" v-bind:class="{ challengecomplete: hasChallenge(4), 'challengeincomplete': inChallenge(4) }" id="challenge4" onclick="enterChallenge(4)">{{getChallengeDisplay(4)[0]}}<br>{{getChallengeDisplay(4)[1]}}<br>{{getChallengeDisplay(4)[2]}}</button>
+              </div>
+      <div v-if="tab == 'ascension'">
+        <button class="ascensionReset" onclick="ascend()">
+      Reset all previous progress for {{format(getAPGain())}} ascension points.
+        </button>
+        <div class="ascpoints">
+          You have {{format(player.ascensionpoints)}} ascension points.
+        </div>
+        <button @click="subtabs.ascension = 'ascension'" class="tabbtn">
+          Ascension Main
+        </button>
+        <button @click="subtabs.ascension = 'technobabble'" class="tabbtn" v-if="player.trolUnlocks >= 1">
+          Technobabble Gaming
+        </button>
+        <button @click="subtabs.ascension = 'ascchallenges'" class="tabbtn" v-if="hasUpgrade(311)">
+          Ascension Challenges
+        </button>
+        <button @click="subtabs.ascension = 'gifts'" class="tabbtn" v-if="player.ascensionChallenges[1] > 1">
+          Gifts
+        </button><br><br>
+        <div v-if="subtabs.ascension == 'ascension'">
+          <upgrade type="ascensionUpgrade" :upgid="300"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="301" v-if="hasUpgrade(300)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="302" v-if="hasUpgrade(300)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="303" v-if="hasUpgrade(302)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="304" v-if="hasUpgrade(303)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="305" v-if="hasUpgrade(303)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="306" v-if="hasUpgrade(303)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="307" v-if="hasUpgrade(303)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="308" v-if="hasUpgrade(307)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="309" v-if="hasUpgrade(308)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="310" v-if="hasUpgrade(309)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="311" v-if="hasUpgrade(310)"></upgrade><br><br>
+          <upgrade type="ascensionUpgrade" :upgid="312" v-if="hasUpgrade(311)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="313" v-if="hasUpgrade(312)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="314" v-if="hasUpgrade(313)"></upgrade>
+          <upgrade type="ascensionUpgrade" :upgid="315" v-if="hasUpgrade(314)"></upgrade>
+          <buyable type="sprestigebuyable" :buyableid="5"></buyable><br><br>
+          <br><br><button onclick="exitChallenge()" id="exitchallenge2" v-if="hasUpgrade(310)">Exit The Troll</button><br><br>
+          <button class="challenge" v-bind:class="{ challengecomplete: hasChallenge(5), 'challengeincomplete': inChallenge(5) }" id="challenge5" onclick="enterChallenge(5)" v-if="hasUpgrade(310)">{{getChallengeDisplay(5)[0]}}<br>{{getChallengeDisplay(5)[1]}}<br>{{getChallengeDisplay(5)[2]}}</button>
+          <!--enter the troll :troll:-->
+          <div id="trollingpoints" v-if="hasUpgrade(310)">
+            You have {{format(player.trollingpoints)}} trolling points.<br>
+            {{hasMilestone(303)?"They multiply ascension point gain by "+trollingEffect()[0]:""}}<br>
+            {{player.buyables[5].gte(1)?"They give "+trollingEffect()[1]+" free levels to the first 4 buyables.":""}}<br>
+            {{player.buyables[5].gte(2)?"They raise trolling gain to the "+format(trollingEffect()[2])+" in troll runs.":""}}<br>
+            {{player.buyables[5].gte(3)?"They weaken the first troll nerf to ^"+format(trollingEffect()[3])+".":""}}<br>
+            {{getTrolunlockDisplay()}}
+          </div>
+        </div>
+        <div v-if="subtabs.ascension == 'technobabble'">
+          <span style="color: #08f">You have {{format(player.technobabble.points)}} technobabble gaming, which has pissed off {{formatWhole(getPissedScientists())}} scientists (Next At {{format(getNextScientist())}}), raising all normal upgrades to ^{{format(getScientistEffect())}}.</span>
+          <br><span v-if="getPissedScientists().gt(144)">The scientists have realised you are simply some kind of dumbass and not to be taken seriously</span>
+          <br>
+          Your ascension points are generating {{format(getTechnobabblegain())}} technobabble gaming per second.
+          <br><br>
+          <button @click="subtabs.technobabble = 'main'" class="tabbtn">
+            Milestones
+          </button>
+          <button @click="subtabs.technobabble = 'qgp'" class="tabbtn" v-if="hasMilestone(301)">
+            Quark-gluon
+          </button>
+          <button @click="subtabs.technobabble = 'secondary'" class="tabbtn" v-if="hasMilestone(305)">
+            Secondary
+          </button>
+          <br><br>
+          <div v-if="subtabs.technobabble == 'main'">
+            <div class="flexrow">
+              <milestone :mid="301"></milestone>
+              <milestone :mid="302"></milestone>
+            </div>
+            <div class="flexrow">
+              <milestone :mid="303"></milestone>
+              <milestone :mid="304"></milestone>
+            </div>
+            <div class="flexrow">
+              <milestone :mid="305"></milestone>
+            </div>
+          </div>
+          <div v-if="subtabs.technobabble == 'qgp'">
+            <div v-if="hasMilestone(302)">
+              <h2>
+                The thermochanger or something
+              </h2>
+              Quark-gluon plasma starts forming at around 4e12K.<br>Lower than that, they bond together to form <s>Hadrons</s> Quark-gluon gas again.
+              <br><br>
+              Current temperature: {{format(player.technobabble.t)}}K
+              <br>
+              <button :class="{fridgebtn: true, selected: player.technobabble.tSetting == -1}" @click="player.technobabble.tSetting = -1">
+                Decrease
+              </button>
+              <button :class="{fridgebtn: true, selected: player.technobabble.tSetting == 0}" @click="player.technobabble.tSetting = 0">
+                Idle
+              </button>
+              <button :class="{fridgebtn: true, selected: player.technobabble.tSetting == 1}" @click="player.technobabble.tSetting = 1">
+                Increase
+              </button>
+              <br>
+              <button class="fridgebtn" @click="player.technobabble.tSetting = 0; player.technobabble.t = D(5e12)">
+                Reset thermochanger
+              </button>
+            </div>
+            <div v-if="hasMilestone(301)">
+              You have {{format(player.technobabble.qgp)}} Quark-gluon plasma ({{format(soups.qgp.gain())}}/s), multiplying technobabble gaming gain by {{format(soups.qgp.effect())}}
+            </div>
+            <div v-if="hasMilestone(302)">
+              You have {{format(player.technobabble.qgg)}} Quark-gluon gas ({{format(soups.qgg.gain())}}/s), multiplying super prestige point gain by {{format(soups.qgg.effect())}}
+            </div>
+          </div>
+          <div v-if="subtabs.technobabble == 'secondary' && hasMilestone(305)">
+            <span>
+              You have {{format(player.technobabble.higgsF)}} Higgs fermions ({{format(soups.higgsF.gain())}}/s), which are multiplying the effectiveness of all Quark-gluon composites by {{format(soups.higgsF.effect())}}
+            </span>
+            <div v-if="hasMilestone(350)">
+              <span class="photonText">You have {{format(player.technobabble.photons)}} {{player.technobabble.photonType}} Photons ({{format(soups.photons.gain())}}/s), {{soups.photons.effectText()}} {{format(soups.photons.effect())}}</span>
+              <br>
+              <button v-for="type in photonTypes" class="upgradeText upgrade" @click="player.technobabble.photonType = type">
+                Change type to {{type}}
+              </button>
+            </div>
+            <div v-else>
+              <milestone :mid="350"></milestone>
+            </div>
+          </div>
+        </div>
+        <div v-if="subtabs.ascension == 'ascchallenges'">
+          <span style="font-size: 20px;">Aw crap, here we go again.</span><br>
+          Complete Ascension Challenges up to 5 times for rewards!<br>
+          Each time you fully complete an Ascension Challenge, you unlock a new Super-Prestige upgrade.<br>
+          <b>Click on an Ascension Challenge to enter it, and click it again to exit.</b><br><br>
+          <button class="challenge" v-bind:class="{ challengecomplete: player.ascensionChallenges[1]>=1, 'challengeincomplete': inChallenge(101) }" id="challenge101" onclick="enterChallenge(101)">{{getChallengeDisplay(101)[0]}}<br>{{getChallengeDisplay(101)[1]}}<br>{{getChallengeDisplay(101)[2]}}</button>
+          <button class="challenge" v-bind:class="{ challengecomplete: player.ascensionChallenges[2]>=1, 'challengeincomplete': inChallenge(102) }" id="challenge102" onclick="enterChallenge(102)">{{getChallengeDisplay(102)[0]}}<br>{{getChallengeDisplay(102)[1]}}<br>{{getChallengeDisplay(102)[2]}}</button><br>
+          <button class="challenge" v-bind:class="{ challengecomplete: player.ascensionChallenges[3]>=1, 'challengeincomplete': inChallenge(103) }" id="challenge103" onclick="enterChallenge(103)">{{getChallengeDisplay(103)[0]}}<br>{{getChallengeDisplay(103)[1]}}<br>{{getChallengeDisplay(103)[2]}}</button>
+          <button class="challenge" v-bind:class="{ challengecomplete: player.ascensionChallenges[4]>=1, 'challengeincomplete': inChallenge(104) }" id="challenge104" onclick="enterChallenge(104)">{{getChallengeDisplay(104)[0]}}<br>{{getChallengeDisplay(104)[1]}}<br>{{getChallengeDisplay(104)[2]}}</button><br>
+          <button class="challenge" v-bind:class="{ challengecomplete: player.ascensionChallenges[5]>=1, 'challengeincomplete': inChallenge(105) }" id="challenge105" onclick="enterChallenge(105)" v-html="getChallengeDisplay(105).join('<br>')"></button>
+        </div>
+        <div v-if="subtabs.ascension=='gifts'">
+          <span style="font-size: 20px;">Turns out you weren't the only high god...</span><br>
+Appease the other high gods of trolling for rewards!<br>
+You can buy gift boxes using ascension points.
+        </div>
+      </div>
+      <div v-if="tab == 'changelog'">
+        <b>V -1.4</b><br>
+        <p>[IN PROGRESS]</p>
+        <b>V -1.3</b><br>
+        <p>
+          - Internally, changed how point gain <b>multipliers</b> and <b>softcaps</b> are handled<br><i>You probably won't notice this unless we broke something</i>
+        </p>
+        <p>
+          - Added Ascension challenge 1
+        </p>
+        <b>V -1.2</b><br>
+        <p>
+          - Changed <b>softcap</b> message of pissed off scientists 
+        </p><p>
+          - Added ascension challenges's framework
+        </p>
+        <br><br>
+        <b>V -1.1</b><br>
+        <p>
+          - Added <b>changelog</b>
+        </p>
+        <br><br>
+        <b>V -1.0</b><br>
+        <p>- Added trolling, upgrades, ascension, prestige, super prestige, challenges, prestige upgrades, super prestige upgrades, ascension upgrades, The Troll, technobabble gaming, and quark-gluon plasma</p>
+        <p>- Added saving and format and also some css stuff</p>
+      </div>
+    </div>
+  </body>
+  <footer >
+    <br><br>
+    <button class="save" onclick="save()">
+      Save the game
+    </button>
+    <button class="save" onclick="importSave()">
+      Import save
+    </button>
+    <button class="save" onclick="exportSave()">
+      Export save
+    </button>
+    <button class="edit" onclick="scooch()">    
+    Edit the code
+    </button>
+    <button class="discord" onclick="location.href=discord">    
+    Join the discord
+    </button>
+    <button class="hardReset" onclick="hardReset()">
+      Hard Reset
+    </button>
+    <div>
+      Credits:<br>
+      All the actually important stuff: Mkey, Upvoid, Randomtuba, Unpingabot, Yhvr, Jacorb, gapples2,  Scar, and everyone else who helped <br>
+      Graphics and some upgrades: Spelpotatis
+    </div>
+    </footer>
+</html>

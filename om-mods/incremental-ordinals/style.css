@@ -1,0 +1,569 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: sans-serif;
+  color: white;
+  background-color: black;
+  margin: 0;
+  /* background-image: url(https://wallpaperplay.com/walls/full/2/5/0/200799.jpg); */
+}
+
+#root {
+  margin: 32px;
+}
+
+.header {
+  font-size: 40px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 26.666666666666666667px;
+}
+
+h3 {
+  font-size: 22.857142857142857143px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 13.333333333333333333px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+.header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: block;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+p {
+  margin: 16px 0;
+}
+
+space {
+  display: inline-block;
+}
+
+break {
+  display: block;
+  height: 1em;
+}
+
+button,
+input {
+  font-family: sans-serif;
+  font-size: 13.333333333333333333px;
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+button:hover,
+input:hover {
+  background-color: #EFEFEF;
+}
+
+big {
+  font-size: 20px;
+}
+
+small {
+  font-size: 13.333333333333333333px;
+}
+
+noscript {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: black;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#noScript {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.largeButton {
+  font-size: 17.777777777777777778px;
+  height: 30px;
+}
+
+/* .assignButton {
+  font-size: calc(40pt / 3);
+} */
+
+#hardy {
+  height: 64px;
+}
+
+.thicc {
+  font-size: 20px !important;
+  height: 60px;
+}
+
+.saveButton {
+  border: 2px solid lime !important;
+}
+
+.importButton {
+  border: 2px solid #0080FF !important;
+}
+
+#resetButton {
+  font-weight: bold;
+  color: red;
+  border: 2px solid red;
+}
+
+#resetButton:hover {
+  color: white;
+  background-color: red;
+}
+
+#achieveTable {
+  width: 1250px;
+}
+
+.achievement {
+  font-size: 15px;
+  background-color: gray;
+  width: 125px;
+  height: 125px;
+  border-radius: 4px;
+}
+
+.earned {
+  background-color: green;
+}
+
+.slugMile {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+[tooltip] {
+  position: relative;
+  z-index: 2;
+}
+
+[tooltip]:before,
+[tooltip]:after {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[tooltip]:before {
+  font-size: 12px;
+  position: absolute;
+  top: -10px;
+  /*margin-bottom: -60pt;*/
+  padding: 10px;
+  border-radius: 4px;
+  width: 100px;
+  background-color: black;
+  color: white;
+  content: attr(tooltip);
+  transition-duration: 0.2s;
+  z-index: 4;
+  text-align: center;
+  left: 50%;
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+}
+
+[tooltip]:hover:before {
+  visibility: visible;
+  opacity: 1;
+  z-index: 5;
+}
+
+#factorContainer {
+  height: 250px;
+}
+
+#checkIncrementy {
+  font-weight: bold;
+}
+
+#progressBar {
+  background-color: #A0A0A0;
+}
+
+#progressBarProg {
+  color: black;
+  background-color: lime;
+  text-align: center;
+}
+
+#manualClicksLeft {
+  font-weight: bold;
+}
+
+#debug {
+  font-size: 10.666666666666666667px !important;
+}
+
+.infinityButton {
+  color: white;
+  background-color: black;
+  border: 2px outset #B67F33;
+}
+
+.infinityButton:hover {
+  color: black;
+  background-color: #B67F33;
+}
+
+.infinityButton:active {
+  border-style: inset;
+}
+
+.darkButton {
+  color: white;
+  background-color: black;
+  border: 2px outset gray;
+}
+
+.darkButton:hover {
+  background-color: black;
+  border: 2px outset black;
+}
+
+.darkButton:active {
+  border-style: inset;
+}
+
+.boosterButton {
+  color: #8080FF;
+  background-color: black;
+  border: 2px solid blue;
+}
+
+.boosterButton:hover {
+  color: navy;
+  background-color: white;
+}
+
+.collapseButton {
+  color: lightgreen;
+  background-color: black;
+  border: 2px solid green;
+}
+
+.collapseButton:hover {
+  color: white;
+  background-color: green;
+}
+
+.singularity {
+  color: white;
+  background-color: black;
+  border: 2px solid green;
+}
+
+.singularity:hover {
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+}
+
+.treeButton {
+  font-size: 17.777777777777777778px;
+  width: 200px;
+  height: 100px;
+  padding: 1.2px 7.2px;
+}
+
+.locked {
+  color: black !important;
+  background-color: white !important;
+  border: 2px solid black;
+  cursor: not-allowed;
+}
+
+/* .locked:hover {
+  color: black;
+  background-color: white;
+} */
+
+.canbuy:hover {
+  background-color: green;
+}
+
+.bought {
+  color: black !important;
+  background-color: lime !important;
+  border: 2px solid black;
+  cursor: default;
+}
+
+/* .bought:hover {
+  color: black;
+  background-color: lime;
+} */
+
+.singfunc {
+  margin: 13.333333333333333333px 11.111111111111111111px;
+}
+
+.sfRow {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+#sfTable td,
+#sfTable2 td {
+  display: inline;
+  padding: 0;
+}
+
+#sfTable,
+#sfTable2 {
+  width: 100%;
+}
+
+.sfLocked {
+  color: gray !important;
+  border: 2px solid #004000 !important;
+  cursor: not-allowed;
+}
+
+.sfBought {
+  color: black !important;
+  background-color: lime !important;
+  border: 2px solid green !important;
+  cursor: default;
+}
+
+#functions,
+#functions2 {
+  color: white;
+  background-color: black;
+  border: 2px solid green;
+  border-radius: 4px;
+  width: 434px;
+  height: 94px;
+  padding: 1px 6px;
+  position: fixed;
+  left: calc(50% - 225px);
+  bottom: 0;
+}
+
+#singRange {
+  width: 50%;
+}
+
+.challenge {
+  font-size: 15px;
+  width: 300px;
+  height: 150px;
+}
+
+#compChal {
+  font-size: 20px;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+.assignButton {
+  width: 106.666666666666666667px;
+  height: 35.555555555555555556px;
+}
+
+#collapseScreen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: black;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#collapseScreenText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 133.333333333333333333px;
+  font-weight: bold;
+  font-family: Comic Sans MS;
+  color: lightgreen;
+}
+
+#whitescreen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#whitescreenText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+  font-family: serif;
+  color: black;
+}
+
+#enterIncrementyverse {
+  font-size: 40px;
+  font-weight: bold;
+  color: blue;
+  width: 50%;
+  height: 200px;
+  border: 4px solid blue;
+  border-radius: 16px;
+  background: url("https://cdn.glitch.com/6f7e4eb0-585a-45ff-a8c1-2d13a9a7d93f%2Fvortex3.gif?v=1596905007129")
+    no-repeat center;
+  background-size: cover;
+  text-shadow: 4px 4px 4px blue;
+  transition-duration: 0.2s;
+}
+
+#enterIncrementyverse2 {
+  font-size: 40px;
+  font-weight: bold;
+  color: blue;
+  width: 50%;
+  height: 50%;
+  border: 4px solid blue;
+  border-radius: 16px;
+  background: url("https://cdn.glitch.com/6f7e4eb0-585a-45ff-a8c1-2d13a9a7d93f%2Fvortex3.gif?v=1596905007129")
+    no-repeat center;
+  background-size: cover;
+  text-shadow: 4px 4px 4px blue;
+  transition-duration: 0.2s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#enterIncrementyverse:hover {
+  text-shadow: 4px 4px 4px #8000FF;
+}
+
+.fractalEngine {
+  width: 100%;
+  font-size: 17.777777777777777778px;
+}
+
+#fractalShiftButton {
+  font-size: 17.777777777777777778px;
+  width: 350px;
+  height: 180px;
+}
+
+.tabButton {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  width: 120px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.tabButton:hover {
+  background-color: #DFDFDF;
+}
+
+#infinityTabButton {
+  color: white;
+  background-color: black;
+  border: 2px solid #B67F33;
+}
+
+#infinityTabButton:hover {
+  color: black;
+  background-color: #B67F33;
+}
+
+#boosterTabButton {
+  color: blue;
+  background-color: black;
+  border: 2px solid blue;
+}
+
+#boosterTabButton:hover {
+  color: navy;
+  background-color: white;
+}
+
+#collapseTabButton {
+  color: lightgreen;
+  background-color: black;
+  border: 2px solid green;
+}
+
+#collapseTabButton:hover {
+  color: white;
+  background-color: green;
+}
+
+#incrementyverseTabButton {
+  color: blue;
+  background-color: black;
+  border: 2px solid blue;
+}
+
+#incrementyverseTabButton:hover {
+  color: navy;
+  background-color: white;
+}

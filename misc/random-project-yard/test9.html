@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <title>Merge Game</title>
+    <style>
+      #money {
+        text-align: center;
+        font-size: 35px;
+      }
+
+      .mergezone {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #0000dd;
+      }
+
+      .mergezone > div {
+        border-radius: 0%;
+      }
+
+      .mergezone > div.block {
+        background-color: #222222;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block1 {
+        background-color: green;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block2 {
+        background-color: tomato;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block3 {
+        background-color: cyan;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block4 {
+        background-color: indigo;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block5 {
+        background-color: lightgreen;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block6 {
+        background-color: sandybrown;
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block7 {
+        background-image: linear-gradient(to right, red, crimson);
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block8 {
+        background-image: linear-gradient(to right, tomato, orange);
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block9 {
+        background-image: linear-gradient(to right, indigo, cyan);
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+
+      .mergezone > div.block10 {
+        background-image: linear-gradient(to right, hotpink, lime);
+        width: 45px;
+        height: 45px;
+        margin: 7px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="money"></p>
+
+    <div class="mergezone">
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <br />
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="block"></div>
+    </div>
+
+    <center>
+      <button onclick="merge()">Merge</button>
+      <button id="upgs" onclick="betterBlock()">1+ tier ($500)</button>
+    </center>
+
+    <script>
+      document.getElementById("money").innerHTML = 0;
+      var money = 0;
+      var cost = 500;
+      var blocks = 0;
+
+      function betterBlock() {
+        if (money >= cost) {
+          blocks++;
+          money -= cost;
+          cost *= 1.85;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+          document.getElementById("upgs").innerHTML =
+            "1+ tier ($" + cost.toFixed(0) + ")";
+          if (blocks == 1) {
+            document.getElementsByClassName("block1")[0].className = "block";
+          }
+          if (blocks == 2) {
+            document.getElementsByClassName("block2")[0].className = "block";
+          }
+          if (blocks == 3) {
+            document.getElementsByClassName("block3")[0].className = "block";
+          }
+          if (blocks == 4) {
+            document.getElementsByClassName("block4")[0].className = "block";
+          }
+        }
+      }
+
+      function merge() {
+        if (document.getElementsByClassName("block")[0]) {
+          if (blocks == 0) {
+            document.getElementsByClassName("block")[0].className = "block1";
+            money++;
+          }
+          if (blocks == 1) {
+            document.getElementsByClassName("block")[0].className = "block2";
+            money += 3;
+          }
+          if (blocks == 2) {
+            document.getElementsByClassName("block")[0].className = "block3";
+            money += 9;
+          }
+          if (blocks == 3) {
+            document.getElementsByClassName("block")[0].className = "block4";
+            money += 27;
+          }
+          if (blocks == 4) {
+            document.getElementsByClassName("block")[0].className = "block5";
+            money += 81;
+          }
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block1")[1]) {
+          document.getElementsByClassName("block1")[0].className = "block2";
+          document.getElementsByClassName("block1")[0].className = "block";
+          money += 3;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block2")[1]) {
+          document.getElementsByClassName("block2")[0].className = "block3";
+          document.getElementsByClassName("block2")[0].className = "block";
+          money += 9;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block3")[1]) {
+          document.getElementsByClassName("block3")[0].className = "block4";
+          document.getElementsByClassName("block3")[0].className = "block";
+          money += 27;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block4")[1]) {
+          document.getElementsByClassName("block4")[0].className = "block5";
+          document.getElementsByClassName("block4")[0].className = "block";
+          money += 81;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block5")[1]) {
+          document.getElementsByClassName("block5")[0].className = "block6";
+          document.getElementsByClassName("block5")[0].className = "block";
+          money += 243;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block6")[1]) {
+          document.getElementsByClassName("block6")[0].className = "block7";
+          document.getElementsByClassName("block6")[0].className = "block";
+          money += 729;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block7")[1]) {
+          document.getElementsByClassName("block7")[0].className = "block8";
+          document.getElementsByClassName("block7")[0].className = "block";
+          money += 2187;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block8")[1]) {
+          document.getElementsByClassName("block8")[0].className = "block9";
+          document.getElementsByClassName("block8")[0].className = "block";
+          money += 6561;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+        if (document.getElementsByClassName("block9")[1]) {
+          document.getElementsByClassName("block9")[0].className = "block10";
+          document.getElementsByClassName("block9")[0].className = "block";
+          money += 19683;
+          document.getElementById("money").innerHTML = "$" + money.toFixed(0);
+        }
+      }
+    </script>
+  </body>
+</html>

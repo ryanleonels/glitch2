@@ -1,0 +1,312 @@
+body {
+  font-family: 'Cascadia Mono', monospace;
+  margin: 0px;
+  background-color: #222222;
+  margin: 7.5px;
+  color: white;
+  text-align: center;
+  cursor: url('https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/mouse1normal.png?v=1710012110232'),  auto;
+}
+button {
+  user-select: none;
+  font-family: 'Cascadia Mono', monospace;
+  border-color: #696969;
+  border: 3px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  cursor: url('https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/mouse1onclick.png?v=1710012110586'),  auto;
+}
+#newstickernomar{
+margin:0
+}
+#catlimitnomar{
+  margin: 0px
+}
+.nomarginh3 {
+  margin: 1px
+}
+.nomarginh2 {
+  margin: 0px
+}
+.vu0button {
+  background-color: #dddddd;
+  border-color: #dddddd;
+  width: 90vw;
+    color: black
+}
+.vu0button:hover {
+  background-color: #bbbbbb;
+  border-color: #bbbbbb;
+    width: 90vw;
+  color:black
+}
+.vu1button {
+  background-color: #ff00ff;
+  border-color: #ff00ff;
+  width: 90vw;
+    color: white
+}
+.unimport {
+  color: #bbbbbb;
+  font-size:0.5em;
+}
+h1 {
+  margin: 3px
+}
+h2 {
+  margin:1.5px
+}
+.main {
+  color: default;
+  opacity: 0.75
+}
+
+.red {
+  color: #ff0000
+}
+.yellow {
+  color: #ffff00
+}
+.green {
+  color: #00ff00
+}
+.cyan {
+  color: #00ffff
+}
+.blue {
+  color: #0000ff
+}
+.magenta {
+  color: #ff00ff
+}
+.button {
+  background-color: #dddddd;
+  border-color: #dddddd
+}
+textarea {
+  resize: none;
+  cursor: url('https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/mouse1onclick.png?v=1710012110586'),  auto;
+}
+.button:hover {
+  background-color: #bbbbbb;
+  border-color: #bbbbbb
+}
+.tabbutton{
+  background-color: #dddddd;
+  border-color: #dddddd;
+     font-size: 20px;
+}
+.tabbutton:hover{
+  background-color: #bbbbbb;
+  border-color: #bbbbbb
+}
+td{
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align:center;
+}
+.energytable{
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  text-align:center;
+}
+#catlimbutton {
+  background-color: #0000ff;
+  border-color: #0000ff;
+  color: white;
+}
+#catlimbutton:hover {
+  background-color: #000099;
+  border-color: #000099;
+  color: white
+}
+#catcoinbutton{
+  background-color:#ffff00;
+  border-color:#ffff00
+}
+#catcoinbutton:hover{
+  background-color:#999900;
+  border-color:#999900
+}
+#catgodbutton{
+  background-color:#ff0000;
+  border-color:#ff0000
+}
+#catgodbutton:hover{
+  background-color:#990000;
+  border-color:#990000
+}
+#hypercatsbutton{
+  background-color:#00ff00;
+  border-color:#00ff00
+}
+#hypercatsbutton:hover{
+  background-color:#009900;
+  border-color:#009900
+}
+#energybutton{
+  background-color:#00ffff;
+  border-color:#00ffff
+}
+#energybutton:hover{
+  background-color:#009999;
+  border-color:#009999
+}
+#voidbutton {
+  background-color:#ff00ff;
+  border-color:#ff00ff
+}
+#voidbutton:hover {
+  background-color:#990099;
+  border-color:#990099
+}
+#buyall{
+  color:black;
+border-color: white;
+background: linear-gradient(90deg,
+    hsl(0, 100%, 50%),
+    hsl(30, 100%, 50%),
+    hsl(60, 100%, 50%),
+    hsl(90, 100%, 50%),
+    hsl(120, 100%, 50%),
+    hsl(150, 100%, 50%),
+    hsl(180, 100%, 50%),
+    hsl(210, 100%, 50%),
+    hsl(240, 100%, 50%),
+    hsl(270, 100%, 50%),
+    hsl(300,100%,50%)
+  );
+}
+#buyall:hover{
+  color:white;
+border-color: white;
+background: linear-gradient(90deg,
+    hsl(0, 100%, 30%),
+    hsl(30, 100%, 30%),
+    hsl(60, 100%, 30%),
+    hsl(90, 100%, 30%),
+    hsl(120, 100%, 30%),
+    hsl(150, 100%, 30%),
+    hsl(180, 100%, 30%),
+    hsl(210, 100%, 30%),
+    hsl(240, 100%, 30%),
+    hsl(270, 100%, 30%),
+    hsl(300,100%,50%)
+  );
+}
+progress {
+  border-radius: 7px; 
+  width: 40%;
+  height: 16px;
+}
+progress::-webkit-progress-bar {
+  background-color: #333333;
+  border-radius: 3px;
+}
+progress::-webkit-progress-value {
+  background-color: #0000ff;
+  border-radius: 3px;
+}
+#overlay {
+    background-color: rgba(0,0,0,0.5); /* your color */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events:none;
+      z-index:10
+}
+/* jackorb [] tooltip */
+    [tooltip] {
+      position: relative;
+      z-index: 2;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    [tooltip]:before,
+    [tooltip]:after {
+      visibility: hidden;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+      pointer-events: none;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:before {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-bottom: 5px;
+      margin-left: -80px;
+      padding: 7px;
+      width: 160px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: white;
+      content: attr(tooltip);
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.2;
+      transition-duration: 0.5s;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:after {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      width: 0;
+      border-top: 5px solid rgba(0, 0, 0, 0.75);
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+      content: " ";
+      font-size: 0;
+      line-height: 0;
+      transition-duration: 0.5s;
+      white-space: pre-wrap;
+    }
+
+    [tooltip]:hover:before,
+    [tooltip]:hover:after {
+      visibility: visible;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+      filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+      opacity: 1;
+      white-space: pre-wrap;
+    }
+
+#myturn span {
+    position: absolute;
+    display: inline-block;
+    color: #ffffff;
+    text-align: right;
+}
+
+#myturn {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+#catspacesong {
+  cursor: url('https://cdn.glitch.global/1be1d1e2-9728-453c-8f0d-285db27f9993/mouse1onclick.png?v=1710012110586'),  auto;
+}
+#loafing {
+  color: #ffffff;
+  font-size: 10em;
+background-color: rgba(0,0,0,1); /* your color */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events:none;
+      z-index:10
+}

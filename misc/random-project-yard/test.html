@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Magnet Revival Oldest</title>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            body {
+                font-family: 'Inconsolata';
+                font-size: 22px;
+            }
+
+            noscript {
+                font-family: 'Open Sans';
+            }
+
+            .button {
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                font-family: 'Inconsolata';
+                font-size: 17px;
+            }
+
+            .button7 {
+                color: black;
+                font-family: 'Inconsolata';
+                font-size: 17px;
+            }
+
+            .tablinks {
+                border: none;
+                color: red;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                font-family: 'Inconsolata';
+                font-size: 17px;
+            }
+
+            .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                border-top: none;
+            }
+
+            .button1 {
+                background-image: url("https://cdn.glitch.global/933d6f5d-1512-40dc-87ad-2978eac0d0fc/magnet1.png?1694044401630");
+            }
+
+            .button2 {
+                background-color: black;
+            }
+
+            .button3 {
+                background-color: black;
+            }
+
+            .button4 {
+                background-color: black;
+            }
+
+            .button5 {
+                background-color: black;
+            }
+
+            .button6 {
+                background-color: black;
+            }
+
+            .button7 {
+                background-color: red;
+            }
+
+            .tablinks {
+                background-color: #880000;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var game = {
+                magnets: 0,
+                goldMagnets: 0,
+                diamondMagnets: 0,
+                legendaryMagnets: 0
+            }
+
+            var multiply = 1;
+            var goldMagnetCost = 500;
+            var goldMagnetGain = 1;
+
+            setInterval(()=>{
+
+                document.getElementById("yourStats").innerHTML = "Your Magnets: " + game.magnets + ".<br>Your Multiplier: " + multiply + "x.<br>Gold Magnets: " + game.goldMagnets + ".<br>Current Gold Magnet Cost: " + goldMagnetCost + " Magnets.<br>Diamond Magnets: " + game.diamondMagnets + ".<br>Legendary Magnets: " + game.legendaryMagnets + ".";
+            }
+            , 1000);
+
+            function earnMoney() {
+                game.magnets = game.magnets + multiply;
+                document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+            }
+
+            function earnMultiplier() {
+                while (game.magnets > 25) {
+                    game.magnets = game.magnets - 25;
+                    multiply = multiply + 1;
+                    document.getElementById("stats").innerHTML = "Your Multiplier = " + multiply + "x.";
+                    document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+                }
+            }
+
+            function earnSecondMultiplier() {
+                while (game.magnets > 50) {
+                    game.magnets = game.magnets - 50;
+                    multiply = multiply + 2;
+                    document.getElementById("stats").innerHTML = "Your Multiplier = " + multiply + "x.";
+                    document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+                }
+            }
+
+            function earnThirdMultiplier() {
+                while (game.magnets > 100) {
+                    game.magnets = game.magnets - 100;
+                    multiply = multiply + 4;
+                    document.getElementById("stats").innerHTML = "Your Multiplier = " + multiply + "x.";
+                    document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+                }
+            }
+
+            function earnFourthMultiplier() {
+                while (game.magnets > 200) {
+                    game.magnets = game.magnets - 200;
+                    multiply = multiply + 8;
+                    document.getElementById("stats").innerHTML = "Your Multiplier = " + multiply + "x.";
+                    document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+                }
+            }
+
+            function goldMagnets() {
+                while (game.magnets > goldMagnetCost) {
+                    game.magnets = 0;
+                    goldMagnetCost = goldMagnetCost * 1.3;
+                    multiply = multiply * 1.3;
+                    game.goldMagnets = game.goldMagnets + goldMagnetGain;
+                    document.getElementById("stats").innerHTML = "Your Multiplier = " + multiply + "x.";
+                    document.getElementById("display").innerHTML = "You have " + game.magnets + " Magnets, and you have " + game.goldMagnets + " Gold Magnets.";
+                }
+            }
+
+            function resetWholeGame() {
+                let confirmed = confirm("Are you sure? Hard reset means, lose all your progress, your magnets, prestiges, and EVERYTHING. Once you did it, you cannot reverse!");
+                confirmed = confirm("Really wanna reset your game?");
+                confirmed = confirm("Final Warning!!");
+                if (confirmed) {
+                    game.magnets = 0;
+                    game.goldMagnets = 0;
+                    multiply = 1;
+                    goldMagnetCost = 500;
+                    goldMagnetGain = 1;
+                    game.diamondMagnets = 0;
+                    game.legendaryMagnets = 0;
+                    setTimeout(()=>{
+                        window.location.reload();
+                    }
+                    , 600);
+                }
+            }
+
+            /////////////////////////////////////////////////////////
+
+            function tab(evt, tabs) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabs).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            function hideTabs() {
+                document.getElementById("Stats").style.display = "none";
+                document.getElementById("About").style.display = "none";
+            }
+        </script>
+        <h2 id="display"></h2>
+        <h3 id="stats"></h3>
+        <button class="button button1" onclick="earnMoney()">Gain Magnets</button>
+        <button class="button button2" onclick="earnMultiplier()">Gain 1st Multiplier</button>
+        <button class="button button3" onclick="earnSecondMultiplier()">Gain 2nd Multiplier</button>
+        <button class="button button4" onclick="earnThirdMultiplier()">Gain 3rd Multiplier</button>
+        <button class="button button5" onclick="earnFourthMultiplier()">Gain 4th Multiplier</button>
+        <button class="button button6" onclick="goldMagnets()">Earn Gold Magnets</button>
+        <div class="tab">
+            <button class="tablinks" onclick="tab(event, 'Stats')">Stats</button>
+            <button class="tablinks" onclick="tab(event, 'About')">About</button>
+            <button class="tablinks" onclick="tab(event, 'Help')">Help</button>
+            <button class="tablinks" onclick="hideTabs()">Hide</button>
+        </div>
+        <div id="Stats" class="tabcontent">
+            <h3>All Player Stats</h3>
+            <p id="yourStats">Loading...</p>
+            <button class="button button7" onclick="resetWholeGame()">HARD RESET GAME</button>
+        </div>
+        <div id="About" class="tabcontent">
+            <h3>About</h3>
+            <p id="about">
+                Revival of the old The Magnet Game. Lots of stuff was broken in the old one so I decided to remake it. Has no saving system, don't refresh if you don't wanna lose progress.<br>
+                <br>Version 2.0-revival. 2021
+            </p>
+        </div>
+        <div id="Help" class="tabcontent">
+            <h3>Help Tab</h3>
+            <h3>
+                How to play this game? You have come to the right place.<br>
+                In this game, magnets and gold magnets are the main currency of the game.<br>
+                Each button click gives you a certain number of magnets.<br>
+                There is 4 different buttons for continuously increasing your magnet multiplier, if you cannot afford the larger ones.<br>
+                At 500 magnets, you can get Gold Magnets and increase your magnet multiplier by 1.3x.<br>
+                Buying Gold Magnets means all other magnets are removed.<h3>
+        </div>
+        <noscript>
+            <h1 style="color:Red;">Cannot load game. In order to play, please enable JavaScript.</h1>
+            <h2 style="color:#880000;">In order to play, please go to Settings=>Privacy and Security=>JavaScript=>Turn switch to allowed. After that, reload page.</h2>
+        </noscript>
+    </body>
+</html>

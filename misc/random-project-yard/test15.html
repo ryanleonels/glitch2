@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .flexcontainer {
+        display: flex !important;
+        flex-flow: row wrap;
+        justify-content: left;
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #000;
+      }
+    </style>
+    <title>Color Changing CSS Gradient using JavaScript</title>
+  </head>
+  <!-- you can do similar with the keyframes property but I decided not to -->
+  <body style="background-color: #000">
+    <div class="flexcontainer">
+      <div id="linear" style="width: 50%; height: 200px">
+      </div>
+      <div id="radial" style="width: 50%; height: 200px">
+      </div>
+    </div>
+    <div class="flexcontainer">
+      <div id="conic" style="width: 100%; height: 200px">
+      </div>
+      <div id="checker" style="width: 100%; height: 200px">
+      </div>
+    </div>
+
+    <script>
+      /*if(navigator.userAgent.indexOf("Windows NT 5.1") > -1) {
+        alert("Conic Gradients are not supported on your browser and operating system! You can continue to this page, but there will be no secondary gradient wallpaper to be shown.");
+      } else if(navigator.userAgent.indexOf("Windows NT 5.0") > -1) {
+        alert("Conic Gradients are not supported on your browser and operating system! You can continue to this page, but there will be no secondary gradient wallpaper to be shown.");
+      }*/
+      
+      var degrees = 0;
+      var degrees2 = 0;
+      var degrees3 = 0;
+      var degrees4 = 0;
+      var degrees5 = 100;
+      
+      setInterval(() => {
+        degrees++;
+        document.getElementById("linear").style.background =
+          "linear-gradient(" + degrees + "deg, hsl(" + degrees + ", 100%, 50%), hsl(" + (degrees / 2) + ", 100%, 50%)";
+        degrees2++;
+        document.getElementById("radial").style.background =
+          "radial-gradient(hsl(" + degrees2 + ", 100%, 50%), hsl(" + (degrees2 / 2) + ", 100%, 50%), hsl(" + (degrees2 / 4) + ", 100%, 50%)";
+        degrees3++;
+        document.getElementById("conic").style.background =
+          "conic-gradient(from " + degrees3 + "deg, hsl(" + degrees3 + ", 100%, 50%), hsl(" + (degrees3 / 2) + ", 100%, 50%), hsl(" + (degrees3 / 4) + ", 100%, 50%), hsl(" + (degrees3 / 8) + ", 100%, 50%), hsl(" + (degrees3 / 4) + ", 100%, 50%), hsl(" + (degrees3 / 2) + ", 100%, 50%), hsl(" + degrees3 + ", 100%, 50%)";
+        degrees4++;
+        degrees5 /= 1.00025;
+        if(degrees5 >= 0.275) { // 0.24676
+          document.getElementById("checker").style.background =
+          `conic-gradient(
+           hsl(` + degrees4 + `, 100%, 50%) 0.25turn,
+           hsl(` + (degrees4 / 2) + `, 100%, 50%) 0.25turn 0.5turn,
+           hsl(` + degrees4 + `, 100%, 50%) 0.5turn 0.75turn,
+           hsl(` + (degrees4 / 2) + `, 100%, 50%) 0.75turn
+           )` + `top left / ` + degrees5 + `% ` + degrees5 + `% repeat`
+        }
+      });
+      function randomInt(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+    </script>
+  </body>
+</html>

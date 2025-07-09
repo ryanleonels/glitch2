@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="900" height="600" onclick="gainWood(), gainStone()" onmousemove="findCoords()"
+style="border:1px solid #c3c3c3;">
+</canvas>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.fillStyle = "#89a54c";
+ctx.fillRect(0,0,900,600);
+
+var wood = 0;
+var stone = 0;
+var food = false;
+var speed = .32;
+var y;
+var z;
+
+var X = 0;
+var Y = 0;
+var botX = 0;
+var botY = 0;
+var rand = 1;
+var cordX = Math.floor(Math.random() * 901);
+var cordY = Math.floor(Math.random() * 600);
+
+X = Math.floor(Math.random() * 901);
+Y = Math.floor(Math.random() * 601);
+botX = Math.floor(Math.random() * 901);
+botY = Math.floor(Math.random() * 601);
+
+var down = 0, up = 0, left = 0, right = 0
+
+function move(a, b, c, d) {
+  var x = 0.2;
+  var y = 0;
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.fillRect(a, b, c, d);
+  a += x;
+  b += y;
+}
+
+
+drawTree();
+var drawn = 0;
+setTimeout(() => {
+  build(y, z)
+}, 2500);
+
+setInterval(() => {
+  rand = Math.floor(Math.random() * 5);
+}, 300);
+
+function drawTree(a, b) {
+  ctx.beginPath();
+  ctx.strokeStyle = "#576930";
+  ctx.arc(a,b,82,0,2*Math.PI);
+  ctx.fillStyle = "#748c40";
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = "#b6db66";
+  ctx.arc(a,b,62,0,2*Math.PI);
+  ctx.fillStyle = "#89a54c";
+  ctx.fill();
+  ctx.stroke();
+}
+
+function drawGrass(a, b) {
+  ctx.beginPath();
+  ctx.strokeStyle = "#89a54c";
+  ctx.arc(a,b,4,0,2*Math.PI);
+  ctx.fillStyle = "#576930";
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = "#b6db66";
+  ctx.arc(a,b,3,0,2*Math.PI);
+  ctx.fillStyle = "#89a54c";
+  ctx.fill();
+  ctx.stroke();
+}
+
+function drawRock(a, b) {
+  ctx.beginPath();
+  ctx.strokeStyle = "#878787";
+  ctx.arc(a,b,52,0,2*Math.PI);
+  ctx.fillStyle = "#acacac";
+  ctx.fill();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.strokeStyle = "#acacac";
+  ctx.arc(a,b,35,0,2*Math.PI);
+  ctx.fillStyle = "#cccccc";
+  ctx.fill();
+  ctx.stroke();
+}
+
+function build(a, b) {
+  if(wood >= 0) {
+  }
+}
+
+document.addEventListener("keydown", function(a) {
+  if(a.keyCode == 66) {
+    build(y, z);
+  }
+});
+
+function update() {
+  ctx.fillStyle = "#89a54c";
+  ctx.fillRect(0,0,900,900);
+  //ctx.fillStyle = "#fff";
+  //ctx.fillRect(X, Y, 30, 30);
+  ctx.beginPath();
+  ctx.strokeStyle = "#86592d";
+  ctx.arc(X,Y,16,0,2*Math.PI);
+  ctx.fillStyle = "#d9b38c";
+  ctx.fill();
+  ctx.stroke();
+  //////////////////
+  //
+  //
+  //
+  if(right == 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X+13,Y-9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+    ///////////////////
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X+13,Y+9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+  }
+  if(left == 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X-13,Y-9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+    ///////////////////
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X-13,Y+9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+  }
+  if(up == 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X-13,Y-9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+    ///////////////////
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X+13,Y-9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+  }
+  if(down == 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X-13,Y+9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+    ///////////////////
+    ctx.beginPath();
+    ctx.strokeStyle = "#86592d";
+    ctx.arc(X+13,Y+9,4,0,2*Math.PI);
+    ctx.fillStyle = "#d9b38c";
+    ctx.fill();
+    ctx.stroke();
+  }
+  if(food == true) {
+    if(right == 1) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#821717";
+      ctx.arc(X+17,Y,7,0,2*Math.PI);
+      ctx.fillStyle = "#d92626";
+      ctx.fill();
+      ctx.stroke();
+    }
+    if(left == 1) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#821717";
+      ctx.arc(X-17,Y,7,0,2*Math.PI);
+      ctx.fillStyle = "#d92626";
+      ctx.fill();
+      ctx.stroke();
+    }
+    if(up == 1) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#821717";
+      ctx.arc(X,Y-13,7,0,2*Math.PI);
+      ctx.fillStyle = "#d92626";
+      ctx.fill();
+      ctx.stroke();
+    }
+    if(down == 1) {
+      ctx.beginPath();
+      ctx.strokeStyle = "#821717";
+      ctx.arc(X,Y+13,7,0,2*Math.PI);
+      ctx.fillStyle = "#d92626";
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+  ctx.lineWidth = 3;
+  drawTree(399, 233);
+  drawTree(94, 53);
+  drawRock(349, 574);
+  drawRock(846, 323);
+  if(rand == 1) {
+    if(botX >= 884) {
+      botX += 0;
+    } else {
+      botX += speed;
+    }
+  }
+  if(rand == 2) {
+    if(botX <= 15) {
+      botX -= 0;
+    } else {
+      botX -= speed;
+    }
+  }
+  if(rand == 3) {
+    if(botY >= 584) {
+      botY += 0;
+    } else {
+      botY += speed;
+    }
+  }
+  if(rand == 4) {
+    if(botY <= 17) {
+      botY -= 0;
+    } else {
+      botY -= speed;
+    }
+  }
+  ctx.beginPath();
+  ctx.strokeStyle = "#ff4da6";
+  ctx.arc(botX,botY,16,0,2*Math.PI);
+  ctx.fillStyle = "#ff99cc";
+  ctx.fill();
+  ctx.stroke();
+  
+  ctx.beginPath();
+  ctx.strokeStyle = "#ff4da6";
+  ctx.arc(y,z,16,0,2*Math.PI);
+  ctx.fillStyle = "#ff99cc";
+  ctx.fill();
+  ctx.stroke();
+  
+  
+  ctx.fillStyle = "#fff";
+  ctx.font = "30px Segoe UI";
+  ctx.fillText("["+X.toFixed(0)+","+Y.toFixed(0)+"]", 10, 37);
+  ctx.fillText("Wood: " + wood + " | Stone: " + stone, 620, 582);
+  ctx.font = "18px Segoe UI";
+  ctx.fillText("sabrina", botX-27, botY+5);
+}
+
+function findCoords(a) {
+  y = a.clientX;
+  z = a.clientY;
+}
+
+var drawn = 0;
+
+if(drawn == 1) {
+  for(var i = 0; i < 85; i++) {
+    drawGrass(Math.random() * 901, Math.random() * 901);
+  }
+}
+
+function gainWood() {
+  if(X >= 295 && X <= 501 && Y >= 127 && Y <= 324) {
+    wood++;
+  }
+  if(X >= 13 && X <= 198 && Y >= 0 && Y <= 150) {
+    wood++;
+  }
+}
+
+function gainStone() {
+  if(X >= 774 && X <= 900 && Y >= 254 && Y <= 387) {
+    stone++;
+  }
+  if(X >= 277 && X <= 421 && Y >= 509 && Y <= 605) {
+    stone++;
+  }
+}
+
+setInterval(update, 10);
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 87) {
+    food = false;
+    down = 0;
+    up = 1;
+    left = 0;
+    right = 0;
+    speed = .32;
+    if(Y <= 17) {
+      Y -= 0;
+    } else {
+      Y -= 5.3;
+    }
+    move(X, Y, 30, 30);
+  }
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 83) {
+    food = false;
+    down = 1;
+    up = 0;
+    left = 0;
+    right = 0;
+    speed = .32;
+    if(Y >= 584) {
+      Y += 0;
+    } else {
+      Y += 5.3;
+    }
+    move(X, Y, 30, 30);
+  }
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 65) {
+    food = false;
+    down = 0;
+    up = 0;
+    left = 1;
+    right = 0;
+    speed = .32;
+    if(X <= 15) {
+      X -= 0;
+    } else {
+      X -= 5.3;
+    }
+    move(X, Y, 30, 30);
+  }
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 68) {
+    food = false;
+    down = 0;
+    up = 0;
+    left = 0;
+    right = 1;
+    speed = .32;
+    if(X >= 884) {
+      X += 0;
+    } else {
+      X += 5.3;
+    }
+    move(X, Y, 30, 30);
+  }
+});
+
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 81) {
+    food = true;
+  }
+});
+</script>
+
+</body>
+</html>

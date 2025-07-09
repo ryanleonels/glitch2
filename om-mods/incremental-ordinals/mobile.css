@@ -1,0 +1,187 @@
+/* 
+Optimize the game for mobile screens if the window is under 660px 
+Code by Adesdae Games. Why are you here, anyways?
+Oops, ignore all the “!important”, please.
+*/
+
+@media screen and (max-width: 660px), (max-height: 550px) {
+  /*body {
+    text-align: center !important;
+  }*/
+
+  #hardy {
+    font-size: 20px;
+    overflow-x: hidden;
+    height: 40px;
+    /* vertically center text */
+    line-height: 40px;
+  }
+
+  /*#factorContainer {
+    height: 250pt !important;
+  }*/
+
+  .treeButton {
+    border: 2px solid black;
+    cursor: pointer;
+    margin: center;
+    width: 120px !important;
+    height: 60px !important;
+    font-size: 10px !important;
+  }
+
+  .tabButton {
+    width: 100% !important;
+    /*height: 37.5pt !important;*/
+  }
+
+  invistab,
+  .invisTab {
+    display: none !important;
+  }
+
+  button {
+    /*width: 75vw !important;*/
+    /*min-height: 24px !important;*/
+    font-size: 13.333333333333333333px !important;
+  }
+
+  .challenge {
+    width: 266.666666666666666667px !important;
+    height: 133.333333333333333333px !important;
+    font-size: 8px !important;
+  }
+
+  /* span {
+    display: inline !important;
+  } */
+
+  /* #changeOffline {
+    margin: 0 !important;
+  } */
+
+  /*.subtab {
+    min-width: 100px !important;
+    height: 35px !important;
+    font-size: 14px !important;
+  }
+
+  /* html {
+    width: 100% !important;
+  } */
+
+  /*.infinityButton {
+    min-width: 105pt !important;
+    min-height: 22.5pt !important;
+    font-size: 14px !important;
+  }
+
+  ul#factorListMain {
+    padding-left: 0;
+  }
+
+  li > .infinityButton {
+    width: 50vw !important;
+  }
+
+  /* div[style="height: 186pt"] {
+    height: 250pt !important;
+  } */
+
+  /* #boosterText {
+    display: block !important;
+  } */
+
+  /* #darkManifoldMaxMode {
+    height: 35px !important;
+  } */
+
+  table#cardinalTable > tbody > tr {
+    width: 100% !important;
+  }
+
+  table#cardinalTable > tbody > tr > td {
+    display: block;
+    width: 100% !important;
+  }
+
+  /*#collapseButton {
+    height: 48pt !important;
+  }*/
+
+  .assignButton {
+    margin: 0 !important;
+  }
+
+  /*#aleph0Mult,
+  #aleph1Mult,
+  #aleph2Mult {
+    display: inline;
+    padding: 0 5px;
+  }*/
+
+  /* #cardExtra3 {
+    display: inline;
+  } */
+
+  /*.achievement {
+    font-size: 10.666666666666666667px !important;
+  }*/
+
+  /*.slugMile {
+    font-size: 15px !important;
+    width: 75vw !important;
+    height: 75pt !important;
+    margin-bottom: 5px;
+  }*/
+
+  /* #slug5 {
+    height: auto !important;
+  } */
+
+  tr {
+    margin: 0 !important;
+  }
+
+  /*#slugMile6Table {
+    width: 100% !important;
+  }*/
+
+  /*[tooltip]:before {
+    font-size: 8px !important;
+    padding: 6.666666666666666667px !important;
+    width: 66.666666666666666667px !important;
+  }*/
+
+  /* #aup1,
+  #aup2,
+  #aup3,
+  #aup4,
+  #aup5,
+  #aup6,
+  #aup7,
+  #aup8 {
+    width: 200px !important;
+  } */
+
+  .incrementyverse {
+    border-radius: 4px !important;
+    font-size: 20px !important;
+  }
+
+  .incrementyverseReq {
+    font-size: 16px !important;
+  }
+
+  #singRange {
+    width: 90% !important;
+  }
+  
+  #chal9Table {
+    width: 543.312px !important;
+  }
+  
+  #ocUnlock {
+    width: 813.969px !important;
+  }
+}

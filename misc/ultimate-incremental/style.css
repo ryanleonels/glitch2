@@ -1,0 +1,184 @@
+body {
+  font-family: var(--font);
+  margin: 1em;
+  background-color: var(--background);
+  color: var(--color);
+  text-align: center;
+  --background: #000000;
+  --color: #ffffff;
+}
+row {
+    background-color: var(--background);
+    color: var(--color);
+    font-family: var(--font);
+  display: flex !important;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+button {
+  
+  font-family: var(--font);
+  background-color: var(--color);
+  color: var(--background);
+}
+.dropdown-content button {
+  width: 100%
+}
+.dropdown-content {
+  width: 100%
+} 
+
+button:not(.db) { 
+ 
+  font-size: 16px;
+  margin: auto;
+  border-radius: 25px;
+}
+button {
+ 
+  font-family: var(--font);
+  font-size: 16px;
+  margin: auto;
+  border-radius: 25px;
+}
+.tab {
+  width: 24%;
+}
+.subtab {
+  width: 20%;
+}
+.subsubtab {
+  width: 15%;
+}
+.upgradeCantBuy {
+  border-color: red;
+  border-style: solid;
+  border-width: 5px;
+}
+.upgradeCanBuy {
+  border-color: green;
+  border-style: solid;
+  border-width: 5px;
+}
+.ach {
+  border-radius: 1em;
+  padding: 5px;
+  user-select: none;
+}
+.achIncomplete {
+  box-shadow: inset 0 0 0 1000px rgba(200,0,0,.4);
+}
+.achComplete {
+  box-shadow: inset 0 0 0 1000px rgba(0,200,0,.4);
+}
+.ach:hover .achTooltip {
+  visibility: visible
+}
+
+.ach:not(:hover) .achTooltip {
+  visibility: hidden
+}.upgradeBought {
+  border-color: grey;
+  border-style: solid;
+  border-width: 5px;
+}
+.airReset {
+  width: 200px;
+  height: 250px;
+}
+.settingsButton {
+  width: 15%;
+  margin: 0;
+}
+.gainingPower {
+  color: #666666;
+}
+.notGainingPower {
+  color: #666666;
+}
+.incChallenge {
+  border-color: #AAAA00;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 15%;
+}
+
+.dropdown .settingsbutton {
+  width: 100%;
+}
+
+.dropdown-content {
+  width: 100%;
+  display: none;
+  position: absolute;
+   background-color: var(--background);
+  color: var(--color);
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content div {
+border: 2px var(--color) solid;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-content div:hover {
+background-color: var(--background_tooltip);
+}
+button:hover {
+  background-color: var(--background_tooltip);
+}
+
+.show {display: block}
+.hide {display: none}
+.dropdown-content.show {display: flex; flex-direction: column; gap: 0px}
+.normalDiv {
+  padding: 18px;
+}
+
+.white {
+  color: white;
+}
+
+.gray {
+  color: gray;
+}
+
+.progress-bar {
+  position: relative;
+  height: 30px;
+  transition: width 0.2s linear;
+  border: 2px solid var(--color);
+  border-radius: 10px;
+}
+.progress-bar-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.progress-bar-value { 
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.red {
+  box-shadow: inset 0 0 0 1000px rgba(255,0,0,.8);
+}
+.orange {
+  box-shadow: inset 0 0 0 1000px rgba(255,140,0,.8);
+}
+.green {
+  box-shadow: inset 0 0 0 1000px rgba(0,200,0,.4);
+}

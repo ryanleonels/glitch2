@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="break-eternity.js"></script>
+    <script src="main.js"></script>
+    <script src="save.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body onload="start()">
+    <button id="thinkerTab" onclick="showTab('thinkers')" class="storebtn tabbtn">Thinkers</button>
+    <button id="existenceTab" onclick="showTab('existence')" style="display: none" class="creationbtn tabbtn">Existence</button>
+    <button id="abstractTab" onclick="showTab('abstract')" style="display: none" class="abstractbtn tabbtn">Abstract</button>
+    <button id="upgradeTreeTab" onclick="showTab('upgradeTree')" class="storebtn tabbtn">Upgrade Tree</button>
+    <button id="settingsTab" onclick="showTab('settings')" class="storebtn tabbtn">Settings</button>
+    <div id="thinkers" class="tab">
+      <p>You have <span id="ideas">10</span> ideas</p>
+      <button onclick="maxAll(true)" id="weakMaxAll" style="display: none" class="storebtn">Max all thinkers under tier 7</button>
+      <button onclick="maxAll(false)" class="storebtn">Max all</button>
+      <table style="width:100%">
+        <tbody id="parent">
+          <tr id="tier1">
+            <td>
+              Tier 1 thinkers (<span id="tier1Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier1Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier1" onclick="buyTier(1)" align="right">Cost: <span id="tier1Cost">10</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier1" onclick="buyMaxTier(1)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier2" style="display: none">
+            <td>
+              Tier 2 thinkers (<span id="tier2Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier2Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier2" onclick="buyTier(2)" align="right">Cost: <span id="tier2Cost">100</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier2" onclick="buyMaxTier(2)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier3" style="display: none">
+            <td>
+              Tier 3 thinkers (<span id="tier3Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier3Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier3" onclick="buyTier(3)" align="right">Cost: <span id="tier3Cost">10000</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier3" onclick="buyMaxTier(3)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier4" style="display: none">
+            <td>
+              Tier 4 thinkers (<span id="tier4Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier4Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier4" onclick="buyTier(4)" align="right">Cost: <span id="tier4Cost">1000000</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier4" onclick="buyMaxTier(4)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier5" style="display: none">
+            <td>
+              Tier 5 thinkers (<span id="tier5Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier5Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier5" onclick="buyTier(5)" align="right">Cost: <span id="tier5Cost">1e9</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier5" onclick="buyMaxTier(5)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier6" style="display: none">
+            <td>
+              Tier 6 thinkers (<span id="tier6Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier6Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier6" onclick="buyTier(6)" align="right">Cost: <span id="tier6Cost">1e11</span> ideas</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier6" onclick="buyMaxTier(6)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier7" style="display: none">
+            <td>
+              Tier 7 thinkers (<span id="tier7Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier7Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier7" onclick="buyTier(7)" align="right">Cost: <span id="tier7Cost">100</span> existence</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier7" onclick="buyMaxTier(7)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier8" style="display: none">
+            <td>
+              Tier 8 thinkers (<span id="tier8Amount">0</span>)
+            </td>
+            <td>
+              x<span id="tier8Mult">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier8" onclick="buyTier(8)" align="right">Cost: <span id="tier8Cost">1000</span> existence</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier8" onclick="buyMaxTier(8)" align="right">Buy Max</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="creationbtn" style="display: none; margin: auto;" onclick="creation()" id="creation">Create some things<br/> Gain <span id="existOnCreate">0</span> existence</button>
+      <button class="abstractbtn" style="display: none; margin: auto;" onclick="abstract()" id="abstraction">Abstract things<br/> Gain 0 space</button>
+    </div>
+    <div id="existence" class="tab" style="display: none">
+      <p>You have <span id="exist">0</span> existence</p>
+      <button id="existUpgradesSubtab" onclick="showSubtab('existUpgrades','existence')" class="storebtn">Upgrades</button>
+      <button id="creatorsSubtab" onclick="showSubtab('creators','existence')" style="display: none" class="storebtn">Creators</button>
+      <div id="existUpgrades" class="subtab">
+        <table style="width:100%">
+          <tbody>
+            <tr>
+              <td>
+                <button id="upgrade11" class="upgradebtn creationbtn" onclick="buyUpgrade('11')">Increase the multiplier on buy from 1.01 to 1.02<br/>Costs 1 existence</button>
+              </td>
+              <td align="right">
+                <button id="upgrade12" class="upgradebtn creationbtn" onclick="buyUpgrade('12')">Gain 1.25x more existence.<br/>Currently <span id="existMult">1x</span><br/>Costs <span id="existMultCost">2<span> existence</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="upgrade21" class="upgradebtn creationbtn" onclick="buyUpgrade('21')">Gain a multiplier to thinkers based on creations (cbrt(creations))<br/>Costs 2 existence</button>
+              </td>
+              <td align="right">
+                <button id="upgrade22" class="upgradebtn creationbtn" onclick="buyUpgrade('22')">Unlock creators<br/>Costs 1000 existence</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button id="upgrade31" class="upgradebtn creationbtn" onclick="buyUpgrade('31')">Gain a multiplier to thinkers based on existence (log10(existence+10))<br/>Costs 4 existence</button>
+              </td>
+              <td align="right">
+                <button id="upgrade32" class="upgradebtn creationbtn" onclick="buyUpgrade('32')">Gain a multiplier to thinkers based on ideas (log10(ideas+10)/400)<br/>Costs 4 existence</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="creators" class="subtab">
+        <button onclick="maxAllC()" class="creationbtn">Max all</button>
+        <p>You have <span id="things">0</span> things, translated to a x<span id="thingsMult">1</span> multiplier to all thinkers</p>
+        <table style="width:100%">
+          <tbody id="parent">
+            <tr id="tier1C">
+              <td>
+                Tier 1 creators (<span id="tier1CAmount">0</span>)
+              </td>
+              <td>
+                x<span id="tier1CMult">1</span>
+              </td>
+              <td>
+                <button id="buy1Tier1C" onclick="buyTierC(1)" align="right">Cost: <span id="tier1CCost">100</span> existence</button>
+              </td>
+              <td align="right">
+                <button id="buyMaxTier1C" onclick="buyMaxTierC(1)" align="right">Buy Max</button>
+              </td>
+            </tr>
+            <tr id="tier2C">
+              <td>
+                Tier 2 creators (<span id="tier2CAmount">0</span>)
+              </td>
+              <td>
+                x<span id="tier2CMult">1</span>
+              </td>
+              <td>
+                <button id="buy1Tier2C" onclick="buyTierC(2)" align="right">Cost: <span id="tier2CCost">1000</span> existence</button>
+              </td>
+              <td align="right">
+                <button id="buyMaxTier2C" onclick="buyMaxTierC(2)" align="right">Buy Max</button>
+              </td>
+            </tr>
+            <tr id="tier3C">
+              <td>
+                Tier 3 creators (<span id="tier3CAmount">0</span>)
+              </td>
+              <td>
+                x<span id="tier3CMult">1</span>
+              </td>
+              <td>
+                <button id="buy1Tier3C" onclick="buyTierC(3)" align="right">Cost: <span id="tier3CCost">100000</span> existence</button>
+              </td>
+              <td align="right">
+                <button id="buyMaxTier3C" onclick="buyMaxTierC(3)" align="right">Buy Max</button>
+              </td>
+            </tr>
+            <tr id="tier4C">
+              <td>
+                Tier 4 creators (<span id="tier4CAmount">0</span>)
+              </td>
+              <td>
+                x<span id="tier4CMult">1</span>
+              </td>
+              <td>
+                <button id="buy1Tier4C" onclick="buyTierC(4)" align="right">Cost: <span id="tier4CCost">10000000</span> existence</button>
+              </td>
+              <td align="right">
+                <button id="buyMaxTier4C" onclick="buyMaxTierC(4)" align="right">Buy Max</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="abstract" class="tab" style="display: none">
+      <button id="manifoldsSubtab" onclick="showSubtab('manifoldsTab','abstract')" class="storebtn">Manifolds</button>
+      <button id="gravitySubtab" onclick="showSubtab('gravity','abstract')" style="display: none" class="storebtn">Gravity Well</button>
+      <button id="thonkSubtab" onclick="showSubtab('thonks','abstract')" style="display: none" class="storebtn">Thonkers</button>
+      <div id="manifoldsTab" class="subtab">
+        <p>You have <span id="space">0</span> space</p>
+        <p>Manifolds: <span id="manifolds">0</span></p>
+        <button id="buyManifold" onclick="buyManifold()" align="right">Buy manifold for a thinker multiplier<br/>Cost: <span id="manifoldCost">1</span> space</button><br><br>
+        <!-- <button id="rebuyManifold" onclick="rebuyManifolds()" align="right" class="storebtn">Rebuy manifolds</button> -->
+      </div>
+      <div id="gravity" class="subtab">
+        <p>You have <span id="gravitonAmount">0</span> gravitons</p>
+        <table>
+          <tr>
+            <td>
+              <button id="gravityWell" class="gravwelbtn" onclick="gravityWell()">Enter the Gravity Well</button>
+            </td>
+          </tr>
+        </table>
+        <p>You have <span id="gravityWaves">0</span> gravity waves, which make manifolds <span id="manifoldMult">1</span>x better</p>
+        <table>
+          <tr>
+            <td>
+              <button id="sg11" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g11')">Earn 2x more gravity waves<br/>Cost: <span id="sg11cost">1e5</span> gravity waves</button>
+            </td>
+            <td>
+              <button id="sg12" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g12')">Earn 3x more gravitons<br/>Cost: <span id="sg12cost">1e8</span> gravity waves</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="sg21" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g21')">Reduce thinker cost scaling<br/>Cost: 1e7 gravity waves</button>
+            </td>
+            <td>
+              <button id="sg22" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g22')">Reduce gravity well penalty<br/>Cost: 1e8 gravity waves</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="sg31" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g31')">Thinkers gain a boost based on gravity waves, unaffected by gravity well.<br/>Cost: 1e20 gravity waves</button>
+            </td>
+            <td>
+              <button id="sg32" class="gravitybtn upgradebtn" onclick="buyGravUpgrade('g32')">Manifold scaling is a lot slower.<br/>Cost: 1e170 gravity waves</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="thonks" class="subtab">
+        <table style="width:100%">
+          <button onclick="maxAllT()" class="abstractbtn">Max all</button>
+        <tbody id="parentT">
+          <tr id="tier1T">
+            <p>
+              You have <span id="thonkEntities">0</span> thonks, which equal <span id="thonkEffect">1</span> extra manifolds
+            </p>
+            <td>
+              Tier 1 thonkers (<span id="tier1AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier1MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier1T" onclick="buyTierT(1)" align="right">Cost: <span id="tier1CostT">10</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier1T" onclick="buyMaxTierT(1)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier2T" style="display: none">
+            <td>
+              Tier 2 thonkers (<span id="tier2AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier2MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier2T" onclick="buyTierT(2)" align="right">Cost: <span id="tier2CostT">100</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier2T" onclick="buyMaxTierT(2)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier3T" style="display: none">
+            <td>
+              Tier 3 thonkers (<span id="tier3AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier3MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier3T" onclick="buyTierT(3)" align="right">Cost: <span id="tier3CostT">10000</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier3T" onclick="buyMaxTierT(3)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier4T" style="display: none">
+            <td>
+              Tier 4 thonkers (<span id="tier4AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier4MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier4T" onclick="buyTierT(4)" align="right">Cost: <span id="tier4CostT">1000000</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier4T" onclick="buyMaxTierT(4)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier5T" style="display: none">
+            <td>
+              Tier 5 thonkers (<span id="tier5AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier5MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier5T" onclick="buyTierT(5)" align="right">Cost: <span id="tier5CostT">1e9</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier5T" onclick="buyMaxTierT(5)" align="right">Buy Max</button>
+            </td>
+          </tr>
+          <tr id="tier6T" style="display: none">
+            <td>
+              Tier 6 thonkers (<span id="tier6AmountT">0</span>)
+            </td>
+            <td>
+              x<span id="tier6MultT">1</span>
+            </td>
+            <td>
+              <button id="buy1Tier6T" onclick="buyTierT(6)" align="right">Cost: <span id="tier6CostT">1e11</span> thonks</button>
+            </td>
+            <td align="right">
+              <button id="buyMaxTier6T" onclick="buyMaxTierT(6)" align="right">Buy Max</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="upgradeTree" class="tab" style="display: none">
+      <button id="treeUpgradesSubtab" onclick="showSubtab('treeUpgrades','upgradeTree')" class="storebtn">Upgrades</button>
+      <button id="autobuyersSubtab" onclick="showSubtab('autobuyers','upgradeTree')" style="display: none" class="storebtn">Autobuyers</button>
+      <button id="challengesSubtab" onclick="showSubtab('challenges','upgradeTree')" style="display: none" class="storebtn">Challenges</button>
+      <div id="treeUpgrades" class="subtab">
+        <canvas id="treeCanvas"></canvas>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st11" onclick="buyTreeUpgrade('t11')">Manifolds affect creators at a reduced rate.<br/>Cost: 100 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="treebtn creationbtn" id="st21" onclick="buyTreeUpgrade('t21')">Manifold cost scaling is 1.5 times weaker<br/>Cost: 1e5 space</button></td>
+            <td><button class="treebtn creationbtn" id="st22" onclick="buyTreeUpgrade('t22')">Manifolds are raised to the power of 1.5<br/>Cost: 1e7 space</button></td>
+            <td><button class="treebtn creationbtn" id="st23" onclick="buyTreeUpgrade('t23')">Gain a multiplier to Creators based on Space<br>(log10(space+2)^(1/5))<br/>Cost: 1e9 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st31" onclick="buyTreeUpgrade('t31')">
+            Unlock autobuyers, and have all existence upgrades unlocked at the start of each abstract<br/>Cost: 1e20 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st41" onclick="buyTreeUpgrade('t41')">
+            Creators are 1e20x stronger.<br/>Cost: 1e30 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="treebtn creationbtn" id="st51" onclick="buyTreeUpgrade('t51')">Gain a boost to creators based on abstractions (sqrt(abstractions))<br/>Cost: 1e40 space</button></td>
+            <td><button class="treebtn creationbtn" id="st52" onclick="buyTreeUpgrade('t52')">Gain a boost to creators based on things ((log10(things+2))^(1/5))<br/>Cost: 1e45 space</button></td>
+            <td><button class="treebtn creationbtn" id="st53" onclick="buyTreeUpgrade('t53')">Gain a boost to creators based on manifolds (manifolds/8000+1)<br/>Cost: 1e50 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="treebtn creationbtn" id="st61" onclick="buyTreeUpgrade('t61')">Creations persist between abstractions<br/>Cost: 1e55 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="sd1" onclick="buyTreeUpgrade('d1')">Unlock the gravity well<br/>Cost: 1e60 space</button></td>
+            <td><button class="treebtn creationbtn" id="st62" onclick="buyTreeUpgrade('t62')">Existence multiplier affects Creators to a reduced extent<br/>Cost: 1e55 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st71" onclick="buyTreeUpgrade('t71')">
+            Tier 1 Thinkers get a boost based on things<br/>Cost: 1e200 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st81" onclick="buyTreeUpgrade('t81')">Manifold power is raised to the 1.12th power.<br/>Cost: 1e450 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st82" onclick="buyTreeUpgrade('t82')">Cost scaling of manifolds is 1.12 times weaker.<br/>Cost: 1e450 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st91" onclick="buyTreeUpgrade('t91')">Gravitons are 1e5x stronger.<br/>Cost: 1e600 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st92" onclick="buyTreeUpgrade('t92')">Thinkers are 1e450x stronger.<br/>Cost: 1e800 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st93" onclick="buyTreeUpgrade('t93')">Cancel nerf of all existence upgrades in the Gravity Well<br/>Cost: 1e1000 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st94" onclick="buyTreeUpgrade('t94')">Buy multiplier 1.02x > 1.75x.<br/>Cost: 1e1200 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st101" onclick="buyTreeUpgrade('t101')">Creators gain a boost based on gravity waves outside of the Gravity Well.<br/>Cost: 1e1650 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st102" onclick="buyTreeUpgrade('t102')">Graviton formula is better.<br/>Cost: 1e1650 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="sd2" onclick="buyTreeUpgrade('d2')">
+            Unlock Thonkers<br/>Cost: 1e4200 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st111" onclick="buyTreeUpgrade('t111')">Gain a boost to gravitons equal to manifolds.<br/>Cost: 1e5000 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st121" onclick="buyTreeUpgrade('t121')">Gravity waves boost to manifolds is stronger<br/>Cost: 1e5200 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st122" onclick="buyTreeUpgrade('t122')">Thonkers are effected by manifolds, but their effect is severely reduced.<br/>Cost: 1e5300 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st123" onclick="buyTreeUpgrade('t123')">Thonkers gain a multiplier equal to bought manifolds.<br/>Cost: 1e5100 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="st131" onclick="buyTreeUpgrade('t131')">You gain 1e15x more space.<br/>Cost: 1e6500 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st132" onclick="buyTreeUpgrade('t132')">Thonkers gain a boost based on space (log10(space+10)).<br/>Cost: 1e6200 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st133" onclick="buyTreeUpgrade('t133')">Thonkers gain a boost based on thonks (log10(thonks+10)/1200).<br/>Cost: 1e6200 space</button></td>
+            <td><button class="upgradebtn creationbtn" id="st134" onclick="buyTreeUpgrade('t134')">Thonker buy 10 mult is increased to 1.2x.<br/>Cost: 1e6500 space</button></td>
+          </tr>
+        </table>
+        <table id="upgradeTable" style="display: flex; justify-content: center">
+          <tr>
+            <td><button class="upgradebtn creationbtn" id="sa1" onclick="buyTreeUpgrade('a1')">Abstraction Challenge 1.<br/>Cost: 1e6969 space</button></td> <!--- Maybe change the cost to 1e7,000? --->
+            <td><button class="upgradebtn creationbtn" id="sa2" onclick="buyTreeUpgrade('a2')">Abstraction Challenge 2.<br/>Cost: 1e6969 space</button></td>
+          </tr>
+        </table>
+      </div>
+      <div id="autobuyers" style="display: none" class="subtab">
+        <table>
+          <tr id="thinkersAuto">
+            <td>
+              Thinker autobuyers
+            </td>
+            <td>
+              <button id="toggleAuto1" onclick="toggleAuto(1)" align="right">Tier 1</button>
+            </td>
+            <td>
+              <button id="toggleAuto2" onclick="toggleAuto(2)" align="right">Tier 2</button>
+            </td>
+            <td>
+              <button id="toggleAuto3" onclick="toggleAuto(3)" align="right">Tier 3</button>
+            </td>
+            <td>
+              <button id="toggleAuto4" onclick="toggleAuto(4)" align="right">Tier 4</button>
+            </td>
+            <td>
+              <button id="toggleAuto5" onclick="toggleAuto(5)" align="right">Tier 5</button>
+            </td>
+            <td>
+              <button id="toggleAuto6" onclick="toggleAuto(6)" align="right">Tier 6</button>
+            </td>
+            <td>
+              <button id="toggleAuto7" onclick="toggleAuto(7)" align="right">Tier 7</button>
+            </td>
+            <td>
+              <button id="toggleAuto8" onclick="toggleAuto(8)" align="right">Tier 8</button>
+            </td>
+          </tr>
+          <tr id="thinkersAuto">
+            <td>
+              Creator autobuyers
+            </td>
+            <td>
+              <button id="toggleAutoC1" onclick="toggleAutoC(1)" align="right">Tier 1</button>
+            </td>
+            <td>
+              <button id="toggleAutoC2" onclick="toggleAutoC(2)" align="right">Tier 2</button>
+            </td>
+            <td>
+              <button id="toggleAutoC3" onclick="toggleAutoC(3)" align="right">Tier 3</button>
+            </td>
+            <td>
+              <button id="toggleAutoC4" onclick="toggleAutoC(4)" align="right">Tier 4</button>
+            </td>
+          </tr>
+          <tr id="Existence mult auto">
+            <td>
+              <button id="toggleAutoEm" onclick="toggleAutoEm()" align="right">Existence Mult Autobuyer</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="challenges" style="display: none" class="subtab">
+        <table>
+          <tr id="nChallenges">
+            <td>
+              Abstract challenges
+            </td>
+          </tr>
+          <tr id="nChallenges2">
+            <td>
+              <button id="enterChallenge1" class="challengebtn abstractbtn" align="center" onclick="enterChallenge(1)">
+                Abstract Challenge 1<br>Manifolds are useless.<br>Reward: Thonks provide more manifolds.<br>
+              </div>
+            </td>
+            <td>
+              <button id="enterChallenge2" class="challengebtn abstractbtn" align="center" onclick="enterChallenge(2)">
+                Abstract Challenge 2<br>Thinker multiplier is capped at 1000.<br>Goal: 1e13 existence<br>Reward: Gravitons produce more gravity waves.<br>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="settings" class="tab" style="display: none">
+      <button id="saveButton" onclick="save()" class="storebtn">Save</button>
+      <button id="loadButton" onclick="load()" class="storebtn">Load</button>
+      <button id="exportButton" onclick="exp()" class="storebtn">Export</button>
+      <button id="importButton" onclick="imp()" class="storebtn">Import</button>
+      <button id="resetButton" onclick="reset()" class="storebtn">Reset</button>
+      <div style="display:none;position:fixed;left:0;top:0"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
+  
+    </div>
+    <script src="canvas.js"></script>
+  </body>
+</html>
