@@ -91,7 +91,7 @@ function reset() {
 }
 
 function load() {
-  const loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSave"));
+  const loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSaveFunmode"));
   if (loadgame !== null && AF === 0) {
     loadGame(loadgame);
   }
@@ -253,7 +253,7 @@ function loadGame(loadgame) {
 
 
 function save() {
-  if (AF === 0) localStorage.setItem("ordinalMarkupSave", JSON.stringify(game));
+  if (AF === 0) localStorage.setItem("ordinalMarkupSaveFunmode", JSON.stringify(game));
 }
 
 function exporty() {

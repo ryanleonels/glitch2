@@ -85,7 +85,7 @@ updateFactors()
 load()
 function load() {
   if (fake==0) {
-  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSave"))
+  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSave+"))
   if (loadgame != null) {
     loadGame(loadgame)
   }}
@@ -221,7 +221,7 @@ function loadGame(loadgame) {
 
 
 function save() {
-  if (fake==0) localStorage.setItem("ordinalMarkupSave", JSON.stringify(game))
+  if (fake==0) localStorage.setItem("ordinalMarkupSave+", JSON.stringify(game))
 }
 
 function exporty() {

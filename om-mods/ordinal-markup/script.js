@@ -24,7 +24,7 @@ document.getElementById("music").loop=true
 document.getElementById("music").volume=0.5
 document.getElementById("music").muted=false
 var sPath = window.location.origin;
-if (sPath != "https://ordinal-markup.glitch.me" && sPath != "http://ordinal-markup.glitch.me") {
+if (sPath != "https://ordinal-markup.glitch.me" && sPath != "http://ordinal-markup.glitch.me" && sPath != "https://ryanleonels.github.io" && sPath != "http://ryanleonels.github.io") {
   document.getElementById("bootLeg").style.display="block"
   fake=1
 } else {
@@ -86,7 +86,7 @@ updateFactors()
 load()
 function load() {
   if (fake==0) {
-  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSave"))
+  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSaveOld"))
   if (loadgame != null) {
     loadGame(loadgame)
   }}
@@ -225,7 +225,7 @@ function save() {
 }
 
 function exporty() {
-  copyStringToClipboard(btoa(localStorage.ordinalMarkupSave))
+  copyStringToClipboard(btoa(localStorage.ordinalMarkupSaveOld))
 }
 
 function importy() {

@@ -11,7 +11,7 @@ let app
 game = newGame()
 app = newVue() // no data yet
 app.$data.tab = 1
-load(JSON.parse(localStorage.getItem("timeLayerSave")))
+load(JSON.parse(localStorage.getItem("timeLayeetSave")))
 
 window.setInterval(function() {
   let now=Date.now()

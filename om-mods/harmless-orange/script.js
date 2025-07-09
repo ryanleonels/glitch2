@@ -46,7 +46,7 @@ updateFactors()
 
 load()
 function load() {
-  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSave"))
+  let loadgame = JSON.parse(localStorage.getItem("ordinalMarkupSaveOriginal"))
   if (loadgame != null) {
     if (typeof loadgame.base != "undefined") game.base = loadgame.base
     if (typeof loadgame.ord != "undefined") game.ord = loadgame.ord
@@ -66,7 +66,7 @@ function load() {
 }
 
 function save() {
-  localStorage.setItem("ordinalMarkupSave", JSON.stringify(game))
+  localStorage.setItem("ordinalMarkupSaveOriginal", JSON.stringify(game))
 }
 
 render()

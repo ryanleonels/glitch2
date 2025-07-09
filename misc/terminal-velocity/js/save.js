@@ -99,7 +99,7 @@ function parseSave(text) {
 }
 
 function save() {
-  localStorage.setItem("TerminalVelocity", exportedSave());
+  localStorage.setItem("TerminalVelocity2", exportedSave());
 }
 
 function fixSave() {
