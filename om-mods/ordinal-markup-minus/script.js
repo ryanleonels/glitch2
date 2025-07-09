@@ -376,7 +376,7 @@ function loop(ms) {
     ordMarks[0]="ψ(Ωx)"
     ordMarks[1]="ψ(Ω<sup>2</sup>x)"
   }
-  let themeSave="<link rel=\"stylesheet\" href=\"/" + (game.theme==0?"light":"dark") + ".css\">"
+  let themeSave="<link rel=\"stylesheet\" href=\"" + (game.theme==0?"light":"dark") + ".css\">"
   if (document.getElementById("theme").innerHTML != themeSave) document.getElementById("theme").innerHTML = themeSave
   render()
   if (game.factorBoosts < 0) game.factorBoosts=0
