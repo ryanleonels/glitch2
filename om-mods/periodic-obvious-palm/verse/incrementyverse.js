@@ -349,7 +349,7 @@ function die() {
     if (anim == 250) {
       get("whitescreen").style.display="block"
       get("whitescreen").style["z-index"]="3"
-      get("enterIncrementyverseButton2").style.background="url('https://cdn.glitch.com/6f7e4eb0-585a-45ff-a8c1-2d13a9a7d93f%2Fwhite.png?v=1597786875194')"
+      get("enterIncrementyverseButton2").style.background="url('https://ryanleonels.github.io/glitch2/cdn/6f7e4eb0-585a-45ff-a8c1-2d13a9a7d93f%2Fwhite.png?v=1597786875194')"
       get("enterIncrementyverseButton2").style["border-color"]="#FFFFFF"
       get("enterIncrementyverseButton2").style["background-size"]="400%"
       get("enterIncrementyverseButton2").style.filter=`brightness(1)`

@@ -62,8 +62,8 @@ function hideTabs() {
 
 // YES MUSIC FROM ORDINAL MARKUP OKAY
 const links = [
-  "https://cdn.glitch.com/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FHypnothis.mp3?v=1584285594822",
-  "https://cdn.glitch.com/310d7aca-4728-445f-9084-db26ceccd7b5%2FHeaven%20and%20Hell%20-%20Jeremy%20Blake%20%5BMpgun.com%5D.mp3?v=1592859293921",
+  "https://ryanleonels.github.io/glitch2/cdn/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FHypnothis.mp3?v=1584285594822",
+  "https://ryanleonels.github.io/glitch2/cdn/310d7aca-4728-445f-9084-db26ceccd7b5%2FHeaven%20and%20Hell%20-%20Jeremy%20Blake%20%5BMpgun.com%5D.mp3?v=1592859293921",
   "https://cdn.discordapp.com/attachments/670777278699012136/723885956926668860/TheRatFat_-_Monody.mp3",
   "https://cdn.discordapp.com/attachments/670777278699012136/724242522280427590/TheFatRat_-_Fly_Away_feat._Anjulie.mp3",
   "https://cdn.discordapp.com/attachments/670777278699012136/724242811142275113/TheFatRat_-_Time_Lapse.mp3"

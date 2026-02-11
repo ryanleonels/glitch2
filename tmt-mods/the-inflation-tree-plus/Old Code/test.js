@@ -166,7 +166,7 @@ addLayer("b", {
         milestones: []
     }},
     color:() => "#415a9e",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(5000)
       if (player.g.unl && !player.b.unl) req = req.mul(500)
@@ -415,7 +415,7 @@ addLayer("g", {
         milestones: []
     }},
     color:() => "#409c6e",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(5000)
       if (player.b.unl && !player.g.unl) req = req.mul(500)
@@ -716,7 +716,7 @@ addLayer("e", {
         order: 0
     }},
     color:() => "#9643a3",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(1e60)
       if (!player[this.layer].upgrades.includes(14)) if (player[this.layer].order > 0) req = req.pow(player[this.layer].order+1)
@@ -903,7 +903,7 @@ addLayer("r", {
         order: 0
     }},
     color:() => "#94bc42",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(1e20)
       if (!player[this.layer].upgrades.includes(15)) if (player[this.layer].order > 0) req = req.pow(player[this.layer].order+1)
@@ -1208,7 +1208,7 @@ addLayer("d", {
         banking: 0
     }},
     color:() => "#328ba8",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(1e32)
       if (!player[this.layer].upgrades.includes(11)) if (player[this.layer].order > 0) req = req.pow(player[this.layer].order+1)
@@ -1545,7 +1545,7 @@ addLayer("pr", {
         order: 0
     }},
     color:() => "#e8d684",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(68)
       return req
@@ -1741,7 +1741,7 @@ addLayer("s", {
         order: 0
     }},
     color:() => "#fab4d9",
-    background:() => 'https://cdn.glitch.com/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
+    background:() => 'https://ryanleonels.github.io/glitch2/cdn/7460ed4d-c31b-459d-8407-710f48e787a3%2Fefdb5b70-5e55-4f23-9524-953a8eea4545.image.png?v=1601771864943',
     requires() {
       let req = new Decimal(67)
       return req

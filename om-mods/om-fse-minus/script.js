@@ -34,8 +34,8 @@ let EN = ExpantaNum
 let factor1to4=EN(1)
 const prodChalGoals=[EN("ee495"),EN("ee388"),EN("e5e706"),EN("ee1402"),EN("e3.28e11"),EN("e5e383"),EN("e3e859"),EN("e4.390e7"),EN("ee644"),EN("ee16"),EN("e507200"),EN("e5.6e9")]
 const musicLink=[
-"https://cdn.glitch.com/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FGoing%20Down%20by%20Jake%20Chudnow%20%5BHD%5D.mp3?v=1581538237884",
-"https://cdn.glitch.com/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FHypnothis.mp3?v=1584285594822"
+"https://ryanleonels.github.io/glitch2/cdn/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FGoing%20Down%20by%20Jake%20Chudnow%20%5BHD%5D.mp3?v=1581538237884",
+"https://ryanleonels.github.io/glitch2/cdn/03a4b67b-6f18-4f6d-8d37-50a18fb615c8%2FHypnothis.mp3?v=1584285594822"
 ]
 const musicName = ['OFF', "Going Down by Jake Chudnow", "Hypnothis by Kevin Macleod"]
 const BHO = V(27)
