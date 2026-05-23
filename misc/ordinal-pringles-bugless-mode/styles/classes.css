@@ -1,0 +1,114 @@
+.flexBox {
+    display: flex;
+    align-items: center;
+    place-content:center
+}
+.generalTexts{
+    color: white;
+    font-family: DosisLight;
+}
+.centeredTexts{
+    color: white;
+    font-family: DosisLight;
+    text-align: center;
+}
+.layer{
+    position: absolute;
+}
+.ordButtons{
+    width: 15rem;
+    height: 2rem;
+    border: 2px solid #610000;
+    margin-top: 0.3rem;
+    color: indianred;
+    background: black;
+}
+.automation{
+    width: 15rem;
+    min-height: 2rem;
+    border: 2px solid #9e6911;
+    color: rgba(205, 160, 92, 1);
+    background: black;
+    margin-left: 0.5rem;
+}
+.factor{
+    width: 15rem;
+    min-height: 2rem;
+    border: 2px solid #9e6911;
+    color: rgba(205, 160, 92, 1);
+    background: black;
+    margin-top: 0.3rem;
+}
+.bup{
+    width: 10rem;
+    height: 5.2rem;
+    border: 2px solid #0000ff;
+    color: #8080FF;
+    background: black;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.automation2{
+    margin-top: 1rem;
+    width: 10rem;
+    min-height: 2rem;
+    border: 2px solid #0000ff;
+    color: #8080FF;
+    background: black;
+    margin-left: 0.5rem;
+}
+.challenge{
+    width: 20rem;
+    height: 10rem;
+    border: 2px solid #0000ff;
+    color: #8080FF;
+    background: black;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.boostTopButton{
+    width: 15rem;
+    height: 1.5rem;
+    border: 2px solid #0000ff;
+    color: #8080FF;
+    background: black;
+    margin-top: 0.5rem;
+}
+.achievement{
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid #464646;
+    background: #151515;
+    margin-left: 0.5rem;
+    margin-top: 0.3rem;
+    color: #9d5700;
+}
+.tabButton{
+    width: 5rem;
+    height: 1.5rem;
+    margin-left: 0.3rem;
+    background: black;
+    border: 2px solid;
+}
+.settingsButton{
+    width: 10rem;
+    height: 1.5rem;
+    margin-top: 0.2rem;
+    color: darkgray;
+    background: black;
+    border: 2px solid gray;
+}
+#ordinal {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 50vw;
+    display: inline-block;
+    position: relative;
+    left: 0;
+}
+
+#ordinalContainer {
+    text-align: left;
+    margin-left: 25vw;
+    white-space: nowrap;
+}
