@@ -1,75 +1,77 @@
-function hasUpgrade(layer, id) {
-	return ((player[layer].upgrades.includes(toNumber(id)) || player[layer].upgrades.includes(id.toString())) && !tmp[layer].deactivated)
+// ************ Options ************
+
+let options = {}
+
+function getStartOptions() {
+	return {
+		autosave: true,
+		msDisplay: "always",
+		theme: null,
+		hqTree: false,
+		offlineProd: true,
+		hideChallenges: false,
+		showStory: true,
+		forceOneTab: false,
+		oldStyle: false,
+	}
 }
 
-function hasMilestone(layer, id) {
-	return ((player[layer].milestones.includes(toNumber(id)) || player[layer].milestones.includes(id.toString())) && !tmp[layer].deactivated)
+function toggleOpt(name) {
+	if (name == "oldStyle" && styleCooldown > 0)
+		return;
+
+	options[name] = !options[name];
+	if (name == "hqTree")
+		changeTreeQuality();
+	if (name == "oldStyle")
+		updateStyle();
+}
+var styleCooldown = 0;
+function updateStyle() {
+	styleCooldown = 1;
+	let css = document.getElementById("styleStuff");
+	css.href = options.oldStyle ? "oldStyle.css" : "style.css";
+	needCanvasUpdate = true;
+}
+function changeTreeQuality() {
+	var on = options.hqTree;
+	document.body.style.setProperty('--hqProperty1', on ? "2px solid" : "4px solid");
+	document.body.style.setProperty('--hqProperty2a', on ? "-4px -4px 4px rgba(0, 0, 0, 0.25) inset" : "-4px -4px 4px rgba(0, 0, 0, 0) inset");
+	document.body.style.setProperty('--hqProperty2b', on ? "0px 0px 20px var(--background)" : "");
+	document.body.style.setProperty('--hqProperty3', on ? "2px 2px 4px rgba(0, 0, 0, 0.25)" : "none");
+}
+function toggleAuto(toggle) {
+	player[toggle[0]][toggle[1]] = !player[toggle[0]][toggle[1]];
+	needCanvasUpdate=true
 }
 
-function hasAchievement(layer, id) {
-	return ((player[layer].achievements.includes(toNumber(id)) || player[layer].achievements.includes(id.toString())) && !tmp[layer].deactivated)
-}
+const MS_DISPLAYS = ["ALL", "LAST, AUTO, INCOMPLETE", "AUTOMATION, INCOMPLETE", "INCOMPLETE", "NONE"];
 
-function hasChallenge(layer, id) {
-	return ((player[layer].challenges[id]) && !tmp[layer].deactivated)
-}
+const MS_SETTINGS = ["always", "last", "automation", "incomplete", "never"];
 
-function maxedChallenge(layer, id) {
-	return ((player[layer].challenges[id] >= tmp[layer].challenges[id].completionLimit) && !tmp[layer].deactivated)
+function adjustMSDisp() {
+	options.msDisplay = MS_SETTINGS[(MS_SETTINGS.indexOf(options.msDisplay) + 1) % 5];
 }
+function milestoneShown(layer, id) {
+	complete = player[layer].milestones.includes(id);
+	auto = layers[layer].milestones[id].toggles;
 
-function challengeCompletions(layer, id) {
-	return (player[layer].challenges[id])
-}
-
-function getBuyableAmount(layer, id) {
-	return (player[layer].buyables[id])
-}
-
-function setBuyableAmount(layer, id, amt) {
-	player[layer].buyables[id] = amt
-}
-
-function addBuyables(layer, id, amt) {
-	player[layer].buyables[id] = player[layer].buyables[id].add(amt)
-}
-
-function getClickableState(layer, id) {
-	return (player[layer].clickables[id])
-}
-
-function setClickableState(layer, id, state) {
-	player[layer].clickables[id] = state
-}
-
-function getGridData(layer, id) {
-	return (player[layer].grid[id])
-}
-
-function setGridData(layer, id, data) {
-	player[layer].grid[id] = data
-}
-
-function upgradeEffect(layer, id) {
-	return (tmp[layer].upgrades[id].effect)
-}
-
-function challengeEffect(layer, id) {
-	return (tmp[layer].challenges[id].rewardEffect)
-}
-
-function buyableEffect(layer, id) {
-	return (tmp[layer].buyables[id].effect)
-}
-
-function clickableEffect(layer, id) {
-	return (tmp[layer].clickables[id].effect)
-}
-
-function achievementEffect(layer, id) {
-	return (tmp[layer].achievements[id].effect)
-}
-
-function gridEffect(layer, id) {
-	return (gridRun(layer, 'getEffect', player[layer].grid[id], id))
+	switch (options.msDisplay) {
+		case "always":
+			return true;
+			break;
+		case "last":
+			return (auto) || !complete || player[layer].lastMilestone === id;
+			break;
+		case "automation":
+			return (auto) || !complete;
+			break;
+		case "incomplete":
+			return !complete;
+			break;
+		case "never":
+			return false;
+			break;
+	}
+	return false;
 }
