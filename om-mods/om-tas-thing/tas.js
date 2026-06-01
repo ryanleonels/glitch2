@@ -102,6 +102,6 @@ function startTas(r) {
         break
     }
     game.tasStep++
-    document.getElementById("tasStep").textContent = ga
+    document.getElementById("tasFrames").textContent = game.tasStep
   }, game.intms)
 }

@@ -4,7 +4,7 @@ function Extension(s = 1, c, u = "infinityPoints") {
     var extension = {
         id: au.extensions.length,
         level: 0,
-        cost: new Decimal(2).pow(extension.level),
+        cost: new Decimal(2).pow(this.level),
         currency: u,
         charge: 0,
         speed: new Decimal(s),
